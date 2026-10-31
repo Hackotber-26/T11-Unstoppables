@@ -1,0 +1,18 @@
+{
+  "classification": "synthetic",
+  "method": "greedy exact-origin/destination grouping with party-seat capacity and configured pickup wait",
+  "limitations": [
+    "wait is modeled as earliest-to-latest group request time, not vehicle ETA",
+    "detour and network travel time are not evaluated",
+    "synthetic driver availability does not represent a real fleet",
+    "pooling rate is pooled requests divided by served requests"
+  ],
+  "runs": 33,
+  "scenarios": [
+    "corridor_mismatch",
+    "driver_shortage",
+    "safety_escalation",
+    "station_surge",
+    "weekday_peak"
+  ]
+}

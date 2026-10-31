@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+  trainsync:
+    extends:
+      file: ../../infrastructure/docker/docker-compose.yml
+      service: backend
+    environment:
+      APP_ENV: production
+      APP_PORT: 8080
+      APP_API_KEY: ${APP_API_KEY:-}

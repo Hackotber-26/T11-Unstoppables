@@ -1,0 +1,189 @@
+{
+  "specVersion": "1.0.0",
+  "classification": "synthetic",
+  "coordinateReference": "synthetic-local-cartesian",
+  "units": "meters",
+  "geographicCoordinates": false,
+  "nodes": [
+    {
+      "id": "ST-A1",
+      "corridorId": "COR-A",
+      "x": 0.0,
+      "y": 0.0,
+      "accessible": true
+    },
+    {
+      "id": "ST-A2",
+      "corridorId": "COR-A",
+      "x": 1200.0,
+      "y": 300.0,
+      "accessible": true
+    },
+    {
+      "id": "ST-A3",
+      "corridorId": "COR-A",
+      "x": 2600.0,
+      "y": 250.0,
+      "accessible": false
+    },
+    {
+      "id": "ST-A4",
+      "corridorId": "COR-A",
+      "x": 4100.0,
+      "y": 0.0,
+      "accessible": true
+    },
+    {
+      "id": "ST-B1",
+      "corridorId": "COR-B",
+      "x": 0.0,
+      "y": 1600.0,
+      "accessible": true
+    },
+    {
+      "id": "ST-B2",
+      "corridorId": "COR-B",
+      "x": 1400.0,
+      "y": 1850.0,
+      "accessible": false
+    },
+    {
+      "id": "ST-B3",
+      "corridorId": "COR-B",
+      "x": 2850.0,
+      "y": 1750.0,
+      "accessible": true
+    },
+    {
+      "id": "ST-B4",
+      "corridorId": "COR-B",
+      "x": 4300.0,
+      "y": 1600.0,
+      "accessible": true
+    }
+  ],
+  "edges": [
+    {
+      "id": "E-A12",
+      "from": "ST-A1",
+      "to": "ST-A2",
+      "corridorId": "COR-A",
+      "distanceMeters": 1237,
+      "travelSeconds": 210
+    },
+    {
+      "id": "E-A21",
+      "from": "ST-A2",
+      "to": "ST-A1",
+      "corridorId": "COR-A",
+      "distanceMeters": 1237,
+      "travelSeconds": 205
+    },
+    {
+      "id": "E-A23",
+      "from": "ST-A2",
+      "to": "ST-A3",
+      "corridorId": "COR-A",
+      "distanceMeters": 1401,
+      "travelSeconds": 240
+    },
+    {
+      "id": "E-A32",
+      "from": "ST-A3",
+      "to": "ST-A2",
+      "corridorId": "COR-A",
+      "distanceMeters": 1401,
+      "travelSeconds": 235
+    },
+    {
+      "id": "E-A34",
+      "from": "ST-A3",
+      "to": "ST-A4",
+      "corridorId": "COR-A",
+      "distanceMeters": 1512,
+      "travelSeconds": 255
+    },
+    {
+      "id": "E-A43",
+      "from": "ST-A4",
+      "to": "ST-A3",
+      "corridorId": "COR-A",
+      "distanceMeters": 1512,
+      "travelSeconds": 250
+    },
+    {
+      "id": "E-B12",
+      "from": "ST-B1",
+      "to": "ST-B2",
+      "corridorId": "COR-B",
+      "distanceMeters": 1421,
+      "travelSeconds": 245
+    },
+    {
+      "id": "E-B21",
+      "from": "ST-B2",
+      "to": "ST-B1",
+      "corridorId": "COR-B",
+      "distanceMeters": 1421,
+      "travelSeconds": 240
+    },
+    {
+      "id": "E-B23",
+      "from": "ST-B2",
+      "to": "ST-B3",
+      "corridorId": "COR-B",
+      "distanceMeters": 1452,
+      "travelSeconds": 250
+    },
+    {
+      "id": "E-B32",
+      "from": "ST-B3",
+      "to": "ST-B2",
+      "corridorId": "COR-B",
+      "distanceMeters": 1452,
+      "travelSeconds": 245
+    },
+    {
+      "id": "E-B34",
+      "from": "ST-B3",
+      "to": "ST-B4",
+      "corridorId": "COR-B",
+      "distanceMeters": 1501,
+      "travelSeconds": 260
+    },
+    {
+      "id": "E-B43",
+      "from": "ST-B4",
+      "to": "ST-B3",
+      "corridorId": "COR-B",
+      "distanceMeters": 1501,
+      "travelSeconds": 255
+    },
+    {
+      "id": "E-XA1",
+      "from": "ST-A1",
+      "to": "ST-B1",
+      "corridorId": "COR-X",
+      "distanceMeters": 1600,
+      "travelSeconds": 330
+    },
+    {
+      "id": "E-XB1",
+      "from": "ST-B1",
+      "to": "ST-A1",
+      "corridorId": "COR-X",
+      "distanceMeters": 1600,
+      "travelSeconds": 330
+    }
+  ],
+  "exampleRoute": {
+    "nodes": [
+      "ST-A1",
+      "ST-A2",
+      "ST-A3",
+      "ST-A4"
+    ],
+    "travelSeconds": 705,
+    "distanceMeters": 4150
+  }
+}

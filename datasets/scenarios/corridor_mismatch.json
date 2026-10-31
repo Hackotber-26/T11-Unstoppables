@@ -1,0 +1,19 @@
+{
+  "scenario_id": "corridor_mismatch",
+  "description": "Synthetic demand with frequent destinations outside the pickup corridor.",
+  "seed": 41033,
+  "rider_count": 150,
+  "arrival_window_seconds": 720,
+  "arrival_shape": "flat",
+  "destination_mismatch_rate": 0.62,
+  "party_size_two_rate": 0.05,
+  "accessible_request_rate": 0.08,
+  "safety_event_count": 0,
+  "drivers": 48,
+  "vehicle_capacity": 4,
+  "accessible_vehicle_rate": 0.18,
+  "max_wait_seconds": 300,
+  "max_detour_meters": 1800,
+  "max_pool_size": 4,
+  "pool_discount_bps": 1500
+}

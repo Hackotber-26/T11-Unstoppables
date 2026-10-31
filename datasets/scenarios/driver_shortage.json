@@ -1,0 +1,19 @@
+{
+  "scenario_id": "driver_shortage",
+  "description": "Synthetic commuter demand under restricted available driver supply.",
+  "seed": 41034,
+  "rider_count": 180,
+  "arrival_window_seconds": 600,
+  "arrival_shape": "peak",
+  "destination_mismatch_rate": 0.2,
+  "party_size_two_rate": 0.1,
+  "accessible_request_rate": 0.1,
+  "safety_event_count": 0,
+  "drivers": 12,
+  "vehicle_capacity": 4,
+  "accessible_vehicle_rate": 0.2,
+  "max_wait_seconds": 360,
+  "max_detour_meters": 2500,
+  "max_pool_size": 4,
+  "pool_discount_bps": 1500
+}

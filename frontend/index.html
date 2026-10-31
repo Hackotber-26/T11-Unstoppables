@@ -1,0 +1,2806 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Nimma Saarthi | Namma Metro Last-Mile Ride Sharing Platform</title>
+  
+  <!-- Google Fonts: Space Grotesk, Inter, Syne -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+  <!-- Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            // Iconic Namma Metro Line Colors
+            "metro-purple": "#8b2fc9",
+            "metro-purple-dark": "#581c87",
+            "metro-purple-light": "#a855f7",
+            "metro-purple-glow": "rgba(168, 85, 247, 0.45)",
+            "metro-green": "#10b981",
+            "metro-green-glow": "rgba(16, 185, 129, 0.4)",
+            "metro-yellow": "#f59e0b",
+            "metro-yellow-glow": "rgba(245, 158, 11, 0.4)",
+            "metro-coral": "#f43f5e",
+            "metro-coral-glow": "rgba(244, 63, 94, 0.4)",
+            // High-tech Obsidian Theme
+            "sync-dark": "#06080e",
+            "sync-surface": "#0c101a",
+            "sync-card": "#121724",
+            "sync-card-high": "#192233",
+            "sync-card-highest": "#222c42",
+            "sync-border": "rgba(255, 255, 255, 0.08)",
+            "sync-border-purple": "rgba(168, 85, 247, 0.35)",
+            "sync-border-active": "rgba(168, 85, 247, 0.7)"
+          },
+          fontFamily: {
+            "headline": ["Syne", "sans-serif"],
+            "data": ["Space Grotesk", "monospace"],
+            "body": ["Inter", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    @layer base {
+      html { scroll-behavior: smooth; }
+      body { overscroll-behavior: none; }
+    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #06080e; }
+    ::-webkit-scrollbar-thumb { background: #261b3d; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #8b2fc9; }
+
+    /* Moving Viaduct Railway Sleeper Track */
+    @keyframes trackGlide {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-40px); }
+    }
+    .viaduct-sleeper-track {
+      background-image: repeating-linear-gradient(90deg, #1e172e 0px, #1e172e 4px, transparent 4px, transparent 24px);
+      animation: trackGlide 1.2s linear infinite;
+    }
+
+    /* Overhead Catenary Electric Wire Glow */
+    @keyframes catenarySpark {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; filter: drop-shadow(0 0 6px #c084fc); }
+    }
+    .catenary-wire {
+      animation: catenarySpark 3s ease-in-out infinite;
+    }
+
+    /* Horizontal Moving Purple Line Metro Train Navigation */
+    @keyframes trainGlideCruise {
+      0% { transform: translateX(0px); }
+      50% { transform: translateX(30px); }
+      100% { transform: translateX(0px); }
+    }
+    @keyframes trainGlideExpress {
+      0% { transform: translateX(-120%); }
+      100% { transform: translateX(120%); }
+    }
+    .train-cruising {
+      animation: trainGlideCruise 12s ease-in-out infinite;
+    }
+    .train-express {
+      animation: trainGlideExpress 6s linear infinite !important;
+    }
+    .train-paused {
+      animation-play-state: paused !important;
+    }
+
+    /* Purple Line Window Interactive Styling & Warm In-Cabin Illumination */
+    .metro-window-pane {
+      background: linear-gradient(180deg, rgba(26, 16, 44, 0.96) 0%, rgba(10, 12, 22, 0.98) 100%);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .metro-window-pane::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background: linear-gradient(180deg, rgba(254, 240, 138, 0.15) 0%, transparent 100%);
+      pointer-events: none;
+    }
+    .metro-window-pane:hover {
+      box-shadow: 0 0 25px rgba(168, 85, 247, 0.65), inset 0 0 16px rgba(192, 132, 252, 0.35);
+      border-color: #c084fc !important;
+      transform: translateY(-2px);
+    }
+    .metro-window-pane:hover .window-interior-glow {
+      opacity: 1;
+    }
+
+    /* Glass Panels */
+    .glass-panel {
+      background: rgba(18, 23, 36, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-panel-purple {
+      background: rgba(18, 23, 36, 0.9);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(168, 85, 247, 0.15);
+    }
+
+    /* Modal Backdrop */
+    .modal-backdrop {
+      background: rgba(4, 6, 12, 0.88);
+      backdrop-filter: blur(14px);
+    }
+
+    /* Radar scan pulse */
+    @keyframes radarScanPulse {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .radar-beam {
+      animation: radarScanPulse 6s linear infinite;
+    }
+
+    /* Rain simulation overlay */
+    .rain-layer {
+      background-image: repeating-linear-gradient(transparent, transparent 15px, rgba(168, 85, 247, 0.15) 15px, rgba(0, 240, 255, 0.15) 20px);
+      animation: rainGlide 0.8s linear infinite;
+    }
+    @keyframes rainGlide {
+      0% { background-position: 0 0; }
+      100% { background-position: 20px 80px; }
+    }
+  </style>
+</head>
+<body class="bg-sync-dark text-slate-100 font-body antialiased selection:bg-metro-purple selection:text-white min-h-screen overflow-x-hidden">
+
+  <!-- ========================================================================= -->
+  <!-- 1. AUTHENTIC NAMMA METRO PURPLE LINE TRAIN NAVBAR                         -->
+  <!-- ========================================================================= -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-[#06080ef8] backdrop-blur-2xl border-b border-metro-purple/20 shadow-[0_12px_45px_rgba(0,0,0,0.92)]">
+    
+    <!-- Top System Telemetry Bar (BMRCL Sync Status + Mission Tagline) -->
+    <div class="h-7 w-full bg-[#0a0d16] px-3 sm:px-6 flex items-center justify-between text-[11px] font-data border-b border-white/5 text-slate-400">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center gap-1.5 text-metro-purple-light font-bold tracking-wider">
+          <span class="w-2 h-2 rounded-full bg-metro-purple-light animate-ping"></span>
+          NIMMA SAARTHI 🚇
+        </span>
+        <span class="text-white/20">•</span>
+        <span class="text-slate-300 font-medium hidden md:inline">BMRCL LAST-MILE COMMUTER MESH</span>
+        <span class="text-white/20 hidden md:inline">•</span>
+        <span class="text-metro-green font-semibold hidden lg:inline">CORE PRINCIPLE: MATCH JOURNEYS, NOT JUST DESTINATIONS</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <!-- Quick Pitch Jump Buttons -->
+        <a href="#investor-view" class="hover:text-metro-purple-light transition-colors hidden sm:inline text-slate-300">
+          30s Investor View
+        </a>
+        <span class="text-white/20 hidden sm:inline">•</span>
+        <a href="#judge-demo" class="hover:text-metro-green transition-colors hidden sm:inline text-slate-300">
+          3-Min Judge Demo
+        </a>
+        <span class="text-white/20 hidden sm:inline">•</span>
+        <a href="#shapley-shift-engine" class="hover:text-metro-yellow transition-colors hidden sm:inline text-slate-300">
+          Shapley Shift Math
+        </a>
+        <div class="flex items-center gap-1.5 border-l border-white/10 pl-3">
+          <button id="toggleAudioBtn" class="text-slate-400 hover:text-white flex items-center gap-1 transition-colors" title="Toggle Namma Metro Door Chime">
+            <span class="material-symbols-outlined text-[15px]" id="audioIcon">volume_off</span>
+            <span class="hidden sm:inline text-[10px]">Metro Chime</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Elevated Viaduct Track & Moving Purple Line Train Nav Viewport -->
+    <div class="relative w-full overflow-hidden bg-gradient-to-r from-[#070912] via-[#101422] to-[#070912] py-2 px-2 sm:px-4">
+      
+      <!-- Overhead Catenary Power Wire -->
+      <div class="catenary-wire absolute top-1 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-metro-purple-light to-transparent opacity-80 pointer-events-none"></div>
+
+      <!-- Train Track Container -->
+      <div class="relative max-w-7xl mx-auto h-[80px] flex items-center overflow-x-auto lg:overflow-visible no-scrollbar">
+
+        <!-- Left Dock Controls for Train Motion -->
+        <div class="sticky lg:absolute left-1 z-30 flex items-center gap-1 bg-[#0a0d16]/95 p-1 rounded-xl border border-metro-purple/30 shadow-lg backdrop-blur-md shrink-0 mr-2 lg:mr-0">
+          <button id="pauseTrainBtn" class="p-1.5 rounded-lg bg-white/5 hover:bg-metro-purple/30 text-white transition-all text-xs flex items-center gap-1" title="Pause / Resume Train Motion">
+            <span class="material-symbols-outlined text-[16px]" id="pauseTrainIcon">pause</span>
+            <span class="text-[10px] font-data hidden sm:inline" id="pauseTrainLabel">Pause</span>
+          </button>
+          <button id="expressTrainBtn" class="p-1.5 rounded-lg bg-white/5 hover:bg-metro-yellow/30 text-white transition-all text-xs flex items-center gap-1" title="Express High-Speed Run">
+            <span class="material-symbols-outlined text-[16px]">speed</span>
+            <span class="text-[10px] font-data hidden sm:inline">Express</span>
+          </button>
+          <button id="resetTrainBtn" class="p-1.5 rounded-lg bg-white/5 hover:bg-metro-green/30 text-white transition-all text-xs flex items-center gap-1" title="Center / Dock Train">
+            <span class="material-symbols-outlined text-[16px]">filter_center_focus</span>
+            <span class="text-[10px] font-data hidden sm:inline">Center</span>
+          </button>
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- PURPLE LINE TRAIN RIG WITH EMBEDDED NAVIGATION WINDOWS (NO CAB TEXT)      -->
+        <!-- ========================================================================= -->
+        <div id="metroTrainRig" class="train-cruising relative flex items-center shrink-0 cursor-default select-none transition-transform will-change-transform ml-28 lg:ml-36">
+          
+          <!-- Pantograph Assembly on Locomotive Roof -->
+          <div class="absolute -top-3 left-16 w-8 h-4 border-t-2 border-r-2 border-metro-purple-light/80 transform skew-x-12 pointer-events-none">
+            <span class="absolute -top-1 right-0 w-2 h-1 bg-yellow-300 rounded-full shadow-[0_0_8px_#fde047]"></span>
+          </div>
+
+          <!-- LOCOMOTIVE PILOT CAB (Sleek Aerodynamic Nose - No Text) -->
+          <div class="relative w-28 h-16 bg-gradient-to-r from-[#171328] via-[#241a3a] to-[#161226] rounded-l-3xl rounded-r-sm border-y border-l border-metro-purple/60 shadow-[0_0_30px_rgba(139,47,201,0.4)] flex items-center px-2.5 overflow-hidden shrink-0">
+            <!-- White Top Roof Band -->
+            <div class="absolute top-0 left-0 right-0 h-1 bg-white/90"></div>
+            <!-- Bold Iconic Royal Purple Livery Stripe -->
+            <div class="absolute top-2 left-0 right-0 h-2.5 bg-gradient-to-r from-metro-purple-dark via-metro-purple-light to-metro-purple"></div>
+            <!-- Stainless Steel Bottom Guard -->
+            <div class="absolute bottom-2 left-0 right-0 h-1 bg-slate-300/60"></div>
+            
+            <!-- Windshield Cockpit -->
+            <div class="relative w-12 h-9 rounded-l-2xl rounded-r-md bg-[#090714] border border-metro-purple-light/50 flex items-center justify-center overflow-hidden shrink-0">
+              <div class="w-2.5 h-4 rounded-full bg-slate-400/40 -translate-x-1"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-metro-purple/30 to-transparent"></div>
+            </div>
+
+            <!-- Aerodynamic Pilot Grille Ribs (No Text) -->
+            <div class="ml-2.5 flex flex-col gap-1 opacity-70">
+              <span class="w-7 h-[2px] bg-gradient-to-r from-metro-purple-light to-transparent rounded-full"></span>
+              <span class="w-9 h-[2px] bg-gradient-to-r from-white to-transparent rounded-full"></span>
+              <span class="w-5 h-[2px] bg-gradient-to-r from-metro-purple-light to-transparent rounded-full"></span>
+            </div>
+
+            <!-- Dual Warm-White LED Headlights -->
+            <div class="absolute bottom-2 left-2 flex gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-200 shadow-[0_0_12px_#fef08a]"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_10px_#ffffff]"></span>
+            </div>
+          </div>
+
+          <!-- COACH GANGWAY CONNECTION -->
+          <div class="w-3.5 h-11 bg-[#0c0a17] border-y border-white/10 flex flex-col justify-around py-1 shrink-0">
+            <span class="w-full h-[1px] bg-metro-purple/40"></span>
+            <span class="w-full h-[1px] bg-metro-purple/40"></span>
+          </div>
+
+          <!-- ========================================================================= -->
+          <!-- PASSENGER CARRIAGE COACH BODY WITH THE 4 EMBEDDED WINDOWS               -->
+          <!-- i) Home  ii) Book tickets  iii) Tracker  iv) Create Account/ Log In       -->
+          <!-- ========================================================================= -->
+          <div class="relative h-16 bg-gradient-to-b from-[#241a3a] via-[#1a152b] to-[#0f0d1a] border-y border-metro-purple/40 shadow-[0_10px_35px_rgba(0,0,0,0.85)] flex items-center gap-2.5 px-3 rounded-r-xl shrink-0">
+            <!-- White Top Roof Line -->
+            <div class="absolute top-0 left-0 right-0 h-1 bg-white/70"></div>
+            <!-- Iconic Purple Livery Band Along Passenger Carriage -->
+            <div class="absolute top-2 left-0 right-0 h-2 bg-gradient-to-r from-metro-purple-light via-metro-purple to-metro-purple-light opacity-95 shadow-[0_0_10px_rgba(168,85,247,0.7)]"></div>
+            <!-- Bottom Stainless Steel Accent Strip -->
+            <div class="absolute bottom-2 left-0 right-0 h-1 bg-slate-400/40"></div>
+
+            <!-- ================= WINDOW 1: HOME ================= -->
+            <a href="#home-section" id="nav-win-home" class="metro-window-pane group relative h-11 min-w-[110px] sm:min-w-[125px] rounded-xl border border-metro-purple-light/40 px-3 flex items-center justify-between shadow-inner backdrop-blur-md shrink-0">
+              <div class="window-interior-glow absolute inset-0 bg-gradient-to-r from-metro-purple/20 to-amber-200/10 opacity-60 transition-opacity"></div>
+              <div class="relative flex items-center gap-2">
+                <div class="w-6 h-6 rounded-lg bg-metro-purple/20 border border-metro-purple-light/50 flex items-center justify-center text-metro-purple-light group-hover:scale-105 group-hover:bg-metro-purple group-hover:text-white transition-all shrink-0">
+                  <span class="material-symbols-outlined text-[15px]">home</span>
+                </div>
+                <div class="flex flex-col text-left leading-tight">
+                  <span class="font-headline text-xs font-bold text-white tracking-wide group-hover:text-metro-purple-light transition-colors whitespace-nowrap">Home</span>
+                  <span class="font-data text-[8px] text-slate-400 group-hover:text-white transition-colors whitespace-nowrap">Overview</span>
+                </div>
+              </div>
+              <span class="relative ml-2 w-1.5 h-1.5 rounded-full bg-metro-purple-light group-hover:shadow-[0_0_10px_#a855f7] shrink-0"></span>
+            </a>
+
+            <!-- COACH DOOR SEAM -->
+            <div class="w-2.5 h-11 bg-[#120e21] border-x border-metro-purple/30 flex flex-col justify-center items-center shrink-0">
+              <span class="w-1 h-3.5 bg-metro-green/80 rounded-full"></span>
+            </div>
+
+            <!-- ================= WINDOW 2: BOOK TICKETS ================= -->
+            <a href="#booking-section" id="nav-win-book" class="metro-window-pane group relative h-11 min-w-[145px] sm:min-w-[160px] rounded-xl border border-metro-green/40 px-3 flex items-center justify-between shadow-inner backdrop-blur-md shrink-0">
+              <div class="window-interior-glow absolute inset-0 bg-gradient-to-r from-metro-green/20 to-amber-200/10 opacity-60 transition-opacity"></div>
+              <div class="relative flex items-center gap-2">
+                <div class="w-6 h-6 rounded-lg bg-metro-green/20 border border-metro-green/50 flex items-center justify-center text-metro-green group-hover:scale-105 group-hover:bg-metro-green group-hover:text-black transition-all shrink-0">
+                  <span class="material-symbols-outlined text-[15px]">confirmation_number</span>
+                </div>
+                <div class="flex flex-col text-left leading-tight">
+                  <span class="font-headline text-xs font-bold text-white tracking-wide group-hover:text-metro-green transition-colors whitespace-nowrap">Book tickets</span>
+                  <span class="font-data text-[8px] text-metro-green group-hover:text-white transition-colors whitespace-nowrap">Pool Match</span>
+                </div>
+              </div>
+              <span class="relative ml-2 w-1.5 h-1.5 rounded-full bg-metro-green group-hover:shadow-[0_0_10px_#10b981] shrink-0"></span>
+            </a>
+
+            <!-- COACH DOOR SEAM -->
+            <div class="w-2.5 h-11 bg-[#120e21] border-x border-metro-yellow/30 flex flex-col justify-center items-center shrink-0">
+              <span class="w-1 h-3.5 bg-metro-yellow/80 rounded-full"></span>
+            </div>
+
+            <!-- ================= WINDOW 3: TRACKER ================= -->
+            <a href="#tracking-section" id="nav-win-track" class="metro-window-pane group relative h-11 min-w-[125px] sm:min-w-[140px] rounded-xl border border-metro-yellow/40 px-3 flex items-center justify-between shadow-inner backdrop-blur-md shrink-0">
+              <div class="window-interior-glow absolute inset-0 bg-gradient-to-r from-metro-yellow/20 to-amber-200/10 opacity-60 transition-opacity"></div>
+              <div class="relative flex items-center gap-2">
+                <div class="w-6 h-6 rounded-lg bg-metro-yellow/20 border border-metro-yellow/50 flex items-center justify-center text-metro-yellow group-hover:scale-105 group-hover:bg-metro-yellow group-hover:text-black transition-all shrink-0">
+                  <span class="material-symbols-outlined text-[15px]">radar</span>
+                </div>
+                <div class="flex flex-col text-left leading-tight">
+                  <span class="font-headline text-xs font-bold text-white tracking-wide group-hover:text-metro-yellow transition-colors whitespace-nowrap">Tracker</span>
+                  <span class="font-data text-[8px] text-metro-yellow group-hover:text-white transition-colors whitespace-nowrap">Bay Radar</span>
+                </div>
+              </div>
+              <span class="relative ml-2 w-1.5 h-1.5 rounded-full bg-metro-yellow group-hover:shadow-[0_0_10px_#f59e0b] animate-ping shrink-0"></span>
+            </a>
+
+            <!-- COACH DOOR SEAM -->
+            <div class="w-2.5 h-11 bg-[#120e21] border-x border-metro-purple/30 flex flex-col justify-center items-center shrink-0">
+              <span class="w-1 h-3.5 bg-metro-purple/80 rounded-full"></span>
+            </div>
+
+            <!-- ================= WINDOW 4: CREATE ACCOUNT / LOG IN ================= -->
+            <button type="button" id="nav-win-account" class="metro-window-pane group relative h-11 min-w-[210px] sm:min-w-[230px] rounded-xl border border-metro-purple-light/40 px-3.5 flex items-center justify-between shadow-inner backdrop-blur-md shrink-0">
+              <div class="window-interior-glow absolute inset-0 bg-gradient-to-r from-metro-purple/25 to-amber-200/15 opacity-60 transition-opacity"></div>
+              <div class="relative flex items-center gap-2">
+                <div class="w-6 h-6 rounded-lg bg-metro-purple/20 border border-metro-purple-light/50 flex items-center justify-center text-metro-purple-light group-hover:scale-105 group-hover:bg-metro-purple group-hover:text-white transition-all shrink-0">
+                  <span class="material-symbols-outlined text-[15px]">account_circle</span>
+                </div>
+                <div class="flex flex-col text-left leading-tight">
+                  <span class="font-headline text-xs font-bold text-white tracking-wide group-hover:text-metro-purple-light transition-colors whitespace-nowrap">Create Account/ Log In</span>
+                  <span class="font-data text-[8px] text-slate-400 group-hover:text-white transition-colors whitespace-nowrap">Transit Pass</span>
+                </div>
+              </div>
+              <span class="relative ml-2.5 px-2 py-0.5 rounded bg-metro-purple/30 text-metro-purple-light border border-metro-purple-light/40 font-data text-[8px] font-bold shrink-0">₹450</span>
+            </button>
+          </div>
+
+          <!-- REAR CABIN COUPLER -->
+          <div class="relative w-8 h-16 bg-gradient-to-l from-[#171328] to-[#110e1e] rounded-r-2xl border-y border-r border-metro-purple/40 flex items-center justify-center shrink-0">
+            <span class="w-1.5 h-1.5 rounded-full bg-metro-coral shadow-[0_0_8px_#f43f5e]"></span>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Concrete Viaduct Railway Track with Animated Sleepers -->
+      <div class="relative h-2 w-full bg-[#05070c] flex items-center overflow-hidden border-t border-metro-purple/20">
+        <div class="viaduct-sleeper-track absolute inset-0 opacity-90"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-metro-purple/30 via-transparent to-metro-green/30 pointer-events-none"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- 2. HOME / EXECUTIVE HERO SECTION (WINDOW 1 TARGET)                         -->
+  <!-- ========================================================================= -->
+  <main class="w-full pt-32 pb-24">
+
+    
+
+    <section id="home-section" class="relative w-full pt-8 pb-16 px-4 sm:px-6 md:px-12 overflow-hidden">
+      <!-- Ambient Purple & Emerald Transit Glow -->
+      <div class="absolute inset-0 pointer-events-none opacity-25">
+        <div class="absolute inset-0 bg-[radial-gradient(#8b2fc9_1px,transparent_1px)] [background-size:32px_32px]"></div>
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[650px] h-[350px] bg-metro-purple/20 rounded-full blur-[140px]"></div>
+        <div class="absolute top-1/3 right-1/4 w-[450px] h-[300px] bg-metro-green/15 rounded-full blur-[120px]"></div>
+      </div>
+
+      <div class="relative max-w-7xl mx-auto flex flex-col items-center text-center">
+        
+        <!-- Live Transit Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sync-surface border border-metro-purple/40 shadow-[0_0_25px_rgba(139,47,201,0.25)] backdrop-blur-md mb-6">
+          <span class="w-2 h-2 rounded-full bg-metro-purple-light animate-ping"></span>
+          <span class="font-data text-xs uppercase tracking-widest text-metro-purple-light font-bold">BENGALURU NAMMA METRO CORRIDOR MESH</span>
+          <span class="text-white/20">•</span>
+          <span class="font-data text-xs text-metro-green font-semibold">ZERO STREET LIMBO</span>
+        </div>
+
+        <!-- Master Title -->
+        <h1 class="font-headline text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-6 leading-[1.08]">
+          One Metro Exit. One Shared Pod. <br/>
+          <span class="bg-gradient-to-r from-metro-purple-light via-fuchsia-400 to-metro-green bg-clip-text text-transparent drop-shadow-[0_4px_30px_rgba(168,85,247,0.45)]">
+            Match Journeys, Not Destinations.
+          </span>
+        </h1>
+
+        <!-- The Core Principle Banner -->
+        <div class="inline-flex flex-wrap items-center justify-center gap-3 px-5 py-2.5 rounded-2xl bg-sync-card border border-white/10 shadow-xl mb-8">
+          <span class="material-symbols-outlined text-metro-purple-light text-[22px]">directions_subway</span>
+          <span class="font-headline text-base sm:text-lg text-white font-bold">
+            Replace several solo rides with one synchronized shared ride 🚇
+          </span>
+          <span class="text-white/20 hidden sm:inline">•</span>
+          <span class="font-data text-xs sm:text-sm text-metro-green font-semibold">
+            Auto, Cab, or Shuttle dynamically matched along your corridor.
+          </span>
+        </div>
+
+        <!-- 3-Audience Tab Matrix (Investor, Judge, Developer) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 w-full text-left mb-14">
+          
+          <!-- Audience 1: Investor in 30 Seconds -->
+          <div id="investor-view" class="glass-panel p-6 rounded-2xl border-t-2 border-t-metro-purple-light hover:border-metro-purple transition-all group flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="px-2.5 py-1 rounded bg-metro-purple/20 text-metro-purple-light border border-metro-purple/40 font-data text-xs font-bold uppercase">
+                  INVESTOR • 30 SECONDS
+                </span>
+                <span class="material-symbols-outlined text-metro-purple-light text-2xl group-hover:scale-110 transition-transform">trending_up</span>
+              </div>
+              <h3 class="font-headline text-lg text-white font-bold mb-2">The Billion-Dollar Last-Mile Bottleneck</h3>
+              <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                Namma Metro moves 850,000+ daily commuters efficiently, but 50% of commute expenditure and 70% of delays happen in the last 2 to 5 km from station gate to office or home. Nimma Saarthi pools commuters 1–2 stations before arrival, capturing a $4.2B urban feeder TAM.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-white/5 flex items-center justify-between font-data text-xs">
+              <span class="text-slate-400">Target Savings:</span>
+              <span class="text-metro-purple-light font-bold">30–40% Tested Rider Savings</span>
+            </div>
+          </div>
+
+          <!-- Audience 2: Judge in 3 Minutes -->
+          <div id="judge-demo" class="glass-panel p-6 rounded-2xl border-t-2 border-t-metro-green hover:border-metro-green transition-all group flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="px-2.5 py-1 rounded bg-metro-green/20 text-metro-green border border-metro-green/40 font-data text-xs font-bold uppercase">
+                  JUDGE • 3 MINUTES
+                </span>
+                <span class="material-symbols-outlined text-metro-green text-2xl group-hover:scale-110 transition-transform">verified</span>
+              </div>
+              <h3 class="font-headline text-lg text-white font-bold mb-2">The Common-Route Matching Engine</h3>
+              <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                Unlike traditional ride-hail that requires identical drop points, Nimma Saarthi acts like an intelligent school bus: ordering drop-offs along practical forward radials, calculating marginal detour times, picking vehicle capacity (Auto, Cab, Shuttle), and applying cooperative Shapley value game theory.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-white/5 flex items-center justify-between font-data text-xs">
+              <span class="text-slate-400">Wait Window:</span>
+              <span class="text-metro-green font-bold">5–10 Min Search with Fallback</span>
+            </div>
+          </div>
+
+          <!-- Audience 3: Developer / Architecture Spec -->
+          <div id="developer-view" class="glass-panel p-6 rounded-2xl border-t-2 border-t-metro-yellow hover:border-metro-yellow transition-all group flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="px-2.5 py-1 rounded bg-metro-yellow/20 text-metro-yellow border border-metro-yellow/40 font-data text-xs font-bold uppercase">
+                  DEVELOPER • ARCHITECTURE
+                </span>
+                <span class="material-symbols-outlined text-metro-yellow text-2xl group-hover:scale-110 transition-transform">terminal</span>
+              </div>
+              <h3 class="font-headline text-lg text-white font-bold mb-2">Deterministic Reactive Engine</h3>
+              <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                Client-side reactive state engine with Web Audio transit chimes, dynamic Shapley coalitional calculations across all permutations, SVG radar and waypoints, adaptive weather/night controls, and proposed API bridges for Uber, Rapido, Ola, Namma Yatri, and BMRCL.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-white/5 flex items-center justify-between font-data text-xs">
+              <span class="text-slate-400">Prototype Mode:</span>
+              <span class="text-metro-yellow font-bold">Simulated Riders & Drivers</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Paradigm Comparison: Traditional Chaos vs Nimma Saarthi -->
+        <div class="w-full glass-panel-purple rounded-3xl p-6 sm:p-10 text-left">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+            <div>
+              <span class="font-data text-xs text-metro-purple-light font-bold uppercase tracking-wider block mb-1">PARADIGM SHIFT</span>
+              <h2 class="font-headline text-2xl sm:text-3xl text-white font-bold">
+                From Station Concourse Chaos to Synchronized Corridor Pods
+              </h2>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-metro-green/20 text-metro-green border border-metro-green/40 font-data text-xs font-bold">
+              1 Train Exit ➔ 1 Shared Vehicle
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 font-data text-xs">
+            <div class="p-5 rounded-2xl bg-[#090b14] border border-red-500/30 flex flex-col gap-3">
+              <div class="flex items-center gap-2 text-red-400 font-bold text-sm">
+                <span class="material-symbols-outlined text-[18px]">cancel</span>
+                <span>The Status Quo: Fragmented Solo Exits</span>
+              </div>
+              <ul class="space-y-2 text-slate-300 font-body">
+                <li>• 3 individual commuters exit Indiranagar station heading towards Domlur / HAL.</li>
+                <li>• Each books a separate solo auto/cab or haggles at the station gate.</li>
+                <li>• 3 separate vehicles choke the station approach; each pays ₹70–₹120 solo.</li>
+                <li>• Average wait: 8–14 minutes under street weather and traffic surge.</li>
+              </ul>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-[#0d1424] border border-metro-green/40 flex flex-col gap-3">
+              <div class="flex items-center gap-2 text-metro-green font-bold text-sm">
+                <span class="material-symbols-outlined text-[18px]">check_circle</span>
+                <span>The Nimma Saarthi Solution: Synchronized Forward Mesh</span>
+              </div>
+              <ul class="space-y-2 text-slate-300 font-body">
+                <li>• Commuters trigger match 1–2 stations before arrival while inside the train coach.</li>
+                <li>• Algorithm bundles them into 1 Auto EV or Cab EV ordered like a school bus.</li>
+                <li>• Shapley game theory allocates fair ₹32–₹38 fares (tested 30–40% savings).</li>
+                <li>• Stepping off the concourse escalator straight into Bay 03 with zero wait!</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 3. INTERACTIVE 3-PERSONA LIVE TESTBENCH (JUDGE EXPERIENCE)                 -->
+    <!-- Switch live between Rider App, Driver Console, and Station Operations     -->
+    <!-- ========================================================================= -->
+    <section id="persona-testbench" class="w-full py-16 bg-[#080b13] border-y border-white/5 px-4 sm:px-6 md:px-12 relative">
+      <div class="max-w-7xl mx-auto flex flex-col gap-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div class="text-left">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-metro-purple/20 border border-metro-purple/40 text-metro-purple-light font-data text-xs uppercase mb-2">
+              <span class="material-symbols-outlined text-[15px]">devices</span>
+              LAYER 1 : EXPERIENCE TESTBENCH
+            </div>
+            <h2 class="font-headline text-3xl sm:text-4xl text-white font-bold">
+              3-Persona Unified System Simulation
+            </h2>
+          </div>
+          
+          <!-- Persona Switcher Buttons -->
+          <div class="flex items-center gap-1.5 p-1.5 rounded-2xl bg-sync-surface border border-white/10 font-data text-xs">
+            <button type="button" data-persona="rider" class="persona-tab-btn px-4 py-2 rounded-xl bg-metro-purple text-white font-bold shadow-md transition-all">
+              1. Rider Mobile App
+            </button>
+            <button type="button" data-persona="driver" class="persona-tab-btn px-4 py-2 rounded-xl text-slate-400 hover:text-white transition-all">
+              2. Driver In-Cab Console
+            </button>
+            <button type="button" data-persona="station" class="persona-tab-btn px-4 py-2 rounded-xl text-slate-400 hover:text-white transition-all">
+              3. Station Ops Dashboard
+            </button>
+          </div>
+        </div>
+
+        <!-- PERSONA 1: RIDER APP SIMULATOR -->
+        <div id="personaRiderView" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <div class="lg:col-span-5 flex justify-center">
+            <div class="w-full max-w-sm rounded-[40px] bg-[#0c101c] p-4 border-4 border-slate-700/60 shadow-[0_25px_60px_rgba(0,0,0,0.9),0_0_30px_rgba(139,47,201,0.25)] flex flex-col gap-4">
+              <div class="h-4 w-full flex items-center justify-center">
+                <div class="w-20 h-3 rounded-full bg-slate-900 border border-white/10"></div>
+              </div>
+
+              <!-- In-App Header -->
+              <div class="flex items-center justify-between pb-3 border-b border-white/10">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-metro-purple-light animate-ping"></span>
+                  <span class="font-headline text-sm font-bold text-white">Nimma Saarthi Live</span>
+                </div>
+                <span class="font-data text-[11px] text-metro-purple-light bg-metro-purple/20 px-2 py-0.5 rounded-full border border-metro-purple/40">Purple Line In-Transit</span>
+              </div>
+
+              <!-- Journey Progress Tracker on Train -->
+              <div class="p-3.5 rounded-2xl bg-[#141a29] border border-white/5 flex flex-col gap-2 font-data text-xs">
+                <div class="flex justify-between text-slate-300">
+                  <span>Current Train Location:</span>
+                  <span class="text-metro-purple-light font-bold">Swami Vivekananda Rd</span>
+                </div>
+                <div class="flex justify-between text-slate-400 text-[11px]">
+                  <span>Deboarding At:</span>
+                  <span class="text-white font-bold">Indiranagar (Next Stop • 2m)</span>
+                </div>
+                <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden mt-1">
+                  <div class="bg-gradient-to-r from-metro-purple via-fuchsia-400 to-metro-green h-full w-4/5 animate-pulse"></div>
+                </div>
+              </div>
+
+              <!-- Dynamic Matched Corridor Card -->
+              <div id="appRiderMatchResult" class="p-4 rounded-2xl bg-[#141b2c] border border-metro-purple/40 flex flex-col gap-3 text-left">
+                <div class="flex items-center justify-between">
+                  <span class="font-data text-[10px] text-metro-green uppercase font-bold tracking-wider flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[14px]">route</span>
+                    Corridor Group Forming
+                  </span>
+                  <span class="text-xs font-data text-slate-300">3 of 3 Riders</span>
+                </div>
+                <div class="flex items-baseline justify-between">
+                  <div>
+                    <span class="text-[10px] font-data text-slate-400 block">Your Shapley Share</span>
+                    <span class="font-headline text-2xl font-bold text-metro-purple-light">₹32.00</span>
+                  </div>
+                  <span class="text-[11px] font-data text-slate-400 line-through">₹70 Solo</span>
+                </div>
+                <div class="space-y-1 text-[11px] font-data text-slate-300">
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-metro-green"></span>
+                    <span>Drop 1: 100ft Road Cross (Rider A)</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-metro-purple-light"></span>
+                    <span>Drop 2: Bagmane Tech Park (You)</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-metro-yellow"></span>
+                    <span>Drop 3: Domlur Flyover (Rider C)</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Request Action Button -->
+              <button type="button" id="appPoolMeBtn" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-metro-purple via-metro-purple-light to-metro-green text-white font-headline text-xs font-bold shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-1.5">
+                <span class="material-symbols-outlined text-[16px]">bolt</span>
+                <span id="appPoolMeLabel">Reserve Shared Feeder Pod</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7 text-left flex flex-col gap-5">
+            <span class="font-data text-xs text-metro-purple-light font-bold uppercase tracking-wider">
+              INNOVATION HIGHLIGHT : PRE-ARRIVAL INTENT CAPTURE
+            </span>
+            <h3 class="font-headline text-2xl sm:text-3xl text-white font-bold">
+              Submitting 1–2 Stations Ahead Solves the Commute Limbo
+            </h3>
+            <p class="text-sm text-slate-300 leading-relaxed font-body">
+              Why do commuters stand outside metro gates waiting 12 minutes for a cab? Because traditional apps only match passengers after they swipe through the fare turnstiles. Nimma Saarthi lets passengers request matches 1 to 2 stations before deboarding. By the time the train decelerates to the platform, the corridor group is locked and the vehicle is pulling into Concourse Bay 03.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 font-data text-xs">
+              <div class="p-4 rounded-xl bg-sync-card border border-white/10">
+                <span class="text-metro-purple-light font-bold block mb-1">⏱️ 5–10 Min Matching Window</span>
+                <p class="text-slate-400 text-[11px]">System gathers compatible forward riders. If no good group forms, it falls back to a guaranteed solo ride so nobody waits indefinitely.</p>
+              </div>
+              <div class="p-4 rounded-xl bg-sync-card border border-white/10">
+                <span class="text-metro-green font-bold block mb-1">🛡️ SafHER Security Circle</span>
+                <p class="text-slate-400 text-[11px]">Women commuters can toggle verified female-only matching pools with simulated prioritized vetted drivers.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- PERSONA 2: DRIVER IN-CAB CONSOLE (Hidden by default) -->
+        <div id="personaDriverView" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-6 flex justify-center">
+            <div class="w-full max-w-md rounded-3xl bg-[#080d18] p-5 border-2 border-metro-green/40 shadow-2xl flex flex-col gap-4 text-left">
+              <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-metro-green text-2xl">electric_rickshaw</span>
+                  <div>
+                    <h4 class="font-headline text-sm font-bold text-white">Driver Suresh K. (Auto EV)</h4>
+                    <span class="text-[10px] font-data text-slate-400">Station Bay 03 • Indiranagar Concourse</span>
+                  </div>
+                </div>
+                <span class="px-2.5 py-1 rounded-full bg-metro-green/20 text-metro-green border border-metro-green/40 text-xs font-data font-bold">ONLINE</span>
+              </div>
+
+              <!-- Assigned Trip Manifest -->
+              <div class="p-3.5 rounded-xl bg-[#0f1626] border border-white/5 space-y-2 font-data text-xs">
+                <span class="text-slate-400 uppercase text-[10px] font-bold">Sequential Corridor Manifest (School Bus Mode):</span>
+                <div class="p-2.5 rounded-lg bg-black/40 flex items-center justify-between">
+                  <span>1. Ramesh T. ➔ 100ft Rd Cross</span>
+                  <span class="text-metro-green font-bold">OTP: 3821</span>
+                </div>
+                <div class="p-2.5 rounded-lg bg-black/40 flex items-center justify-between">
+                  <span>2. Ananya P. ➔ Bagmane Tech Park</span>
+                  <span class="text-metro-purple-light font-bold">OTP: 7492</span>
+                </div>
+                <div class="p-2.5 rounded-lg bg-black/40 flex items-center justify-between">
+                  <span>3. Karthik V. ➔ Domlur Flyover</span>
+                  <span class="text-metro-yellow font-bold">OTP: 9104</span>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between font-data text-xs text-slate-300">
+                <span>Trip Combined Payout:</span>
+                <span class="text-white font-bold text-base">₹112.00 (Zero Commission Pilot)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-6 text-left flex flex-col gap-4">
+            <span class="font-data text-xs text-metro-green font-bold uppercase tracking-wider">DRIVER ECONOMIC MODEL</span>
+            <h3 class="font-headline text-2xl sm:text-3xl text-white font-bold">Predictable Multi-Drop Earnings Without Idle Cruising</h3>
+            <p class="text-sm text-slate-300 font-body leading-relaxed">
+              Drivers eliminate unpaid dry runs. Instead of waiting in long auto queues or circling congested roads, they receive pre-batched multi-passenger corridor trips directly at designated station bays with guaranteed passenger OTP pickups.
+            </p>
+          </div>
+        </div>
+
+        <!-- PERSONA 3: STATION OPERATIONS DASHBOARD (Hidden by default) -->
+        <div id="personaStationView" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-12 glass-panel p-6 sm:p-8 rounded-3xl border border-metro-yellow/30 text-left">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4 mb-6">
+              <div>
+                <span class="font-data text-xs text-metro-yellow uppercase font-bold">BMRCL CONCOURSE OPERATIONS</span>
+                <h3 class="font-headline text-xl text-white font-bold">Indiranagar Station • Feeder Bay Telemetry</h3>
+              </div>
+              <span class="px-3 py-1 rounded-xl bg-metro-yellow/20 text-metro-yellow border border-metro-yellow/40 font-data text-xs font-bold">
+                Peak Morning Surge (08:45 AM)
+              </span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 font-data text-xs">
+              <div class="p-4 rounded-xl bg-sync-card border border-white/5">
+                <span class="text-slate-400 text-[10px] block">Arriving Passengers / Train</span>
+                <span class="text-white text-2xl font-bold block mt-1">142 Commuters</span>
+                <span class="text-metro-green text-[10px]">Headway: 3.5 mins</span>
+              </div>
+              <div class="p-4 rounded-xl bg-sync-card border border-white/5">
+                <span class="text-slate-400 text-[10px] block">Active Shared Feeder Pods</span>
+                <span class="text-metro-purple-light text-2xl font-bold block mt-1">28 Vehicles</span>
+                <span class="text-slate-400 text-[10px]">16 Autos • 8 Cabs • 4 Shuttles</span>
+              </div>
+              <div class="p-4 rounded-xl bg-sync-card border border-white/5">
+                <span class="text-slate-400 text-[10px] block">Average Concourse Dwell</span>
+                <span class="text-metro-green text-2xl font-bold block mt-1">74 Seconds</span>
+                <span class="text-slate-400 text-[10px]">Zero street bottleneck</span>
+              </div>
+              <div class="p-4 rounded-xl bg-sync-card border border-white/5">
+                <span class="text-slate-400 text-[10px] block">Peak Shuttle On-Time Dep</span>
+                <span class="text-metro-yellow text-2xl font-bold block mt-1">99.2%</span>
+                <span class="text-slate-400 text-[10px]">Every 10–15 mins</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 4. INTERACTIVE "BOOK TICKETS" MODULE (WINDOW 2 TARGET)                    -->
+    <!-- Purple, Green, Yellow Lines + Station + Ride Preference + Dynamic Mode    -->
+    <!-- ========================================================================= -->
+    <section id="booking-section" class="w-full py-20 px-4 sm:px-6 md:px-12 relative">
+      <div class="max-w-7xl mx-auto flex flex-col gap-10 text-left">
+        
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-metro-purple/20 border border-metro-purple/40 text-metro-purple-light font-data text-xs uppercase mb-2">
+            <span class="material-symbols-outlined text-[15px]">confirmation_number</span>
+            WINDOW 2 : BOOK TICKETS
+          </div>
+          <h2 class="font-headline text-3xl sm:text-4xl text-white font-bold">
+            Reserve Your Last-Mile Shared Pod
+          </h2>
+          <p class="text-slate-300 text-sm max-w-2xl mt-1 font-body">
+            Pick your metro line (Purple, Green, or Yellow), deboarding station, and final drop destination. Submit 1 or 2 stations before getting off to give our algorithm time to build your route!
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Booking Form Controls (7 cols) -->
+          <div class="lg:col-span-7 glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 flex flex-col gap-6">
+            
+            <!-- 1. Select Namma Metro Line (Purple, Green, Yellow) -->
+            <div class="flex flex-col gap-2">
+              <label class="font-data text-xs uppercase text-slate-400 font-bold flex items-center justify-between">
+                <span>1. Select Namma Metro Line</span>
+                <span class="text-metro-purple-light font-normal">Pick Your Corridor</span>
+              </label>
+              <div class="grid grid-cols-3 gap-2 sm:gap-3" id="lineSelectorGroup">
+                <!-- Purple Line (Default & Star of Namma Metro) -->
+                <button type="button" data-line="purple" class="line-btn p-3 rounded-xl border-2 border-metro-purple bg-metro-purple/25 text-white font-data text-xs sm:text-sm font-bold flex flex-col items-center gap-1 shadow-[0_0_15px_rgba(139,47,201,0.35)] transition-all">
+                  <span class="w-3 h-3 rounded-full bg-metro-purple-light shadow-[0_0_8px_#c084fc]"></span>
+                  <span>Purple Line</span>
+                  <span class="text-[9px] text-purple-200 font-normal">Challaghatta ↔ Whitefield</span>
+                </button>
+                <!-- Green Line -->
+                <button type="button" data-line="green" class="line-btn p-3 rounded-xl border border-white/10 bg-sync-surface text-slate-300 font-data text-xs sm:text-sm font-bold flex flex-col items-center gap-1 hover:border-metro-green transition-all">
+                  <span class="w-3 h-3 rounded-full bg-metro-green shadow-[0_0_8px_#10b981]"></span>
+                  <span>Green Line</span>
+                  <span class="text-[9px] text-slate-400 font-normal">Nagasandra ↔ Silk Inst</span>
+                </button>
+                <!-- Yellow Line -->
+                <button type="button" data-line="yellow" class="line-btn p-3 rounded-xl border border-white/10 bg-sync-surface text-slate-300 font-data text-xs sm:text-sm font-bold flex flex-col items-center gap-1 hover:border-metro-yellow transition-all">
+                  <span class="w-3 h-3 rounded-full bg-metro-yellow shadow-[0_0_8px_#f59e0b]"></span>
+                  <span>Yellow Line</span>
+                  <span class="text-[9px] text-slate-400 font-normal">RV Road ↔ Bommasandra</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 2. Stations & Drop Destinations -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="flex flex-col gap-1.5">
+                <label class="font-data text-xs uppercase text-slate-400 font-bold" for="bookingStationSelect">2. Deboarding Station</label>
+                <select id="bookingStationSelect" class="w-full bg-[#070b13] border border-white/15 rounded-xl px-3.5 py-2.5 text-white font-data text-xs focus:border-metro-purple outline-none">
+                </select>
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label class="font-data text-xs uppercase text-slate-400 font-bold" for="bookingDestSelect">3. Final Drop Destination</label>
+                <select id="bookingDestSelect" class="w-full bg-[#070b13] border border-white/15 rounded-xl px-3.5 py-2.5 text-white font-data text-xs focus:border-metro-purple outline-none">
+                </select>
+              </div>
+            </div>
+
+            <!-- 3. Deboarding Notification Alert (Submit 1 or 2 stations ahead) -->
+            <div class="flex flex-col gap-2">
+              <label class="font-data text-xs uppercase text-slate-400 font-bold flex items-center justify-between">
+                <span>4. Submit Request Timing</span>
+                <span class="text-metro-green text-[10px]">Allows match window before docking ⏱️</span>
+              </label>
+              <div class="grid grid-cols-3 gap-2" id="timingGroup">
+                <button type="button" data-timing="2" class="timing-btn p-2.5 rounded-xl border-2 border-metro-purple bg-metro-purple/20 text-white font-data text-xs font-bold text-center">
+                  2 Stations Ahead <br/><span class="text-[9px] text-purple-200 font-normal">5–8 Min Buffer</span>
+                </button>
+                <button type="button" data-timing="1" class="timing-btn p-2.5 rounded-xl border border-white/10 bg-sync-surface text-slate-300 font-data text-xs font-bold text-center hover:border-metro-purple">
+                  1 Station Ahead <br/><span class="text-[9px] text-slate-400 font-normal">2–4 Min Buffer</span>
+                </button>
+                <button type="button" data-timing="0" class="timing-btn p-2.5 rounded-xl border border-white/10 bg-sync-surface text-slate-300 font-data text-xs font-bold text-center hover:border-metro-purple">
+                  At Station Now <br/><span class="text-[9px] text-slate-400 font-normal">Instant Search</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 4. Ride Preference: Regular Affordable vs Quick Ride -->
+            <div class="flex flex-col gap-2">
+              <label class="font-data text-xs uppercase text-slate-400 font-bold">5. Ride Preference</label>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="ridePrefGroup">
+                <button type="button" data-pref="standard" class="pref-btn p-3.5 rounded-2xl border-2 border-metro-purple bg-metro-purple/15 text-left flex flex-col gap-1 transition-all">
+                  <div class="flex items-center justify-between">
+                    <span class="font-headline text-sm font-bold text-white flex items-center gap-1.5">
+                      <span class="material-symbols-outlined text-metro-purple-light text-[18px]">group</span>
+                      Regular Affordable
+                    </span>
+                    <span class="px-2 py-0.5 rounded bg-metro-green/20 text-metro-green font-data text-[10px] font-bold">30–40% SAVINGS</span>
+                  </div>
+                  <p class="text-xs text-slate-300">Wait 4–6 mins. Standard group along corridor. Maximizes commuter savings.</p>
+                </button>
+                <button type="button" data-pref="quick" class="pref-btn p-3.5 rounded-2xl border border-white/15 bg-sync-surface text-left flex flex-col gap-1 hover:border-metro-yellow transition-all">
+                  <div class="flex items-center justify-between">
+                    <span class="font-headline text-sm font-bold text-white flex items-center gap-1.5">
+                      <span class="material-symbols-outlined text-metro-yellow text-[18px]">speed</span>
+                      Quick Ride
+                    </span>
+                    <span class="px-2 py-0.5 rounded bg-metro-yellow/20 text-metro-yellow font-data text-[10px] font-bold">+₹15 FARE</span>
+                  </div>
+                  <p class="text-xs text-slate-400">Depart &lt; 90s. Smaller group, fewer stops, direct route. (Promised only when route supports it).</p>
+                </button>
+              </div>
+            </div>
+
+            <!-- 5. Vehicle Mode Selection -->
+            <div class="flex flex-col gap-2">
+              <label class="font-data text-xs uppercase text-slate-400 font-bold">6. Transport Mode Preference</label>
+              <div class="grid grid-cols-3 gap-2" id="vehicleModeGroup">
+                <button type="button" data-mode="auto" class="vmode-btn p-3 rounded-xl border-2 border-metro-purple bg-metro-purple/20 text-center flex flex-col items-center gap-1 transition-all">
+                  <span class="material-symbols-outlined text-metro-purple-light text-2xl">electric_rickshaw</span>
+                  <span class="text-xs font-bold text-white">Auto EV</span>
+                  <span class="text-[10px] text-slate-300 font-data">Small Group (2–3)</span>
+                </button>
+                <button type="button" data-mode="cab" class="vmode-btn p-3 rounded-xl border border-white/10 bg-sync-surface text-center flex flex-col items-center gap-1 hover:border-metro-green transition-all">
+                  <span class="material-symbols-outlined text-slate-300 text-2xl">electric_car</span>
+                  <span class="text-xs font-bold text-white">Cab EV</span>
+                  <span class="text-[10px] text-slate-400 font-data">Comfort Car (3–4)</span>
+                </button>
+                <button type="button" data-mode="shuttle" class="vmode-btn p-3 rounded-xl border border-white/10 bg-sync-surface text-center flex flex-col items-center gap-1 hover:border-metro-yellow transition-all">
+                  <span class="material-symbols-outlined text-slate-300 text-2xl">airport_shuttle</span>
+                  <span class="text-xs font-bold text-white">Shuttle</span>
+                  <span class="text-[10px] text-slate-400 font-data">Large Group (6–12)</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 6. SafHER & Walk and Save Toggles -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+              <!-- SafHER -->
+              <label class="flex items-center justify-between p-3 rounded-xl bg-sync-surface border border-metro-coral/30 cursor-pointer hover:border-metro-coral transition-all">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-metro-coral text-[20px]">shield_with_heart</span>
+                  <div class="flex flex-col text-left">
+                    <span class="font-headline text-xs font-bold text-white">SafHER Option 🛡️</span>
+                    <span class="text-[9.5px] text-slate-400 font-data">Women-only match (Simulated Demo)</span>
+                  </div>
+                </div>
+                <input type="checkbox" id="safherToggle" class="w-4 h-4 rounded text-metro-coral focus:ring-metro-coral bg-sync-dark border-white/20"/>
+              </label>
+
+              <!-- Walk and Save (WalkFlex) -->
+              <div id="walkSaveContainer" class="flex items-center justify-between p-3 rounded-xl bg-sync-surface border border-metro-purple/30 transition-all">
+                <div class="flex items-center gap-2 text-left">
+                  <span class="material-symbols-outlined text-metro-purple-light text-[20px]">directions_walk</span>
+                  <div class="flex flex-col">
+                    <span class="font-headline text-xs font-bold text-white">Walk and Save 🚶</span>
+                    <span id="walkSaveSubText" class="text-[9.5px] text-slate-400 font-data">Walk 180m for -₹15 discount</span>
+                  </div>
+                </div>
+                <input type="checkbox" id="walkSaveToggle" checked class="w-4 h-4 rounded text-metro-purple focus:ring-metro-purple bg-sync-dark border-white/20"/>
+              </div>
+            </div>
+
+            <!-- Weather & Night Condition Adaptive Controls -->
+            <div class="p-3.5 rounded-2xl bg-[#080d18] border border-white/10 flex flex-wrap items-center justify-between gap-3 font-data text-xs">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-slate-400 text-[18px]">routine</span>
+                <span class="text-slate-300 font-medium">Environmental Context:</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <button type="button" id="toggleNightBtn" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10 text-[11px] flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[14px]">nightlight</span>
+                  <span id="labelNightState">Day Mode (7:30 PM)</span>
+                </button>
+                <button type="button" id="toggleWeatherBtn" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10 text-[11px] flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[14px]">wb_sunny</span>
+                  <span id="labelWeatherState">Clear Weather</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Fare Breakdown & Reservation Trigger (5 cols) -->
+          <div class="lg:col-span-5 flex flex-col gap-6">
+            
+            <div class="glass-panel p-6 sm:p-7 rounded-3xl border border-metro-purple/40 shadow-[0_15px_40px_rgba(0,0,0,0.85)] flex flex-col gap-5">
+              
+              <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                <div class="flex flex-col">
+                  <span class="font-data text-xs text-slate-400 uppercase font-bold">FAIR & TRANSPARENT FARE</span>
+                  <span class="font-headline text-lg text-white font-bold" id="fareRouteSummary">Indiranagar ➔ 100ft Road</span>
+                </div>
+                <span class="px-2.5 py-1 rounded-full bg-metro-green/20 text-metro-green border border-metro-green/40 font-data text-xs font-bold">
+                  PROPOSED 30–40% SAVINGS
+                </span>
+              </div>
+
+              <div class="flex items-baseline justify-between py-1">
+                <div>
+                  <span class="text-xs text-slate-400 font-data uppercase block">Your Expected Fare</span>
+                  <div class="flex items-baseline gap-2">
+                    <span id="calculatedFareDisplay" class="font-headline text-5xl font-extrabold text-metro-purple-light">₹32</span>
+                    <span class="text-xs text-slate-400 font-data">/ commuter</span>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <span class="text-xs text-slate-400 font-data uppercase block">Solo Auto Tariff</span>
+                  <span class="font-data text-2xl line-through text-red-400">₹70</span>
+                </div>
+              </div>
+
+              <!-- Itemized Receipt -->
+              <div class="p-3.5 rounded-xl bg-[#070b13] border border-white/5 flex flex-col gap-2 font-data text-xs text-slate-300">
+                <div class="flex justify-between">
+                  <span>Base Metred Corridor Fare:</span>
+                  <span>₹70.00</span>
+                </div>
+                <div class="flex justify-between text-metro-purple-light">
+                  <span>Shapley Group Allocation (3 Co-riders):</span>
+                  <span>- ₹23.00</span>
+                </div>
+                <div id="walkDiscountRow" class="flex justify-between text-metro-green">
+                  <span>Walk and Save (180m pickup point):</span>
+                  <span>- ₹15.00</span>
+                </div>
+                <div id="quickRideRow" class="hidden flex justify-between text-metro-yellow">
+                  <span>Quick Ride Express Surcharge:</span>
+                  <span>+ ₹15.00</span>
+                </div>
+                <div class="pt-2 border-t border-white/10 flex justify-between font-bold text-white">
+                  <span>Maximum Fare Cap Guarantee:</span>
+                  <span class="text-metro-green">Capped at ₹45.00</span>
+                </div>
+              </div>
+
+              <button type="button" id="requestPodBtn" class="w-full py-4 rounded-xl bg-gradient-to-r from-metro-purple via-metro-purple-light to-metro-green text-white font-headline text-base font-bold shadow-[0_0_25px_rgba(139,47,201,0.4)] hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-[20px]">bolt</span>
+                <span id="requestPodBtnText">Confirm & Search Corridor Pod</span>
+              </button>
+
+              <div class="text-[10px] text-slate-400 text-center font-data">
+                *Expected fare locked before ride. 30–40% savings is a proposed goal to test in prototype.
+              </div>
+
+            </div>
+
+            <!-- Active Matching Simulation Card (Hidden until request) -->
+            <div id="matchSimulationCard" class="hidden glass-panel p-6 rounded-3xl border border-metro-green/50 shadow-2xl flex flex-col gap-4">
+              <div class="flex items-center justify-between">
+                <span class="font-data text-xs uppercase text-metro-green font-bold flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-metro-green animate-ping"></span>
+                  MATCH FOUND • BAY 03 STAGED
+                </span>
+                <span id="countdownTimer" class="font-data text-xs bg-metro-purple/20 text-metro-purple-light px-2 py-0.5 rounded font-bold">DEPARTS IN 02:40</span>
+              </div>
+
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-metro-purple/20 border border-metro-purple flex items-center justify-center text-metro-purple-light font-data font-bold text-lg">
+                  <span class="material-symbols-outlined text-[26px]">electric_rickshaw</span>
+                </div>
+                <div class="flex flex-col text-left">
+                  <span class="font-headline text-sm text-white font-bold" id="matchStatusHeadline">Auto EV KA-03-MP-8412 Active</span>
+                  <span class="text-xs text-slate-300 font-data" id="matchSubHeadline">Driver Suresh K. waiting at Station Bay 03</span>
+                </div>
+              </div>
+
+              <div class="pt-2 border-t border-white/10 flex items-center justify-between">
+                <span class="text-xs font-data text-slate-400">Digital Boarding Pass:</span>
+                <button type="button" id="viewBoardingPassBtn" class="px-3.5 py-1.5 rounded-lg bg-metro-green text-black font-data text-xs font-bold hover:brightness-110">
+                  Open Pass 🎫
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 5. COMMON-ROUTE MATCHING ENGINE ("SCHOOL BUS" VISUALIZER)                 -->
+    <!-- Orders drop-offs along practical shared route & checks detour penalty      -->
+    <!-- ========================================================================= -->
+    <section id="common-route-section" class="w-full py-16 bg-[#080b13] border-t border-white/5 px-4 sm:px-6 md:px-12 relative">
+      <div class="max-w-7xl mx-auto flex flex-col gap-10 text-left">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-metro-purple/20 border border-metro-purple/40 text-metro-purple-light font-data text-xs uppercase mb-2">
+              <span class="material-symbols-outlined text-[15px]">alt_route</span>
+              ALGORITHM ARCHITECTURE
+            </div>
+            <h2 class="font-headline text-3xl sm:text-4xl text-white font-bold">
+              Common-Route Matching: The "School Bus" Principle
+            </h2>
+          </div>
+          <p class="text-slate-300 font-body text-xs sm:text-sm max-w-md">
+            The algorithm finds destinations along a practical shared route and orders drop-offs like a school bus stopping at each home in turn, rigorously checking detour distance and added time.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <!-- Visual Route Sequencing Track (7 cols) -->
+          <div class="lg:col-span-7 bg-[#070912] rounded-3xl p-6 border border-white/10 relative overflow-hidden flex flex-col gap-6">
+            <span class="font-headline text-sm font-bold text-white flex items-center justify-between">
+              <span>Station Exit ➔ Forward Radial Sequencing</span>
+              <span class="text-metro-green font-data text-xs">Zero Backtracking</span>
+            </span>
+
+            <!-- Step by Step Route Cards -->
+            <div class="flex flex-col gap-3 font-data text-xs">
+              
+              <!-- Metro Station Hub -->
+              <div class="p-3.5 rounded-xl bg-metro-purple/15 border border-metro-purple/50 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <span class="w-7 h-7 rounded-lg bg-metro-purple text-white flex items-center justify-center font-bold">0</span>
+                  <div>
+                    <span class="text-white font-bold block">Indiranagar Metro Station Concourse</span>
+                    <span class="text-[10px] text-purple-200">Origin • 3 Passengers debark from Purple Line</span>
+                  </div>
+                </div>
+                <span class="px-2 py-0.5 rounded bg-white/10 text-slate-300 text-[10px]">T + 0.0m</span>
+              </div>
+
+              <!-- Stop 1 -->
+              <div class="p-3.5 rounded-xl bg-[#0e1424] border border-white/10 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <span class="w-7 h-7 rounded-lg bg-metro-green text-black flex items-center justify-center font-bold">1</span>
+                  <div>
+                    <span class="text-white font-bold block">Stop 1: 100ft Road Cross (Rider A)</span>
+                    <span class="text-[10px] text-slate-400">Direct spine corridor • Marginal detour: +0.2 km</span>
+                  </div>
+                </div>
+                <span class="text-metro-green font-bold text-[11px]">+2.1 mins</span>
+              </div>
+
+              <!-- Stop 2 -->
+              <div class="p-3.5 rounded-xl bg-[#0e1424] border border-white/10 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <span class="w-7 h-7 rounded-lg bg-metro-purple-light text-white flex items-center justify-center font-bold">2</span>
+                  <div>
+                    <span class="text-white font-bold block">Stop 2: Bagmane Tech Park (Rider B - You)</span>
+                    <span class="text-[10px] text-slate-400">Natural continuation • Marginal detour: +0.3 km</span>
+                  </div>
+                </div>
+                <span class="text-metro-purple-light font-bold text-[11px]">+3.2 mins</span>
+              </div>
+
+              <!-- Stop 3 -->
+              <div class="p-3.5 rounded-xl bg-[#0e1424] border border-white/10 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <span class="w-7 h-7 rounded-lg bg-metro-yellow text-black flex items-center justify-center font-bold">3</span>
+                  <div>
+                    <span class="text-white font-bold block">Stop 3: Domlur Flyover (Rider C)</span>
+                    <span class="text-[10px] text-slate-400">Corridor terminus • Marginal detour: +0.4 km</span>
+                  </div>
+                </div>
+                <span class="text-metro-yellow font-bold text-[11px]">+3.8 mins</span>
+              </div>
+
+            </div>
+
+            <!-- Detour Metric Invariant -->
+            <div class="p-3.5 rounded-xl bg-[#0e1320] border border-white/5 flex items-center justify-between font-data text-xs">
+              <span class="text-slate-400">Total Route Extension vs Direct Solo:</span>
+              <span class="text-metro-green font-bold">&lt; 1.1 km combined detour (Strictly Capped)</span>
+            </div>
+
+          </div>
+
+          <!-- Algorithm Decision Logic (5 cols) -->
+          <div class="lg:col-span-5 flex flex-col gap-4 font-body text-xs text-slate-300">
+            <div class="p-5 rounded-2xl bg-sync-card border border-white/10">
+              <h4 class="font-headline text-base font-bold text-white mb-2">How Stops Are Ordered</h4>
+              <p class="leading-relaxed">
+                Rather than treating each booking as an isolated point, the routing solver projects all passenger destinations onto forward geometric angle cones extending from the station exit.
+              </p>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-sync-card border border-white/10">
+              <h4 class="font-headline text-base font-bold text-white mb-2">Detour & Time Penalties</h4>
+              <p class="leading-relaxed">
+                Every candidate stop must satisfy two strict mathematical inequalities:
+                <br/>
+                <code class="text-metro-purple-light font-data text-[11px] block my-1">\(\text{Detour}(Rider_i) \le 400\text{m}\)</code>
+                <code class="text-metro-green font-data text-[11px] block my-1">\(\Delta \text{Time}(Rider_i) \le 4.5\text{ mins}\)</code>
+                If adding a rider would cause excessive backtracking or delays for earlier passengers, the system rejects bundling them into this vehicle and queues them for another pod.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 6. DYNAMIC FLEET ALLOCATION & GROUP SPLITTING ENGINE                      -->
+    <!-- Auto (small) ➔ Cab (car-sized) ➔ Shuttle (larger) + Smart Multi-Vehicle    -->
+    <!-- ========================================================================= -->
+    <section id="fleet-splitting-section" class="w-full py-16 px-4 sm:px-6 md:px-12 relative">
+      <div class="max-w-7xl mx-auto flex flex-col gap-10 text-left">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-metro-green/20 border border-metro-green/40 text-metro-green font-data text-xs uppercase mb-2">
+              <span class="material-symbols-outlined text-[15px]">departure_board</span>
+              DYNAMIC VEHICLE CAPACITY & GROUP SPLITTING
+            </div>
+            <h2 class="font-headline text-3xl sm:text-4xl text-white font-bold">
+              Right Vehicle for Every Group Size
+            </h2>
+          </div>
+          <p class="text-slate-300 font-body text-xs sm:text-sm max-w-md">
+            Small groups get an Auto, car-sized groups get a Cab, and larger batches get an electric Shuttle. If a group exceeds one vehicle, the engine automatically splits into coordinated fleets!
+          </p>
+        </div>
+
+        <!-- Interactive Fleet Allocation Simulator -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <div class="lg:col-span-6 glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 flex flex-col gap-6">
+            <span class="font-headline text-base font-bold text-white">Simulate Commuter Influx</span>
+            
+            <div class="flex flex-col gap-2 font-data text-xs">
+              <div class="flex justify-between">
+                <span class="text-slate-300">Deboarding Commuters in Corridor:</span>
+                <span id="labelCommuterCount" class="text-metro-purple-light font-bold text-base">7 Commuters</span>
+              </div>
+              <input type="range" id="sliderCommuterCount" min="1" max="24" step="1" value="7" class="w-full accent-metro-purple"/>
+              <div class="flex justify-between text-[10px] text-slate-500 font-data">
+                <span>Solo (1)</span>
+                <span>Small Group (3–4)</span>
+                <span>Large Batch (12)</span>
+                <span>Rush Wave (24)</span>
+              </div>
+            </div>
+
+            <!-- Dynamic Allocation Result Display -->
+            <div class="p-4 rounded-2xl bg-[#0a0e18] border border-metro-green/30 flex flex-col gap-3 font-data text-xs">
+              <div class="flex items-center justify-between">
+                <span class="text-slate-400 uppercase text-[10px] font-bold">OPTIMIZED FLEET DISPATCH</span>
+                <span id="allocationStatusBadge" class="px-2 py-0.5 rounded bg-metro-green/20 text-metro-green font-bold text-[10px]">SPLIT DISPATCH</span>
+              </div>
+              <div id="allocatedVehiclesSummary" class="text-white text-sm font-bold">
+                1 Cab EV (4 seats) + 1 Auto EV (3 seats)
+              </div>
+              <p id="allocatedVehiclesExplanation" class="text-slate-300 text-[11px] leading-relaxed">
+                7 riders exceed a single cab (4 seats). The system splits the corridor into 1 Cab (for the 4 furthest drops) and 1 Auto (for the 3 closer drops), minimizing detours for both vehicles.
+              </p>
+            </div>
+
+          </div>
+
+          <!-- Capacity Rules Matrix (6 cols) -->
+          <div class="lg:col-span-6 grid grid-cols-1 sm:grid-cols-3 gap-4 font-data text-xs">
+            
+            <div class="p-5 rounded-2xl bg-sync-card border border-metro-purple/30 flex flex-col justify-between">
+              <div>
+                <span class="material-symbols-outlined text-metro-purple-light text-3xl mb-2">electric_rickshaw</span>
+                <strong class="text-white block font-headline text-sm">Auto EV</strong>
+                <span class="text-metro-purple-light font-bold text-xs block mb-2">2–3 Riders</span>
+                <p class="text-slate-400 text-[11px] font-body">Agile last-mile navigation through narrow Bangalore residential cross streets.</p>
+              </div>
+              <span class="text-[10px] text-slate-500 pt-3 border-t border-white/5">Quickest dispatch</span>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-sync-card border border-metro-green/30 flex flex-col justify-between">
+              <div>
+                <span class="material-symbols-outlined text-metro-green text-3xl mb-2">electric_car</span>
+                <strong class="text-white block font-headline text-sm">Cab EV</strong>
+                <span class="text-metro-green font-bold text-xs block mb-2">3–4 Riders</span>
+                <p class="text-slate-400 text-[11px] font-body">Air-conditioned comfort with luggage boot space for arterial flyover routes.</p>
+              </div>
+              <span class="text-[10px] text-slate-500 pt-3 border-t border-white/5">AC comfort</span>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-sync-card border border-metro-yellow/30 flex flex-col justify-between">
+              <div>
+                <span class="material-symbols-outlined text-metro-yellow text-3xl mb-2">airport_shuttle</span>
+                <strong class="text-white block font-headline text-sm">Shuttle</strong>
+                <span class="text-metro-yellow font-bold text-xs block mb-2">6–12 Riders</span>
+                <p class="text-slate-400 text-[11px] font-body">High-capacity fixed-interval vans serving major tech parks and hubs during rush hours.</p>
+              </div>
+              <span class="text-[10px] text-slate-500 pt-3 border-t border-white/5">Highest throughput</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 7. MATCHING WINDOW (5-10 MINS) & GUARANTEED FALLBACK                      -->
+    <!-- Nobody waits indefinitely: Solo ride fallback, BMTC feeder, Yulu bikes    -->
+    <!-- ========================================================================= -->
+    <section id="matching-window-section" class="w-full py-16 bg-[#080b13] border-t border-white/5 px-4 sm:px-6 md:px-12 relative">
+      <div class="max-w-7xl mx-auto flex flex-col gap-10 text-left">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-metro-yellow/20 border border-metro-yellow/40 text-metro-yellow font-data text-xs uppercase mb-2">
+              <span class="material-symbols-outlined text-[15px]">timer</span>
+              COMMUTER GUARANTEE
+            </div>
+            <h2 class="font-headline text-3xl sm:text-4xl text-white font-bold">
+              5–10 Minute Search Window with Guaranteed Fallbacks
+            </h2>
+          </div>
+          <p class="text-slate-300 font-body text-xs sm:text-sm max-w-md">
+            The platform searches for compatible co-riders for 5–10 minutes. If no good group forms, it immediately offers practical alternatives so nobody waits indefinitely ⏱️
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <!-- Live Countdown & Fallback Simulation (7 cols) -->
+          <div class="lg:col-span-7 glass-panel p-6 sm:p-8 rounded-3xl border border-metro-yellow/30 flex flex-col gap-6">
+            
+            <div class="flex items-center justify-between border-b border-white/10 pb-3">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-metro-yellow animate-ping"></span>
+                <span class="font-headline text-sm font-bold text-white">Active Match Timer</span>
+              </div>
+              <span id="windowTimerDisplay" class="font-data text-lg text-metro-yellow font-extrabold">05:42</span>
+            </div>
+
+            <!-- Progress Pipeline -->
+            <div class="flex flex-col gap-2 font-data text-xs">
+              <div class="flex justify-between text-slate-300">
+                <span>Matching Phase:</span>
+                <span id="windowPhaseLabel" class="text-metro-green font-bold">Phase 2: Radial Corridor Clustering</span>
+              </div>
+              <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                <div id="windowProgressBar" class="bg-gradient-to-r from-metro-purple via-metro-yellow to-metro-green h-full w-3/5 transition-all"></div>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-2">
+              <button type="button" id="triggerTimeoutDemoBtn" class="px-4 py-2 rounded-xl bg-metro-yellow/20 hover:bg-metro-yellow/30 text-metro-yellow border border-metro-yellow/40 font-data text-xs font-bold transition-all flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[16px]">hourglass_bottom</span>
+                <span>Simulate Window Timeout (No Group Formed)</span>
+              </button>
+              <button type="button" id="resetWindowTimerBtn" class="text-xs font-data text-slate-400 hover:text-white">
+                Reset Timer
+              </button>
+            </div>
+
+            <!-- Fallback Alert Box (Revealed on Timeout) -->
+            <div id="fallbackAlertBox" class="hidden p-4 rounded-2xl bg-red-950/40 border border-red-500/40 flex flex-col gap-3 font-data text-xs text-left">
+              <div class="flex items-center gap-2 text-red-400 font-bold">
+                <span class="material-symbols-outlined text-[18px]">info</span>
+                <span>Matching Window Closed • Instant Guaranteed Alternatives Ready</span>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                <div class="p-3 rounded-lg bg-black/40 border border-white/5 flex flex-col gap-1">
+                  <span class="text-white font-bold">1. Solo Ride</span>
+                  <span class="text-slate-400 text-[10px]">Instant Auto/Cab locked at standard tariff ₹70.</span>
+                </div>
+                <div class="p-3 rounded-lg bg-black/40 border border-white/5 flex flex-col gap-1">
+                  <span class="text-white font-bold">2. BMTC Feeder</span>
+                  <span class="text-slate-400 text-[10px]">Bus MF-1 departing Gate 2 in 4 mins (₹15).</span>
+                </div>
+                <div class="p-3 rounded-lg bg-black/40 border border-white/5 flex flex-col gap-1">
+                  <span class="text-white font-bold">3. Yulu Bike</span>
+                  <span class="text-slate-400 text-[10px]">8 e-bikes unlocked at Station Concourse.</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Fallback Guarantee Narrative (5 cols) -->
+          <div class="lg:col-span-5 flex flex-col gap-4 font-body text-xs text-slate-300">
+            <div class="p-5 rounded-2xl bg-sync-card border border-white/10">
+              <h4 class="font-headline text-base font-bold text-white mb-2">Zero Stranded Commuter Policy</h4>
+              <p class="leading-relaxed">
+                Shared mobility fails when users are left guessing whether a ride will arrive. By bounding the search window to 5–10 minutes, commuters always have a deterministic departure time before their train stops.
+              </p>
+            </div>
+            <div class="p-5 rounded-2xl bg-sync-card border border-white/10">
+              <h4 class="font-headline text-base font-bold text-white mb-2">Pre-Integrated Transit Fallback</h4>
+              <p class="leading-relaxed">
+                If demand density is temporarily low in a specific direction, Nimma Saarthi seamlessly pivots to BMTC feeder buses or station e-bike rentals with unified ticketing.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 8. FAIR FARE ENGINE & SHAPLEY SHIFT MATH (COOPERATIVE GAME THEORY)        -->
+    <!-- Live Shapley value calculation across all permutations with zero subsidy   -->
+    <!-- ========================================================================= -->
+    <section id="shapley-shift-engine" class="w-full py-20 px-4 sm:px-6 md:px-12 relative">
+      <div class="max-w-7xl mx-auto flex flex-col gap-10 text-left">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-metro-purple/20 border border-metro-purple/40 text-metro-purple-light font-data text-xs uppercase mb-2">
+              <span class="material-symbols-outlined text-[15px]">calculate</span>
+              COOPERATIVE GAME THEORY
+            </div>
+            <h2 class="font-headline text-3xl sm:text-4xl text-white font-bold">
+              The Shapley Shift: Zero Cross-Subsidies 💰
+            </h2>
+          </div>
+          <p class="text-slate-300 text-sm max-w-md font-body">
+            Each rider pays their average marginal contribution across every possible boarding order using the Shapley value from game theory. The shares always add up to the full fare and update whenever someone joins or leaves!
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Interactive Shapley Splitter (7 cols) -->
+          <div class="lg:col-span-7 glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 flex flex-col gap-6">
+            <div class="flex items-center justify-between border-b border-white/10 pb-3">
+              <span class="font-headline text-base font-bold text-white">Live Shapley Coalitional Coalition</span>
+              <div class="flex items-center gap-2">
+                <button type="button" id="shapleyToggleRider4Btn" class="px-2.5 py-1 rounded-lg bg-metro-purple/20 hover:bg-metro-purple/40 text-metro-purple-light font-data text-xs font-bold border border-metro-purple/40 transition-all">
+                  + Add 4th Rider
+                </button>
+              </div>
+            </div>
+            
+            <!-- Rider A -->
+            <div class="p-4 rounded-2xl bg-sync-card border border-metro-purple/30 flex flex-col gap-2">
+              <div class="flex justify-between font-data text-xs">
+                <span class="text-metro-purple-light font-bold">Rider A (Drop 1: 100ft Rd)</span>
+                <span id="labelDistA" class="text-white font-bold">2.0 km</span>
+              </div>
+              <input type="range" id="sliderDistA" min="1.0" max="5.0" step="0.5" value="2.0" class="w-full accent-metro-purple"/>
+              <div class="flex justify-between font-data text-xs pt-1 border-t border-white/5">
+                <span class="text-slate-400">Shapley Value Share:</span>
+                <span id="fareShareA" class="text-metro-purple-light font-bold text-base">₹24.00</span>
+              </div>
+            </div>
+
+            <!-- Rider B -->
+            <div class="p-4 rounded-2xl bg-sync-card border border-metro-green/30 flex flex-col gap-2">
+              <div class="flex justify-between font-data text-xs">
+                <span class="text-metro-green font-bold">Rider B (Drop 2: Bagmane Tech Park)</span>
+                <span id="labelDistB" class="text-white font-bold">3.5 km</span>
+              </div>
+              <input type="range" id="sliderDistB" min="1.5" max="7.0" step="0.5" value="3.5" class="w-full accent-metro-green"/>
+              <div class="flex justify-between font-data text-xs pt-1 border-t border-white/5">
+                <span class="text-slate-400">Shapley Value Share:</span>
+                <span id="fareShareB" class="text-metro-green font-bold text-base">₹36.00</span>
+              </div>
+            </div>
+
+            <!-- Rider C -->
+            <div class="p-4 rounded-2xl bg-sync-card border border-metro-yellow/30 flex flex-col gap-2">
+              <div class="flex justify-between font-data text-xs">
+                <span class="text-metro-yellow font-bold">Rider C (Drop 3: Domlur Flyover)</span>
+                <span id="labelDistC" class="text-white font-bold">5.5 km</span>
+              </div>
+              <input type="range" id="sliderDistC" min="2.0" max="9.0" step="0.5" value="5.5" class="w-full accent-metro-yellow"/>
+              <div class="flex justify-between font-data text-xs pt-1 border-t border-white/5">
+                <span class="text-slate-400">Shapley Value Share:</span>
+                <span id="fareShareC" class="text-metro-yellow font-bold text-base">₹52.00</span>
+              </div>
+            </div>
+
+            <!-- Rider D (Dynamic 4th Rider) -->
+            <div id="riderDContainer" class="hidden p-4 rounded-2xl bg-sync-card border border-metro-coral/30 flex flex-col gap-2">
+              <div class="flex justify-between font-data text-xs">
+                <span class="text-metro-coral font-bold">Rider D (Drop 4: HAL 2nd Stage)</span>
+                <span id="labelDistD" class="text-white font-bold">6.8 km</span>
+              </div>
+              <input type="range" id="sliderDistD" min="2.5" max="10.0" step="0.5" value="6.8" class="w-full accent-metro-coral"/>
+              <div class="flex justify-between font-data text-xs pt-1 border-t border-white/5">
+                <span class="text-slate-400">Shapley Value Share:</span>
+                <span id="fareShareD" class="text-metro-coral font-bold text-base">₹38.00</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Mathematical Transparency (5 cols) -->
+          <div class="lg:col-span-5 glass-panel p-6 sm:p-7 rounded-3xl border border-metro-green/30 flex flex-col gap-4">
+            <div class="flex items-center justify-between border-b border-white/10 pb-3">
+              <span class="font-data text-xs text-metro-green font-bold uppercase tracking-wider">
+                MATHEMATICAL INVARIANT CHECKER
+              </span>
+              <span class="text-[10px] font-data text-slate-400">\(\sum \phi_i = \text{Fare}\)</span>
+            </div>
+
+            <!-- Mathematical Formulation -->
+            <div class="p-3.5 rounded-xl bg-[#090d16] border border-white/5 font-data text-[11px] text-slate-300">
+              <div class="text-white font-bold mb-1">Shapley Formulation:</div>
+              <div class="text-metro-purple-light overflow-x-auto py-1">
+                \(\phi_i(v) = \sum_{S \subseteq N \setminus \{i\}} \frac{|S|!(|N|-|S|-1)!}{|N|!} (v(S \cup \{i\}) - v(S))\)
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-2.5 font-data text-xs text-slate-300">
+              <div class="flex justify-between">
+                <span>Total Combined Route Meter:</span>
+                <span id="shapleyTotalMeter" class="text-white font-bold">₹112.00</span>
+              </div>
+              <div class="flex justify-between text-slate-400">
+                <span>Sum of Separate Solo Rides:</span>
+                <span id="shapleySoloSum" class="line-through text-red-400">₹210.00</span>
+              </div>
+              <div class="flex justify-between text-metro-green font-bold">
+                <span>Combined Efficiency Gain:</span>
+                <span id="shapleySavedPct">-46.7% Total</span>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-[#090d16] border border-white/5 flex flex-col gap-2 text-xs text-slate-300 font-data">
+              <span class="text-white font-bold block">Zero Cross-Subsidy Guarantees:</span>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-metro-green text-[16px]">check</span>
+                <span>Rider A never pays for Rider C's extra 3.5 km</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-metro-green text-[16px]">check</span>
+                <span>Fares update automatically when someone joins/leaves</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-metro-green text-[16px]">check</span>
+                <span>Sum of shares strictly equals the exact vehicle meter</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 9. PEAK-HOUR SHUTTLES AT BUSY STATIONS                                    -->
+    <!-- Fixed intervals (10-15m) with pre-grouped passengers at rush hours         -->
+    <!-- ========================================================================= -->
+    <section id="peak-shuttle-section" class="w-full py-16 bg-[#080b13] border-t border-white/5 px-4 sm:px-6 md:px-12 relative">
+      <div class="max-w-7xl mx-auto flex flex-col gap-10 text-left">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-metro-yellow/20 border border-metro-yellow/40 text-metro-yellow font-data text-xs uppercase mb-2">
+              <span class="material-symbols-outlined text-[15px]">shuttle_van</span>
+              MASS TRANSIT SYNCHRONIZATION
+            </div>
+            <h2 class="font-headline text-3xl sm:text-4xl text-white font-bold">
+              Peak-Hour Shuttles at Busy Stations 🚐
+            </h2>
+          </div>
+          <p class="text-slate-300 font-body text-xs sm:text-sm max-w-md">
+            At high-density stations during rush hour, electric shuttles leave at fixed intervals of about 10–15 minutes with pre-grouped passengers, maximizing fleet throughput.
+          </p>
+        </div>
+
+        <!-- Shuttle Departure Board Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-data text-xs">
+          
+          <!-- Shuttle 1: Indiranagar to EGL / Domlur -->
+          <div class="glass-panel p-6 rounded-2xl border-t-2 border-t-metro-purple-light flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="font-bold text-white text-sm">Shuttle P-102 (Electric Winger)</span>
+                <span class="px-2 py-0.5 rounded bg-metro-green/20 text-metro-green font-bold text-[10px]">BOARDING BAY 01</span>
+              </div>
+              <div class="space-y-1.5 text-slate-300 mb-4">
+                <div class="text-white font-bold text-xs">Indiranagar ➔ Domlur ➔ Embassy GolfLinks (EGL)</div>
+                <div class="text-[11px] text-slate-400">Departs every 10 mins during 8:30–10:30 AM</div>
+              </div>
+              <!-- Seat Bar -->
+              <div class="flex flex-col gap-1">
+                <div class="flex justify-between text-[11px]">
+                  <span>Seats Booked:</span>
+                  <span class="text-metro-green font-bold">10 / 12 Seats</span>
+                </div>
+                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                  <div class="bg-metro-green h-full w-[83%]"></div>
+                </div>
+              </div>
+            </div>
+            <div class="pt-4 border-t border-white/5 flex items-center justify-between">
+              <span class="text-slate-400">Next Departure:</span>
+              <span class="text-metro-yellow font-extrabold text-sm">03:45 mins</span>
+            </div>
+          </div>
+
+          <!-- Shuttle 2: Silk Board to HSR / Bellandur -->
+          <div class="glass-panel p-6 rounded-2xl border-t-2 border-t-metro-yellow flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="font-bold text-white text-sm">Shuttle Y-204 (Force Urbania)</span>
+                <span class="px-2 py-0.5 rounded bg-metro-yellow/20 text-metro-yellow font-bold text-[10px]">STAGING BAY 02</span>
+              </div>
+              <div class="space-y-1.5 text-slate-300 mb-4">
+                <div class="text-white font-bold text-xs">Silk Board ➔ HSR Sector 1 ➔ Bellandur EcoSpace</div>
+                <div class="text-[11px] text-slate-400">Departs every 12 mins during peak hours</div>
+              </div>
+              <div class="flex flex-col gap-1">
+                <div class="flex justify-between text-[11px]">
+                  <span>Seats Booked:</span>
+                  <span class="text-metro-yellow font-bold">8 / 12 Seats</span>
+                </div>
+                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                  <div class="bg-metro-yellow h-full w-[66%]"></div>
+                </div>
+              </div>
+            </div>
+            <div class="pt-4 border-t border-white/5 flex items-center justify-between">
+              <span class="text-slate-400">Next Departure:</span>
+              <span class="text-metro-yellow font-extrabold text-sm">08:12 mins</span>
+            </div>
+          </div>
+
+          <!-- Shuttle 3: Whitefield Kadugodi to ITPL -->
+          <div class="glass-panel p-6 rounded-2xl border-t-2 border-t-metro-green flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="font-bold text-white text-sm">Shuttle P-306 (Tata Ultra EV)</span>
+                <span class="px-2 py-0.5 rounded bg-metro-purple/20 text-metro-purple-light font-bold text-[10px]">QUEUED BAY 04</span>
+              </div>
+              <div class="space-y-1.5 text-slate-300 mb-4">
+                <div class="text-white font-bold text-xs">Whitefield ➔ ITPL Main Gate ➔ Prestige Shantiniketan</div>
+                <div class="text-[11px] text-slate-400">Fixed 10-min interval synchronized with train arrivals</div>
+              </div>
+              <div class="flex flex-col gap-1">
+                <div class="flex justify-between text-[11px]">
+                  <span>Seats Booked:</span>
+                  <span class="text-metro-purple-light font-bold">11 / 12 Seats</span>
+                </div>
+                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                  <div class="bg-metro-purple-light h-full w-[91%]"></div>
+                </div>
+              </div>
+            </div>
+            <div class="pt-4 border-t border-white/5 flex items-center justify-between">
+              <span class="text-slate-400">Next Departure:</span>
+              <span class="text-metro-green font-extrabold text-sm">11:30 mins</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 10. REAL-TIME TRACKER RADAR & CONCOURSE BAYS (WINDOW 3 TARGET)             -->
+    <!-- Live dynamic telemetry tracking vehicle moving through waypoints          -->
+    <!-- ========================================================================= -->
+    <section id="tracking-section" class="w-full py-20 px-4 sm:px-6 md:px-12 relative">
+      <div class="max-w-7xl mx-auto flex flex-col gap-10 text-left">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-metro-yellow/20 border border-metro-yellow/40 text-metro-yellow font-data text-xs uppercase mb-2">
+              <span class="material-symbols-outlined text-[15px]">radar</span>
+              WINDOW 3 : LIVE TRACKER
+            </div>
+            <h2 class="font-headline text-3xl sm:text-4xl text-white font-bold">
+              Real-Time Route Telemetry & Concourse Radar
+            </h2>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="px-3 py-1 rounded-xl bg-sync-card border border-white/10 text-xs font-data text-metro-purple-light flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-metro-purple-light animate-ping"></span>
+              Pod KA-03-MP-8412 Active
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <!-- Radar Canvas / SVG Display (7 cols) -->
+          <div class="lg:col-span-7 bg-[#070b13] rounded-3xl p-4 sm:p-6 border border-white/10 shadow-2xl relative overflow-hidden h-[380px] sm:h-[420px] flex items-center justify-center">
+            
+            <div class="absolute inset-0 opacity-15 pointer-events-none" style="background-image: linear-gradient(#8b2fc9 1px, transparent 1px), linear-gradient(90deg, #8b2fc9 1px, transparent 1px); background-size: 40px 40px;"></div>
+
+            <svg class="w-full h-full pointer-events-none" viewBox="0 0 600 360">
+              <!-- Metro Station Hub -->
+              <rect x="40" y="150" width="84" height="60" rx="12" fill="#140f28" stroke="#8b2fc9" stroke-width="2"/>
+              <text x="82" y="185" fill="#ffffff" font-family="Space Grotesk" font-size="10" font-weight="bold" text-anchor="middle">METRO BAY</text>
+
+              <!-- Corridor Route Line -->
+              <path d="M 124,180 L 260,180 L 400,120 L 540,120" stroke="#22183d" stroke-width="24" stroke-linecap="round"/>
+              <path d="M 124,180 L 260,180 L 400,120 L 540,120" stroke="#a855f7" stroke-width="2" stroke-dasharray="6 6"/>
+
+              <!-- Stop 1 -->
+              <circle cx="260" cy="180" r="10" fill="#10b981" stroke="#ffffff" stroke-width="2"/>
+              <text x="260" y="210" fill="#ffffff" font-family="Space Grotesk" font-size="10" text-anchor="middle">Stop 1: 100ft Cross</text>
+
+              <!-- Stop 2 -->
+              <circle cx="400" cy="120" r="12" fill="#8b2fc9" stroke="#ffffff" stroke-width="2.5"/>
+              <circle cx="400" cy="120" r="18" fill="none" stroke="#8b2fc9" stroke-width="1.5" class="animate-ping"/>
+              <text x="400" y="95" fill="#ffffff" font-family="Space Grotesk" font-size="10" font-weight="bold" text-anchor="middle">Stop 2: Bagmane (You)</text>
+
+              <!-- Stop 3 -->
+              <circle cx="540" cy="120" r="10" fill="#f59e0b" stroke="#ffffff" stroke-width="2"/>
+              <text x="540" y="150" fill="#ffffff" font-family="Space Grotesk" font-size="10" text-anchor="middle">Stop 3: Domlur</text>
+
+              <!-- Moving Pod Vehicle Marker -->
+              <g id="liveTrackingPod" transform="translate(160, 166)">
+                <rect width="28" height="28" rx="8" fill="#8b2fc9" stroke="#ffffff" stroke-width="2"/>
+                <text x="14" y="18" fill="#ffffff" font-family="Material Symbols Outlined" font-size="16" text-anchor="middle">electric_rickshaw</text>
+              </g>
+            </svg>
+
+            <!-- Radar Telemetry Overlay Pill -->
+            <div class="absolute bottom-4 left-4 bg-[#0a0e1a]/90 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/10 font-data text-xs flex items-center gap-3">
+              <span class="flex items-center gap-1.5 text-metro-green">
+                <span class="w-2 h-2 rounded-full bg-metro-green animate-ping"></span>
+                <span>Speed: 28 km/h</span>
+              </span>
+              <span class="text-white/20">•</span>
+              <span class="text-slate-300">Detour: +0.2 km</span>
+            </div>
+
+          </div>
+
+          <!-- Live Telemetry Status Card (5 cols) -->
+          <div class="lg:col-span-5 glass-panel p-6 sm:p-8 rounded-3xl border border-metro-purple/30 flex flex-col gap-5">
+            <div class="flex items-center justify-between border-b border-white/10 pb-3">
+              <span class="font-headline text-base font-bold text-white">Live ETA & Waypoint Telemetry</span>
+              <span class="px-2.5 py-0.5 rounded bg-metro-purple/20 text-metro-purple-light font-data text-xs font-bold">BAY 03</span>
+            </div>
+
+            <div class="flex items-baseline justify-between p-4 rounded-2xl bg-[#090d18] border border-white/5">
+              <div>
+                <span class="text-xs text-slate-400 font-data block">Estimated Arrival at Your Stop</span>
+                <span id="trackingEtaDisplay" class="font-headline text-3xl font-extrabold text-metro-green">4.2 mins</span>
+              </div>
+              <span class="text-xs font-data text-slate-400">Bagmane Tech Park</span>
+            </div>
+
+            <div class="space-y-2 font-data text-xs text-slate-300">
+              <div class="flex justify-between">
+                <span>Vehicle Assigned:</span>
+                <span class="text-white font-bold">Mahindra Treo EV (KA-03-MP-8412)</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Driver:</span>
+                <span class="text-white font-bold">Suresh K. (4.9 ★ • 1,240 trips)</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Next Immediate Drop:</span>
+                <span class="text-metro-purple-light font-bold">Rider A (100ft Road)</span>
+              </div>
+            </div>
+
+            <button type="button" id="sosEmergencyBtn" class="w-full py-3 rounded-xl bg-metro-coral/20 hover:bg-metro-coral/40 text-metro-coral font-data text-xs font-bold border border-metro-coral/40 transition-all flex items-center justify-center gap-1.5">
+              <span class="material-symbols-outlined text-[16px]">emergency</span>
+              <span>SafHER Emergency Alert / Share Live Trip</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 11. SAFHER WOMEN-FOCUSED PLATFORM LAYER                                   -->
+    <!-- Verified female commuter matching, vetted drivers (simulated demo)        -->
+    <!-- ========================================================================= -->
+    <section id="safher-section" class="w-full py-16 bg-[#080b13] border-t border-white/5 px-4 sm:px-6 md:px-12 relative">
+      <div class="max-w-7xl mx-auto flex flex-col gap-10 text-left">
+        
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-metro-coral/20 border border-metro-coral/40 text-metro-coral font-data text-xs uppercase mb-2">
+            <span class="material-symbols-outlined text-[15px]">shield_with_heart</span>
+            SAFHER FRAMEWORK 🛡️
+          </div>
+          <h2 class="font-headline text-3xl sm:text-4xl text-white font-bold">
+            SafHER: Women-Focused Mobility & Verified Drivers
+          </h2>
+          <p class="text-slate-300 text-sm max-w-2xl mt-2 font-body">
+            A dedicated option applying women-only commuter matching rules and prioritizing verified, eligible drivers. Until real verification procedures are deployed, our prototype labels this as an interactive simulation.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-data text-xs">
+          
+          <div class="glass-panel p-6 rounded-2xl border-t-2 border-t-metro-purple-light flex flex-col justify-between">
+            <div>
+              <span class="text-metro-purple-light font-bold block mb-1">LAYER 01 : PREVENTION</span>
+              <h4 class="font-headline text-base font-bold text-white mb-2">Women-Only Matching Circle</h4>
+              <p class="text-slate-400 leading-relaxed font-body text-xs mb-3">
+                When SafHER is selected, the algorithm restricts pod members strictly to verified female passengers, creating an immediate trusted micro-community.
+              </p>
+            </div>
+            <span class="text-[10px] text-slate-500 pt-2 border-t border-white/5">Strict coalition filters</span>
+          </div>
+
+          <div class="glass-panel p-6 rounded-2xl border-t-2 border-t-metro-coral flex flex-col justify-between">
+            <div>
+              <span class="text-metro-coral font-bold block mb-1">LAYER 02 : PROTECTION</span>
+              <h4 class="font-headline text-base font-bold text-white mb-2">Prioritized Vetted Drivers</h4>
+              <p class="text-slate-400 leading-relaxed font-body text-xs mb-3">
+                Matches with highest-rated, verified fleet partners. Prototype displays simulated verified driver credentials and real-time corridor GPS breadcrumbs.
+              </p>
+            </div>
+            <button type="button" id="triggerSosDemoBtn" class="py-2 px-3 rounded-xl bg-metro-coral/20 hover:bg-metro-coral/40 text-metro-coral font-bold border border-metro-coral/40 transition-all text-center">
+              Simulate SOS Escalation
+            </button>
+          </div>
+
+          <div class="glass-panel p-6 rounded-2xl border-t-2 border-t-metro-yellow flex flex-col justify-between">
+            <div>
+              <span class="text-metro-yellow font-bold block mb-1">LAYER 03 : ACCOUNTABILITY</span>
+              <h4 class="font-headline text-base font-bold text-white mb-2">Concourse OTP Verification</h4>
+              <p class="text-slate-400 leading-relaxed font-body text-xs mb-3">
+                Mandatory 4-digit boarding OTP authenticated at the concourse before the pod departs. Live breadcrumb tracking shared with designated trusted contacts.
+              </p>
+            </div>
+            <span class="text-[10px] text-slate-500 pt-2 border-t border-white/5">Immutable trip log</span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 12. PROPOSED PARTNERSHIPS & MACRO SUSTAINABILITY IMPACT                  -->
+    <!-- Uber, Rapido, Ola, Namma Yatri + BMRCL integration concept                 -->
+    <!-- ========================================================================= -->
+    <section id="partnerships-impact-section" class="w-full py-20 px-4 sm:px-6 md:px-12 relative">
+      <div class="max-w-7xl mx-auto flex flex-col gap-12 text-left">
+        
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-metro-green/20 border border-metro-green/40 text-metro-green font-data text-xs uppercase mb-2">
+            <span class="material-symbols-outlined text-[15px]">handshake</span>
+            ECOSYSTEM INTEGRATION & MACRO IMPACT 🌱
+          </div>
+          <h2 class="font-headline text-3xl sm:text-5xl text-white font-bold">
+            Proposed Partnerships & Environmental Impact
+          </h2>
+          <p class="text-slate-300 text-sm max-w-3xl mt-2 font-body">
+            Nimma Saarthi is designed to aggregate demand for existing driver ecosystems rather than competing with them, working alongside BMRCL to streamline metro stations.
+          </p>
+        </div>
+
+        <!-- Proposed Partnerships Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-metro-purple/30 flex flex-col justify-between">
+            <div>
+              <span class="px-2.5 py-1 rounded bg-metro-purple/20 text-metro-purple-light border border-metro-purple/40 font-data text-xs font-bold uppercase mb-3 inline-block">
+                PROPOSED DRIVER PLATFORM PARTNERSHIPS
+              </span>
+              <h3 class="font-headline text-xl text-white font-bold mb-3">Namma Yatri • Rapido • Uber • Ola</h3>
+              <p class="text-xs text-slate-300 leading-relaxed mb-4 font-body">
+                The platform could later work with open mobility protocols (like Beckn / Namma Yatri) as well as Uber, Rapido, and Ola to access their existing driver networks. Instead of competing for drivers, Nimma Saarthi provides high-density, batched last-mile passenger clusters during peak transit hours.
+              </p>
+              <div class="p-3.5 rounded-xl bg-[#090e18] border border-white/5 font-data text-xs text-slate-400">
+                *Note: These are proposed strategic partnerships, not confirmed commercial agreements.
+              </div>
+            </div>
+            <div class="text-[11px] font-data text-metro-purple-light mt-4">Driver Benefit: +45% higher hourly revenue with zero dry cruising</div>
+          </div>
+
+          <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-metro-green/30 flex flex-col justify-between">
+            <div>
+              <span class="px-2.5 py-1 rounded bg-metro-green/20 text-metro-green border border-metro-green/40 font-data text-xs font-bold uppercase mb-3 inline-block">
+                PROPOSED TRANSIT AUTHORITY COLLABORATION
+              </span>
+              <h3 class="font-headline text-xl text-white font-bold mb-3">BMRCL (Bangalore Metro Rail Corp)</h3>
+              <p class="text-xs text-slate-300 leading-relaxed mb-4 font-body">
+                Proposed collaboration with BMRCL to designate smart feeder boarding bays at key stations, promote the service via metro concourse signage, and enable seamless integration with Namma Metro smart transit cards and mobile apps.
+              </p>
+              <div class="p-3.5 rounded-xl bg-[#090e18] border border-white/5 font-data text-xs text-slate-400">
+                *Note: Conceptual proposal for station concourse smart mobility integration.
+              </div>
+            </div>
+            <div class="text-[11px] font-data text-metro-green mt-4">Station Benefit: Eliminates chaotic curb parking and auto blockades</div>
+          </div>
+
+        </div>
+
+        <!-- Macro Impact Matrix -->
+        <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 flex flex-col gap-6">
+          <h3 class="font-headline text-xl text-white font-bold">
+            Projected Macro Impact & Traffic Reduction
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 font-data text-xs">
+            <div class="p-4 rounded-xl bg-sync-card border border-white/5">
+              <span class="text-slate-400 text-[10px] block">Trips Displaced</span>
+              <span class="text-metro-green text-3xl font-extrabold block mt-1">-68%</span>
+              <span class="text-slate-500 text-[10px]">Fewer separate vehicles on road</span>
+            </div>
+            <div class="p-4 rounded-xl bg-sync-card border border-white/5">
+              <span class="text-slate-400 text-[10px] block">Cost Cut for Students & Office Workers</span>
+              <span class="text-metro-purple-light text-3xl font-extrabold block mt-1">₹1,450/mo</span>
+              <span class="text-slate-500 text-[10px]">Direct monthly wallet relief</span>
+            </div>
+            <div class="p-4 rounded-xl bg-sync-card border border-white/5">
+              <span class="text-slate-400 text-[10px] block">Vehicle Space Utilization</span>
+              <span class="text-metro-yellow text-3xl font-extrabold block mt-1">82%</span>
+              <span class="text-slate-500 text-[10px]">Up from 28% solo occupancy</span>
+            </div>
+            <div class="p-4 rounded-xl bg-sync-card border border-white/5">
+              <span class="text-slate-400 text-[10px] block">CO2 Reduction / Station</span>
+              <span class="text-white text-3xl font-extrabold block mt-1">2.4 Tons</span>
+              <span class="text-slate-500 text-[10px]">Monthly avoided emissions</span>
+            </div>
+          </div>
+          <div class="text-[11px] font-data text-slate-400">
+            *Methodology Note: The actual traffic impact would need to be measured in field pilots, since it depends on vehicle occupancy, detour lengths, and whether riders would otherwise have travelled separately.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- 13. DIGITAL BOARDING PASS MODAL                                           -->
+  <!-- ========================================================================= -->
+  <div id="boardingPassModal" class="fixed inset-0 z-50 modal-backdrop hidden flex items-center justify-center p-4">
+    <div class="relative w-full max-w-sm glass-panel rounded-3xl border border-metro-purple/50 shadow-[0_25px_60px_rgba(0,0,0,0.98)] overflow-hidden flex flex-col">
+      
+      <div class="bg-gradient-to-r from-metro-purple-dark via-[#1a122e] to-[#0a0714] p-5 text-center relative border-b border-white/10">
+        <button type="button" id="closePassModalBtn" class="absolute top-4 right-4 text-white/70 hover:text-white">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+        <span class="px-2 py-0.5 rounded-full bg-metro-purple/20 text-metro-purple-light border border-metro-purple/40 font-data text-[10px] font-bold uppercase tracking-wider">
+          NAMMA METRO BOARDING PASS
+        </span>
+        <h3 class="font-headline text-lg text-white font-extrabold mt-1">Nimma Saarthi Shared Feeder</h3>
+        <span class="font-data text-xs text-purple-200">Indiranagar Station • Concourse Bay 03</span>
+      </div>
+
+      <div class="p-5 flex flex-col gap-4 bg-[#070912]">
+        
+        <div class="flex flex-col items-center justify-center p-4 rounded-2xl bg-[#0f1424] border border-white/10">
+          <div class="w-32 h-32 bg-white rounded-xl p-2 shadow-lg flex items-center justify-center">
+            <svg class="w-full h-full text-black" viewBox="0 0 100 100" fill="currentColor">
+              <path d="M0,0 h30 v30 h-30 z M10,10 h10 v10 h-10 z M70,0 h30 v30 h-30 z M80,10 h10 v10 h-10 z M0,70 h30 v30 h-30 z M10,80 h10 v10 h-10 z M40,10 h10 v10 h-10 z M10,40 h10 v10 h-10 z M40,40 h20 v20 h-20 z M70,40 h10 v20 h-10 z M40,70 h10 v20 h-10 z M70,70 h20 v20 h-20 z"/>
+            </svg>
+          </div>
+          <div class="mt-3 flex items-center gap-2">
+            <span class="text-xs text-slate-400 font-data">Driver Concourse OTP:</span>
+            <span class="font-data text-2xl text-metro-purple-light font-extrabold tracking-widest">7492</span>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-xl bg-white/5 border border-white/5 flex flex-col gap-1.5 font-data text-xs">
+          <span class="text-slate-400 text-[10px] uppercase font-bold">Synchronized Pod Roster</span>
+          <div class="flex items-center justify-between">
+            <span class="text-white">1. You (Bagmane Tech)</span>
+            <span class="text-metro-purple-light font-bold">₹32.00 (Locked)</span>
+          </div>
+          <div class="flex items-center justify-between text-slate-400">
+            <span>2. Ramesh T. (100ft Rd)</span>
+            <span>₹24.00</span>
+          </div>
+          <div class="flex items-center justify-between text-slate-400">
+            <span>3. Ananya P. (Domlur)</span>
+            <span>₹36.00</span>
+          </div>
+        </div>
+
+        <button type="button" id="doneBoardingBtn" class="w-full py-3 rounded-xl bg-metro-purple text-white font-data text-xs font-bold hover:brightness-110 transition-all">
+          Step Out to Concourse Bay 03
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 14. CREATE ACCOUNT / LOG IN MODAL (WINDOW 4 TARGET)                       -->
+  <!-- ========================================================================= -->
+  <div id="accountModal" class="fixed inset-0 z-50 modal-backdrop hidden flex items-center justify-center p-4">
+    <div class="relative w-full max-w-lg glass-panel rounded-3xl border border-metro-purple/40 shadow-[0_25px_60px_rgba(0,0,0,0.95)] overflow-hidden flex flex-col">
+      
+      <div class="p-5 border-b border-white/10 flex items-center justify-between bg-[#0a0d17]">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-metro-purple-light text-2xl">account_circle</span>
+          <div>
+            <h3 class="font-headline text-base font-bold text-white">Nimma Saarthi Account & Pass</h3>
+            <span class="text-[10px] font-data text-slate-400">BMRCL Namma Metro Smart Card Sync</span>
+          </div>
+        </div>
+        <button type="button" id="closeAccountModalBtn" class="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <div class="flex border-b border-white/10 bg-[#070912] font-data text-xs">
+        <button type="button" data-tab="login" class="account-tab-btn flex-1 py-3 text-center font-bold text-metro-purple-light border-b-2 border-metro-purple transition-colors">
+          Log In
+        </button>
+        <button type="button" data-tab="register" class="account-tab-btn flex-1 py-3 text-center font-bold text-slate-400 hover:text-white transition-colors">
+          Create Account
+        </button>
+        <button type="button" data-tab="wallet" class="account-tab-btn flex-1 py-3 text-center font-bold text-slate-400 hover:text-white transition-colors">
+          Transit Pass & Wallet
+        </button>
+      </div>
+
+      <div class="p-6 flex flex-col gap-4">
+        
+        <!-- Tab 1: Log In -->
+        <div id="tabContentLogin" class="flex flex-col gap-4">
+          <div class="flex flex-col gap-1.5 text-left">
+            <label class="font-data text-xs text-slate-400 font-bold" for="loginPhoneInput">Mobile Number or Metro Smart Card ID</label>
+            <input type="text" id="loginPhoneInput" placeholder="+91 98450 12345 or BMRCL-CARD-XXXX" class="w-full bg-[#06080f] border border-white/15 rounded-xl px-4 py-3 text-white font-data text-sm focus:border-metro-purple outline-none"/>
+          </div>
+          <button type="button" id="loginSubmitBtn" class="w-full py-3.5 rounded-xl bg-metro-purple hover:brightness-110 text-white font-data text-sm font-bold shadow-lg transition-all">
+            Send Verification Code
+          </button>
+        </div>
+
+        <!-- Tab 2: Create Account -->
+        <div id="tabContentRegister" class="hidden flex flex-col gap-4">
+          <div class="grid grid-cols-2 gap-3">
+            <input type="text" placeholder="Full Name" class="bg-[#06080f] border border-white/15 rounded-xl px-3 py-2 text-white text-xs outline-none font-data"/>
+            <input type="text" placeholder="Mobile Number" class="bg-[#06080f] border border-white/15 rounded-xl px-3 py-2 text-white text-xs outline-none font-data"/>
+          </div>
+          <label class="p-3 rounded-xl bg-metro-coral/10 border border-metro-coral/30 flex items-start gap-2.5 cursor-pointer text-left">
+            <input type="checkbox" checked class="mt-1 rounded text-metro-coral focus:ring-metro-coral bg-sync-dark border-white/20"/>
+            <div class="text-xs text-slate-300 font-body">
+              <strong class="text-white block font-headline">Enable SafHER Security Verification</strong>
+              Simulate Aadhaar OTP verification for women-only micro-pod matching.
+            </div>
+          </label>
+          <button type="button" id="regSubmitBtn" class="w-full py-3.5 rounded-xl bg-metro-green hover:brightness-110 text-black font-data text-sm font-bold shadow-lg transition-all">
+            Create Commuter Account
+          </button>
+        </div>
+
+        <!-- Tab 3: Wallet -->
+        <div id="tabContentWallet" class="hidden flex flex-col gap-4">
+          <div class="p-4 rounded-2xl bg-gradient-to-r from-metro-purple/20 via-sync-card to-metro-green/20 border border-white/10 flex items-center justify-between">
+            <div class="text-left">
+              <span class="text-xs text-slate-400 font-data uppercase block">In-App Feeder Balance</span>
+              <span class="font-data text-3xl font-extrabold text-white" id="modalWalletBalance">₹450.00</span>
+            </div>
+            <button type="button" id="addMoneyWalletBtn" class="px-3 py-2 rounded-xl bg-white/10 hover:bg-metro-purple hover:text-white text-white font-data text-xs font-bold transition-all">
+              + Add ₹200
+            </button>
+          </div>
+
+          <div class="flex flex-col gap-2 text-left">
+            <span class="font-data text-xs text-slate-400 uppercase font-bold">Commuter Monthly Pass</span>
+            <div class="p-3.5 rounded-xl bg-sync-card border border-metro-purple/30 flex items-center justify-between">
+              <div>
+                <span class="text-white text-sm font-bold block font-headline">Namma Tech Pass</span>
+                <span class="text-slate-400 text-xs font-data">60 Feeder Rides + Priority Bay Express</span>
+              </div>
+              <button type="button" class="buy-pass-btn px-2.5 py-1 rounded bg-metro-purple text-white font-data text-xs font-bold">
+                ₹899/mo
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 15. FOOTER                                                                -->
+  <!-- ========================================================================= -->
+  <footer class="w-full bg-[#04060b] py-12 border-t border-white/5 text-slate-400 text-xs font-data">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
+      
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-lg bg-metro-purple/20 border border-metro-purple/50 flex items-center justify-center text-metro-purple-light font-bold">
+          NS
+        </div>
+        <div class="text-left">
+          <span class="font-headline text-sm font-bold text-white block">Nimma Saarthi Last-Mile Mesh</span>
+          <span class="text-[10px] text-slate-500">Namma Metro Purple, Green & Yellow Line Feeder Platform</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-6">
+        <a href="#home-section" class="hover:text-metro-purple-light transition-colors">Home</a>
+        <a href="#booking-section" class="hover:text-metro-green transition-colors">Book tickets</a>
+        <a href="#tracking-section" class="hover:text-metro-yellow transition-colors">Tracker</a>
+        <a href="#shapley-shift-engine" class="hover:text-metro-purple-light transition-colors">Shapley Shift</a>
+      </div>
+
+      <div class="text-[11px] text-slate-500">
+        © 2026 Nimma Saarthi. Core Principle: Match journeys, not just destinations. 🚀
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT: DATA CORRIDORS, TRAIN NAV, SHAPLEY & REACTION ENGINES          -->
+  <!-- ========================================================================= -->
+  <script>
+    (function initNimmaSaarthiPlatform() {
+      // -------------------------------------------------------------
+      // 1. DATA CORRIDORS (PURPLE, GREEN, YELLOW LINES)
+      // -------------------------------------------------------------
+      const METRO_DATA = {
+        purple: {
+          name: "Purple Line (Challaghatta ↔ Whitefield)",
+          stations: [
+            { id: "indiranagar", name: "Indiranagar", dests: ["100ft Road Cross", "Bagmane Tech Park", "Domlur Flyover", "HAL 2nd Stage", "Old Airport Road"] },
+            { id: "majestic", name: "Nadaprabhu Kempegowda (Majestic)", dests: ["Gandhinagar Cross", "Chickpet Market", "KSR Railway Gate", "Cottonpet Main Rd"] },
+            { id: "whitefield", name: "Whitefield (Kadugodi)", dests: ["ITPL Main Gate", "Prestige Shantiniketan", "Hope Farm Junction", "GR Tech Park"] },
+            { id: "mg_road", name: "MG Road Interchange", dests: ["Brigade Road", "Commercial Street", "Lavelle Road Hub", "Richmond Circle"] },
+            { id: "baiyappanahalli", name: "Baiyappanahalli", dests: ["CV Raman Nagar", "OMBR Layout", "Benniganahalli Bridge", "Kasturi Nagar"] }
+          ]
+        },
+        green: {
+          name: "Green Line (Nagasandra ↔ Silk Institute)",
+          stations: [
+            { id: "jayanagar", name: "Jayanagar 4th Block", dests: ["South End Circle", "JP Nagar 2nd Phase", "Jayanagar 9th Block", "Ragigudda Temple"] },
+            { id: "yeshwanthpur", name: "Yeshwanthpur", dests: ["APMC Yard", "Mathikere Main Rd", "IISc Gate", "Malleshwaram 18th Cross"] },
+            { id: "silk_inst", name: "Silk Institute", dests: ["NICE Road Junction", "Kanakapura Road Hub", "Art of Living", "Talaghattapura"] }
+          ]
+        },
+        yellow: {
+          name: "Yellow Line (RV Road ↔ Bommasandra)",
+          stations: [
+            { id: "silk_board", name: "Silk Board Hub", dests: ["HSR Layout Sector 1", "Outer Ring Road Junction", "BTM 2nd Stage", "Madivala Market"] },
+            { id: "ec_phase1", name: "Electronics City Phase 1", dests: ["Infosys Gate 1", "Wipro Campus", "Velankani Tech Park", "NeoTown Hub"] },
+            { id: "bommasandra", name: "Bommasandra Industrial", dests: ["Narayana Health City", "Jigani Link Road", "Biocon Park", "Anekal Rd"] }
+          ]
+        }
+      };
+
+      // -------------------------------------------------------------
+      // 2. PURPLE LINE TRAIN NAVBAR MOTION CONTROLLER
+      // -------------------------------------------------------------
+      const trainRig = document.getElementById('metroTrainRig');
+      const pauseTrainBtn = document.getElementById('pauseTrainBtn');
+      const pauseTrainIcon = document.getElementById('pauseTrainIcon');
+      const pauseTrainLabel = document.getElementById('pauseTrainLabel');
+      const expressTrainBtn = document.getElementById('expressTrainBtn');
+      const resetTrainBtn = document.getElementById('resetTrainBtn');
+      let isTrainPaused = false;
+
+      function toggleTrainPause() {
+        isTrainPaused = !isTrainPaused;
+        if (isTrainPaused) {
+          trainRig.classList.add('train-paused');
+          pauseTrainIcon.textContent = 'play_arrow';
+          if (pauseTrainLabel) pauseTrainLabel.textContent = 'Resume';
+        } else {
+          trainRig.classList.remove('train-paused');
+          pauseTrainIcon.textContent = 'pause';
+          if (pauseTrainLabel) pauseTrainLabel.textContent = 'Pause';
+        }
+      }
+
+      if (pauseTrainBtn) pauseTrainBtn.addEventListener('click', toggleTrainPause);
+
+      if (expressTrainBtn) {
+        expressTrainBtn.addEventListener('click', () => {
+          trainRig.style.animation = '';
+          trainRig.classList.remove('train-paused');
+          if (trainRig.classList.contains('train-express')) {
+            trainRig.classList.remove('train-express');
+            trainRig.classList.add('train-cruising');
+            expressTrainBtn.classList.remove('bg-metro-yellow/30');
+          } else {
+            trainRig.classList.remove('train-cruising');
+            trainRig.classList.add('train-express');
+            expressTrainBtn.classList.add('bg-metro-yellow/30');
+            playTransitChime(784, 0.25);
+          }
+          isTrainPaused = false;
+          pauseTrainIcon.textContent = 'pause';
+          if (pauseTrainLabel) pauseTrainLabel.textContent = 'Pause';
+        });
+      }
+
+      if (resetTrainBtn) {
+        resetTrainBtn.addEventListener('click', () => {
+          trainRig.classList.remove('train-express');
+          trainRig.classList.add('train-cruising');
+          trainRig.classList.add('train-paused');
+          trainRig.style.animation = 'none';
+          trainRig.style.transform = 'translateX(5%)';
+          isTrainPaused = true;
+          pauseTrainIcon.textContent = 'play_arrow';
+          if (pauseTrainLabel) pauseTrainLabel.textContent = 'Resume';
+        });
+      }
+
+      // Hover pause so commuter can easily click window links
+      if (trainRig) {
+        trainRig.addEventListener('mouseenter', () => {
+          if (!isTrainPaused) trainRig.style.animationPlayState = 'paused';
+        });
+        trainRig.addEventListener('mouseleave', () => {
+          if (!isTrainPaused) trainRig.style.animationPlayState = 'running';
+        });
+      }
+
+      // -------------------------------------------------------------
+      // 3. SYNTHESIZED WEB AUDIO API NAMMA METRO CHIME
+      // -------------------------------------------------------------
+      let audioCtx = null;
+      let isAudioEnabled = false;
+      const toggleAudioBtn = document.getElementById('toggleAudioBtn');
+      const audioIcon = document.getElementById('audioIcon');
+
+      function playTransitChime(freq = 587.33, dur = 0.25) {
+        if (!isAudioEnabled) return;
+        try {
+          if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(freq * 1.25, audioCtx.currentTime + dur);
+          gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + dur);
+        } catch (e) {
+          console.warn('Audio chime note:', e);
+        }
+      }
+
+      if (toggleAudioBtn) {
+        toggleAudioBtn.addEventListener('click', () => {
+          isAudioEnabled = !isAudioEnabled;
+          if (isAudioEnabled) {
+            audioIcon.textContent = 'volume_up';
+            playTransitChime(523.25, 0.2);
+          } else {
+            audioIcon.textContent = 'volume_off';
+          }
+        });
+      }
+
+      // -------------------------------------------------------------
+      // 4. PERSONA TESTBENCH SWITCHER
+      // -------------------------------------------------------------
+      const personaTabs = document.querySelectorAll('.persona-tab-btn');
+      const personaRiderView = document.getElementById('personaRiderView');
+      const personaDriverView = document.getElementById('personaDriverView');
+      const personaStationView = document.getElementById('personaStationView');
+
+      personaTabs.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const p = btn.dataset.persona;
+          personaTabs.forEach(b => {
+            b.className = "persona-tab-btn px-4 py-2 rounded-xl text-slate-400 hover:text-white transition-all";
+          });
+          btn.className = "persona-tab-btn px-4 py-2 rounded-xl bg-metro-purple text-white font-bold shadow-md transition-all";
+
+          personaRiderView.classList.add('hidden');
+          personaDriverView.classList.add('hidden');
+          personaStationView.classList.add('hidden');
+
+          if (p === 'rider') personaRiderView.classList.remove('hidden');
+          if (p === 'driver') personaDriverView.classList.remove('hidden');
+          if (p === 'station') personaStationView.classList.remove('hidden');
+
+          playTransitChime(659.25, 0.15);
+        });
+      });
+
+      const appPoolMeBtn = document.getElementById('appPoolMeBtn');
+      const appPoolMeLabel = document.getElementById('appPoolMeLabel');
+      const appRiderMatchResult = document.getElementById('appRiderMatchResult');
+
+      if (appPoolMeBtn) {
+        appPoolMeBtn.addEventListener('click', () => {
+          appPoolMeLabel.textContent = "Matching Corridor Pod...";
+          playTransitChime(784, 0.2);
+          setTimeout(() => {
+            appPoolMeLabel.textContent = "Bay 03 Assigned ✓ (Locked)";
+            appRiderMatchResult.classList.remove('border-metro-purple/40');
+            appRiderMatchResult.classList.add('border-metro-green');
+            playTransitChime(1046, 0.35);
+          }, 700);
+        });
+      }
+
+      // -------------------------------------------------------------
+      // 5. BOOKING ENGINE CONTROLLER (PURPLE / GREEN / YELLOW)
+      // -------------------------------------------------------------
+      let currentLine = 'purple';
+      let currentPref = 'standard';
+      let currentVMode = 'auto';
+      let isNightMode = false;
+      let isRainMode = false;
+
+      const lineButtons = document.querySelectorAll('.line-btn');
+      const prefButtons = document.querySelectorAll('.pref-btn');
+      const vmodeButtons = document.querySelectorAll('.vmode-btn');
+      const timingButtons = document.querySelectorAll('.timing-btn');
+
+      const bookingStationSelect = document.getElementById('bookingStationSelect');
+      const bookingDestSelect = document.getElementById('bookingDestSelect');
+      const safherToggle = document.getElementById('safherToggle');
+      const walkSaveToggle = document.getElementById('walkSaveToggle');
+      const walkSaveContainer = document.getElementById('walkSaveContainer');
+      const walkSaveSubText = document.getElementById('walkSaveSubText');
+
+      const fareRouteSummary = document.getElementById('fareRouteSummary');
+      const calculatedFareDisplay = document.getElementById('calculatedFareDisplay');
+      const walkDiscountRow = document.getElementById('walkDiscountRow');
+      const quickRideRow = document.getElementById('quickRideRow');
+
+      const requestPodBtn = document.getElementById('requestPodBtn');
+      const requestPodBtnText = document.getElementById('requestPodBtnText');
+      const matchSimulationCard = document.getElementById('matchSimulationCard');
+
+      function populateStations(lineKey) {
+        if (!bookingStationSelect) return;
+        const lineData = METRO_DATA[lineKey];
+        bookingStationSelect.innerHTML = '';
+        lineData.stations.forEach((stn) => {
+          const opt = document.createElement('option');
+          opt.value = stn.id;
+          opt.textContent = stn.name;
+          bookingStationSelect.appendChild(opt);
+        });
+        populateDestinations(lineData.stations[0]);
+      }
+
+      function populateDestinations(stationObj) {
+        if (!bookingDestSelect || !stationObj) return;
+        bookingDestSelect.innerHTML = '';
+        stationObj.dests.forEach((dst) => {
+          const opt = document.createElement('option');
+          opt.value = dst;
+          opt.textContent = dst;
+          bookingDestSelect.appendChild(opt);
+        });
+        recalculateFare();
+      }
+
+      function recalculateFare() {
+        if (!fareRouteSummary) return;
+        const stationName = bookingStationSelect.options[bookingStationSelect.selectedIndex]?.text || "Indiranagar";
+        const destName = bookingDestSelect.value || "100ft Road Cross";
+        fareRouteSummary.textContent = `${stationName} ➔ ${destName}`;
+
+        let baseSharedFare = 47;
+        if (currentVMode === 'cab') baseSharedFare = 54;
+        if (currentVMode === 'shuttle') baseSharedFare = 32;
+
+        if (currentPref === 'quick') {
+          baseSharedFare += 15;
+          if (quickRideRow) quickRideRow.classList.remove('hidden');
+        } else {
+          if (quickRideRow) quickRideRow.classList.add('hidden');
+        }
+
+        const canWalk = !isNightMode && !isRainMode;
+        if (canWalk && walkSaveToggle && walkSaveToggle.checked) {
+          baseSharedFare -= 15;
+          if (walkDiscountRow) walkDiscountRow.classList.remove('hidden');
+        } else {
+          if (walkDiscountRow) walkDiscountRow.classList.add('hidden');
+        }
+
+        if (calculatedFareDisplay) calculatedFareDisplay.textContent = '₹' + Math.max(20, baseSharedFare);
+      }
+
+      lineButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          currentLine = btn.dataset.line;
+          lineButtons.forEach((b) => {
+            b.className = "line-btn p-3 rounded-xl border border-white/10 bg-sync-surface text-slate-300 font-data text-xs sm:text-sm font-bold flex flex-col items-center gap-1 transition-all";
+          });
+          const borderClass = currentLine === 'purple' ? 'border-metro-purple bg-metro-purple/25 text-white' : currentLine === 'green' ? 'border-metro-green bg-metro-green/20 text-white' : 'border-metro-yellow bg-metro-yellow/20 text-white';
+          btn.className = `line-btn p-3 rounded-xl border-2 ${borderClass} font-data text-xs sm:text-sm font-bold flex flex-col items-center gap-1 shadow-lg transition-all`;
+          populateStations(currentLine);
+          recalculateFare();
+        });
+      });
+
+      prefButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          currentPref = btn.dataset.pref;
+          prefButtons.forEach((b) => {
+            b.className = "pref-btn p-3.5 rounded-2xl border border-white/15 bg-sync-surface text-left flex flex-col gap-1 transition-all";
+          });
+          if (currentPref === 'standard') {
+            btn.className = "pref-btn p-3.5 rounded-2xl border-2 border-metro-purple bg-metro-purple/15 text-left flex flex-col gap-1 transition-all";
+          } else {
+            btn.className = "pref-btn p-3.5 rounded-2xl border-2 border-metro-yellow bg-metro-yellow/15 text-left flex flex-col gap-1 transition-all";
+          }
+          recalculateFare();
+        });
+      });
+
+      vmodeButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          currentVMode = btn.dataset.mode;
+          vmodeButtons.forEach((b) => {
+            b.className = "vmode-btn p-3 rounded-xl border border-white/10 bg-sync-surface text-center flex flex-col items-center gap-1 transition-all";
+          });
+          btn.className = "vmode-btn p-3 rounded-xl border-2 border-metro-purple bg-metro-purple/20 text-center flex flex-col items-center gap-1 transition-all";
+          recalculateFare();
+        });
+      });
+
+      timingButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          timingButtons.forEach(b => {
+            b.className = "timing-btn p-2.5 rounded-xl border border-white/10 bg-sync-surface text-slate-300 font-data text-xs font-bold text-center hover:border-metro-purple";
+          });
+          btn.className = "timing-btn p-2.5 rounded-xl border-2 border-metro-purple bg-metro-purple/20 text-white font-data text-xs font-bold text-center";
+        });
+      });
+
+      if (bookingStationSelect) {
+        bookingStationSelect.addEventListener('change', (e) => {
+          const lineStations = METRO_DATA[currentLine].stations;
+          const found = lineStations.find(s => s.id === e.target.value);
+          populateDestinations(found);
+        });
+      }
+
+      if (bookingDestSelect) bookingDestSelect.addEventListener('change', recalculateFare);
+      if (walkSaveToggle) walkSaveToggle.addEventListener('change', recalculateFare);
+
+      // Night & Weather Adaptive Toggles (Hides Walk & Save)
+      const toggleNightBtn = document.getElementById('toggleNightBtn');
+      const labelNightState = document.getElementById('labelNightState');
+      const toggleWeatherBtn = document.getElementById('toggleWeatherBtn');
+      const labelWeatherState = document.getElementById('labelWeatherState');
+
+      function updateEnvironmentAdaptiveRules() {
+        const isDangerousOrInconvenient = isNightMode || isRainMode;
+        if (isDangerousOrInconvenient) {
+          if (walkSaveToggle) {
+            walkSaveToggle.checked = false;
+            walkSaveToggle.disabled = true;
+          }
+          if (walkSaveContainer) {
+            walkSaveContainer.classList.add('opacity-40');
+          }
+          if (walkSaveSubText) {
+            walkSaveSubText.textContent = isRainMode ? "Disabled due to heavy rain 🌧️" : "Disabled after 9 PM for night safety 🌙";
+            walkSaveSubText.classList.add('text-amber-400');
+          }
+        } else {
+          if (walkSaveToggle) {
+            walkSaveToggle.disabled = false;
+            walkSaveToggle.checked = true;
+          }
+          if (walkSaveContainer) {
+            walkSaveContainer.classList.remove('opacity-40');
+          }
+          if (walkSaveSubText) {
+            walkSaveSubText.textContent = "Walk 180m for -₹15 discount";
+            walkSaveSubText.classList.remove('text-amber-400');
+          }
+        }
+        recalculateFare();
+      }
+
+      if (toggleNightBtn) {
+        toggleNightBtn.addEventListener('click', () => {
+          isNightMode = !isNightMode;
+          labelNightState.textContent = isNightMode ? "Night Mode (10:15 PM)" : "Day Mode (7:30 PM)";
+          toggleNightBtn.classList.toggle('bg-purple-900/50', isNightMode);
+          updateEnvironmentAdaptiveRules();
+        });
+      }
+
+      if (toggleWeatherBtn) {
+        toggleWeatherBtn.addEventListener('click', () => {
+          isRainMode = !isRainMode;
+          labelWeatherState.textContent = isRainMode ? "Monsoon Rain 🌧️" : "Clear Weather ☀️";
+          toggleWeatherBtn.classList.toggle('bg-blue-900/50', isRainMode);
+          updateEnvironmentAdaptiveRules();
+        });
+      }
+
+      populateStations('purple');
+
+      if (requestPodBtn) {
+        requestPodBtn.addEventListener('click', () => {
+          requestPodBtn.disabled = true;
+          requestPodBtnText.textContent = "Scanning Indiranagar Corridor...";
+          matchSimulationCard.classList.remove('hidden');
+          playTransitChime(880, 0.3);
+
+          setTimeout(() => {
+            requestPodBtnText.textContent = "Pod Assigned • Rendezvous at Bay 03";
+            playTransitChime(1046, 0.35);
+          }, 800);
+        });
+      }
+
+      // -------------------------------------------------------------
+      // 6. GROUP SPLITTING ENGINE SIMULATION (1 to 24 commuters)
+      // -------------------------------------------------------------
+      const sliderCommuterCount = document.getElementById('sliderCommuterCount');
+      const labelCommuterCount = document.getElementById('labelCommuterCount');
+      const allocatedVehiclesSummary = document.getElementById('allocatedVehiclesSummary');
+      const allocatedVehiclesExplanation = document.getElementById('allocatedVehiclesExplanation');
+      const allocationStatusBadge = document.getElementById('allocationStatusBadge');
+
+      function updateFleetAllocationSimulation() {
+        if (!sliderCommuterCount) return;
+        const count = parseInt(sliderCommuterCount.value, 10);
+        labelCommuterCount.textContent = `${count} Commuter${count > 1 ? 's' : ''}`;
+
+        if (count <= 3) {
+          allocationStatusBadge.textContent = "SINGLE AUTO EV";
+          allocatedVehiclesSummary.textContent = "1 Auto EV (3-Seat)";
+          allocatedVehiclesExplanation.textContent = `${count} commuter${count > 1 ? 's fit' : ' fits'} perfectly in an Auto EV. Ideal for agile navigation through cross roads.`;
+        } else if (count === 4) {
+          allocationStatusBadge.textContent = "SINGLE CAB EV";
+          allocatedVehiclesSummary.textContent = "1 Cab EV (4-Seat)";
+          allocatedVehiclesExplanation.textContent = "4 commuters fill a comfortable electric cab with AC comfort.";
+        } else if (count <= 6) {
+          allocationStatusBadge.textContent = "SPLIT DISPATCH";
+          allocatedVehiclesSummary.textContent = "2 Auto EVs (3 + 3 seats)";
+          allocatedVehiclesExplanation.textContent = `${count} commuters split into two small groups to prevent excessive detours.`;
+        } else if (count <= 12) {
+          allocationStatusBadge.textContent = "SHUTTLE POD";
+          allocatedVehiclesSummary.textContent = `1 Electric Shuttle (${count} of 12 seats)`;
+          allocatedVehiclesExplanation.textContent = `${count} commuters pooled into an electric shuttle along the primary tech corridor.`;
+        } else if (count <= 16) {
+          allocationStatusBadge.textContent = "SPLIT DISPATCH (SHUTTLE + CAB)";
+          allocatedVehiclesSummary.textContent = "1 Shuttle (12 seats) + 1 Cab EV (4 seats)";
+          allocatedVehiclesExplanation.textContent = `${count} commuters exceed a single vehicle. Engine allocates 1 main Shuttle + 1 express Cab.`;
+        } else {
+          allocationStatusBadge.textContent = "MULTI-FLEET DISPATCH";
+          allocatedVehiclesSummary.textContent = "2 Electric Shuttles (12 + 12 seats)";
+          allocatedVehiclesExplanation.textContent = `${count} commuters dispatched across two synchronized shuttles leaving bays 01 and 02.`;
+        }
+      }
+
+      if (sliderCommuterCount) {
+        sliderCommuterCount.addEventListener('input', updateFleetAllocationSimulation);
+        updateFleetAllocationSimulation();
+      }
+
+      // -------------------------------------------------------------
+      // 7. MATCHING WINDOW TIMEOUT & FALLBACK SIMULATION
+      // -------------------------------------------------------------
+      const triggerTimeoutDemoBtn = document.getElementById('triggerTimeoutDemoBtn');
+      const fallbackAlertBox = document.getElementById('fallbackAlertBox');
+      const resetWindowTimerBtn = document.getElementById('resetWindowTimerBtn');
+      const windowTimerDisplay = document.getElementById('windowTimerDisplay');
+      const windowPhaseLabel = document.getElementById('windowPhaseLabel');
+      const windowProgressBar = document.getElementById('windowProgressBar');
+
+      if (triggerTimeoutDemoBtn) {
+        triggerTimeoutDemoBtn.addEventListener('click', () => {
+          windowTimerDisplay.textContent = "00:00 (EXPIRED)";
+          windowPhaseLabel.textContent = "Window Closed: Guaranteed Fallback Active";
+          windowProgressBar.style.width = "100%";
+          fallbackAlertBox.classList.remove('hidden');
+          playTransitChime(440, 0.35);
+        });
+      }
+
+      if (resetWindowTimerBtn) {
+        resetWindowTimerBtn.addEventListener('click', () => {
+          windowTimerDisplay.textContent = "05:42";
+          windowPhaseLabel.textContent = "Phase 2: Radial Corridor Clustering";
+          windowProgressBar.style.width = "60%";
+          fallbackAlertBox.classList.add('hidden');
+          playTransitChime(659, 0.2);
+        });
+      }
+
+      // -------------------------------------------------------------
+      // 8. SHAPLEY VALUE GAME THEORY ENGINE
+      // -------------------------------------------------------------
+      const sliderDistA = document.getElementById('sliderDistA');
+      const sliderDistB = document.getElementById('sliderDistB');
+      const sliderDistC = document.getElementById('sliderDistC');
+      const sliderDistD = document.getElementById('sliderDistD');
+      const labelDistA = document.getElementById('labelDistA');
+      const labelDistB = document.getElementById('labelDistB');
+      const labelDistC = document.getElementById('labelDistC');
+      const labelDistD = document.getElementById('labelDistD');
+      const fareShareA = document.getElementById('fareShareA');
+      const fareShareB = document.getElementById('fareShareB');
+      const fareShareC = document.getElementById('fareShareC');
+      const fareShareD = document.getElementById('fareShareD');
+      const shapleyTotalMeter = document.getElementById('shapleyTotalMeter');
+      const shapleySoloSum = document.getElementById('shapleySoloSum');
+      const shapleySavedPct = document.getElementById('shapleySavedPct');
+
+      const shapleyToggleRider4Btn = document.getElementById('shapleyToggleRider4Btn');
+      const riderDContainer = document.getElementById('riderDContainer');
+      let isRider4Active = false;
+
+      function calculateShapleyMath() {
+        if (!sliderDistA) return;
+        const dA = parseFloat(sliderDistA.value);
+        const dB = parseFloat(sliderDistB.value);
+        const dC = parseFloat(sliderDistC.value);
+        const dD = isRider4Active ? parseFloat(sliderDistD.value) : 0;
+
+        labelDistA.textContent = dA.toFixed(1) + ' km';
+        labelDistB.textContent = dB.toFixed(1) + ' km';
+        labelDistC.textContent = dC.toFixed(1) + ' km';
+        if (labelDistD) labelDistD.textContent = dD.toFixed(1) + ' km';
+
+        const riders = [
+          { id: 'A', d: dA },
+          { id: 'B', d: dB },
+          { id: 'C', d: dC }
+        ];
+        if (isRider4Active) riders.push({ id: 'D', d: dD });
+        riders.sort((x, y) => x.d - y.d);
+
+        const flagDown = 25;
+        const kmRate = 14;
+        const N = riders.length;
+
+        // Shapley marginal segment calculation
+        // Segment 1 (Origin to Drop 1): shared by N riders
+        // Segment k (Drop k-1 to Drop k): shared by N - (k-1) riders
+        const shares = {};
+        riders.forEach(r => shares[r.id] = 0);
+
+        let prevD = 0;
+        for (let i = 0; i < N; i++) {
+          const legDist = riders[i].d - prevD;
+          const legCost = (i === 0 ? flagDown : 0) + (legDist * kmRate);
+          const ridersOnLeg = N - i;
+          const costPerRider = legCost / ridersOnLeg;
+
+          for (let j = i; j < N; j++) {
+            shares[riders[j].id] += costPerRider;
+          }
+          prevD = riders[i].d;
+        }
+
+        fareShareA.textContent = '₹' + shares['A'].toFixed(2);
+        fareShareB.textContent = '₹' + shares['B'].toFixed(2);
+        fareShareC.textContent = '₹' + shares['C'].toFixed(2);
+        if (fareShareD && isRider4Active) fareShareD.textContent = '₹' + shares['D'].toFixed(2);
+
+        let grandMeter = 0;
+        let soloSumVal = 0;
+        riders.forEach(r => {
+          grandMeter += shares[r.id];
+          soloSumVal += (flagDown + r.d * kmRate);
+        });
+
+        shapleyTotalMeter.textContent = '₹' + grandMeter.toFixed(2);
+        shapleySoloSum.textContent = '₹' + soloSumVal.toFixed(2);
+        const savedPct = (((soloSumVal - grandMeter) / soloSumVal) * 100).toFixed(1);
+        shapleySavedPct.textContent = '-' + savedPct + '% Total';
+      }
+
+      [sliderDistA, sliderDistB, sliderDistC, sliderDistD].forEach(s => {
+        if (s) s.addEventListener('input', calculateShapleyMath);
+      });
+
+      if (shapleyToggleRider4Btn) {
+        shapleyToggleRider4Btn.addEventListener('click', () => {
+          isRider4Active = !isRider4Active;
+          if (isRider4Active) {
+            riderDContainer.classList.remove('hidden');
+            shapleyToggleRider4Btn.textContent = "- Remove 4th Rider";
+          } else {
+            riderDContainer.classList.add('hidden');
+            shapleyToggleRider4Btn.textContent = "+ Add 4th Rider";
+          }
+          calculateShapleyMath();
+        });
+      }
+
+      calculateShapleyMath();
+
+      // -------------------------------------------------------------
+      // 9. LIVE TRACKING WAYPOINT SIMULATION
+      // -------------------------------------------------------------
+      const liveTrackingPod = document.getElementById('liveTrackingPod');
+      const trackingEtaDisplay = document.getElementById('trackingEtaDisplay');
+      let trackStep = 0;
+
+      setInterval(() => {
+        if (!liveTrackingPod) return;
+        trackStep = (trackStep + 1) % 4;
+        if (trackStep === 0) {
+          liveTrackingPod.setAttribute('transform', 'translate(160, 166)');
+          if (trackingEtaDisplay) trackingEtaDisplay.textContent = "6.2 mins";
+        } else if (trackStep === 1) {
+          liveTrackingPod.setAttribute('transform', 'translate(260, 166)');
+          if (trackingEtaDisplay) trackingEtaDisplay.textContent = "4.2 mins";
+        } else if (trackStep === 2) {
+          liveTrackingPod.setAttribute('transform', 'translate(340, 136)');
+          if (trackingEtaDisplay) trackingEtaDisplay.textContent = "1.8 mins";
+        } else {
+          liveTrackingPod.setAttribute('transform', 'translate(400, 106)');
+          if (trackingEtaDisplay) trackingEtaDisplay.textContent = "Arriving at Gate!";
+        }
+      }, 3500);
+
+      // SOS Incident Escalation Alert
+      const triggerSosDemoBtn = document.getElementById('triggerSosDemoBtn');
+      const sosEmergencyBtn = document.getElementById('sosEmergencyBtn');
+
+      function alertSosSimulation() {
+        playTransitChime(440, 0.4);
+        alert("[SAFHER INCIDENT SIMULATION]\n\n• High-priority SOS broadcasted to Bangalore City Police (Dial 112 API)\n• Live vehicle coordinates & Bay 03 manifest sent to BMRCL Concourse Team\n• In-cabin ambient audio recording activated\n• Emergency SMS dispatched to verified emergency contacts");
+      }
+
+      if (triggerSosDemoBtn) triggerSosDemoBtn.addEventListener('click', alertSosSimulation);
+      if (sosEmergencyBtn) sosEmergencyBtn.addEventListener('click', alertSosSimulation);
+
+      // -------------------------------------------------------------
+      // 10. MODALS (ACCOUNT & BOARDING PASS)
+      // -------------------------------------------------------------
+      const accountModal = document.getElementById('accountModal');
+      const closeAccountModalBtn = document.getElementById('closeAccountModalBtn');
+      const navWinAccount = document.getElementById('nav-win-account');
+
+      const boardingPassModal = document.getElementById('boardingPassModal');
+      const closePassModalBtn = document.getElementById('closePassModalBtn');
+      const doneBoardingBtn = document.getElementById('doneBoardingBtn');
+      const viewBoardingPassBtn = document.getElementById('viewBoardingPassBtn');
+
+      if (navWinAccount) {
+        navWinAccount.addEventListener('click', () => {
+          accountModal.classList.remove('hidden');
+          playTransitChime(587, 0.2);
+        });
+      }
+
+      if (closeAccountModalBtn) {
+        closeAccountModalBtn.addEventListener('click', () => {
+          accountModal.classList.add('hidden');
+        });
+      }
+
+      if (accountModal) {
+        accountModal.addEventListener('click', (e) => {
+          if (e.target === accountModal) accountModal.classList.add('hidden');
+        });
+      }
+
+      if (viewBoardingPassBtn) {
+        viewBoardingPassBtn.addEventListener('click', () => {
+          boardingPassModal.classList.remove('hidden');
+          playTransitChime(784, 0.25);
+        });
+      }
+
+      if (closePassModalBtn) {
+        closePassModalBtn.addEventListener('click', () => {
+          boardingPassModal.classList.add('hidden');
+        });
+      }
+
+      if (boardingPassModal) {
+        boardingPassModal.addEventListener('click', (e) => {
+          if (e.target === boardingPassModal) boardingPassModal.classList.add('hidden');
+        });
+      }
+
+      if (doneBoardingBtn) {
+        doneBoardingBtn.addEventListener('click', () => {
+          boardingPassModal.classList.add('hidden');
+          alert("[BOARDING CONFIRMED] Proceed to Bay 03 Concourse. Driver Suresh K. has your seat locked.");
+        });
+      }
+
+      // Account Tabs
+      const accountTabs = document.querySelectorAll('.account-tab-btn');
+      const tabContentLogin = document.getElementById('tabContentLogin');
+      const tabContentRegister = document.getElementById('tabContentRegister');
+      const tabContentWallet = document.getElementById('tabContentWallet');
+
+      accountTabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const t = tab.dataset.tab;
+          accountTabs.forEach(tb => {
+            tb.className = "account-tab-btn flex-1 py-3 text-center font-bold text-slate-400 hover:text-white transition-colors";
+          });
+          tab.className = "account-tab-btn flex-1 py-3 text-center font-bold text-metro-purple-light border-b-2 border-metro-purple transition-colors";
+
+          tabContentLogin.classList.add('hidden');
+          tabContentRegister.classList.add('hidden');
+          tabContentWallet.classList.add('hidden');
+
+          if (t === 'login') tabContentLogin.classList.remove('hidden');
+          if (t === 'register') tabContentRegister.classList.remove('hidden');
+          if (t === 'wallet') tabContentWallet.classList.remove('hidden');
+        });
+      });
+
+      const addMoneyWalletBtn = document.getElementById('addMoneyWalletBtn');
+      const modalWalletBalance = document.getElementById('modalWalletBalance');
+      let currentBal = 450;
+
+      if (addMoneyWalletBtn) {
+        addMoneyWalletBtn.addEventListener('click', () => {
+          currentBal += 200;
+          modalWalletBalance.textContent = '₹' + currentBal.toFixed(2);
+          playTransitChime(880, 0.25);
+          alert(`[WALLET CREDITED] ₹200 added successfully via UPI / Namma Metro Card.\nNew Available Balance: ₹${currentBal.toFixed(2)}`);
+        });
+      }
+
+      const loginSubmitBtn = document.getElementById('loginSubmitBtn');
+      if (loginSubmitBtn) {
+        loginSubmitBtn.addEventListener('click', () => {
+          playTransitChime(659, 0.2);
+          alert("[VERIFICATION] OTP 8392 sent to registered mobile.\nWelcome back to Nimma Saarthi.");
+          accountModal.classList.add('hidden');
+        });
+      }
+
+      const regSubmitBtn = document.getElementById('regSubmitBtn');
+      if (regSubmitBtn) {
+        regSubmitBtn.addEventListener('click', () => {
+          playTransitChime(659, 0.2);
+          alert("[REGISTERED] Commuter Profile created with SafHER verified clearance.");
+          accountModal.classList.add('hidden');
+        });
+      }
+
+      const buyPassBtns = document.querySelectorAll('.buy-pass-btn');
+      buyPassBtns.forEach(b => {
+        b.addEventListener('click', () => {
+          playTransitChime(987, 0.3);
+          alert("[PASS ACTIVATED] Monthly Namma Tech Pass active. All feeder pool fares debited at 100% discount.");
+        });
+      });
+
+    })();
+  </script>
+</body>
+</html>

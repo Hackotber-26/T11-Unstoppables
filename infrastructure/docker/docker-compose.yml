@@ -1,0 +1,146 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: trainsync-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: trainsync
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-local-postgres-password}
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d trainsync"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    container_name: trainsync-redis
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${REDIS_PORT:-6379}:6379"
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-local-redis-password}
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf", "--requirepass", "${REDIS_PASSWORD:-local-redis-password}"]
+    volumes:
+      - ../redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a \"$$REDIS_PASSWORD\" ping 2>/dev/null | grep -q PONG"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  migrate:
+    build:
+      context: ../..
+      dockerfile: infrastructure/docker/Dockerfile.backend
+    container_name: trainsync-migrate
+    restart: "no"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    entrypoint: ["/app/migrate"]
+    environment:
+      APP_ENV: development
+      APP_PORT: 8080
+      DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-local-postgres-password}@postgres:5432/trainsync
+      MIGRATIONS_DIR: /app/migrations
+
+  backend:
+    build:
+      context: ../..
+      dockerfile: infrastructure/docker/Dockerfile.backend
+    container_name: trainsync-backend
+    restart: unless-stopped
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+    environment:
+      APP_ENV: development
+      APP_HOST: 0.0.0.0
+      APP_PORT: 8080
+      APP_API_KEY: ${APP_API_KEY:-}
+      DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-local-postgres-password}@postgres:5432/trainsync
+      REDIS_URL: redis://:${REDIS_PASSWORD:-local-redis-password}@redis:6379/0
+      JWT_SECRET: ${JWT_SECRET:-local-development-only-secret-change-before-deploy-2026}
+    ports:
+      - "127.0.0.1:${API_PORT:-8080}:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8080/api/v1/health >/dev/null"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 15s
+
+  worker:
+    build:
+      context: ../..
+      dockerfile: infrastructure/docker/Dockerfile.backend
+    container_name: trainsync-worker
+    restart: unless-stopped
+    entrypoint: ["/app/worker"]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    environment:
+      APP_ENV: development
+      DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-local-postgres-password}@postgres:5432/trainsync
+      JWT_SECRET: ${JWT_SECRET:-local-development-only-secret-change-before-deploy-2026}
+
+  pooler:
+    build:
+      context: ../..
+      dockerfile: infrastructure/docker/Dockerfile.backend
+    container_name: trainsync-pooler
+    restart: unless-stopped
+    entrypoint: ["/app/pooler"]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    environment:
+      APP_ENV: development
+      DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-local-postgres-password}@postgres:5432/trainsync
+      JWT_SECRET: ${JWT_SECRET:-local-development-only-secret-change-before-deploy-2026}
+
+  prometheus:
+    image: prom/prometheus:v2.54.1
+    container_name: trainsync-prometheus
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${PROMETHEUS_PORT:-9090}:9090"
+    volumes:
+      - ../prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ../prometheus/alerts.yml:/etc/prometheus/alerts.yml:ro
+
+  grafana:
+    image: grafana/grafana:11.1.2
+    container_name: trainsync-grafana
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${GRAFANA_PORT:-3001}:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-local-grafana-change-me}
+    volumes:
+      - ../grafana/provisioning:/etc/grafana/provisioning:ro
+      - grafana_data:/var/lib/grafana
+
+  caddy:
+    image: caddy:2
+    container_name: trainsync-caddy
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${CADDY_HTTP_PORT:-8081}:80"
+      - "127.0.0.1:${CADDY_HTTPS_PORT:-8444}:443"
+    volumes:
+      - ../caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+
+volumes:
+  postgres_data:
+  grafana_data:

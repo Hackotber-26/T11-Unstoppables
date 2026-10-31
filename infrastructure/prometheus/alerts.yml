@@ -1,0 +1,19 @@
+groups:
+  - name: trainsync-availability
+    rules:
+      - alert: TrainSyncAPIDown
+        expr: up{job="trainsync-api"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: TrainSync API metrics endpoint is unavailable
+          description: Prometheus has failed to scrape the API for at least one minute.
+      - alert: TrainSyncNoScrapeData
+        expr: absent(up{job="trainsync-api"})
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: TrainSync API scrape target is missing
+          description: The API target is absent from Prometheus service discovery.

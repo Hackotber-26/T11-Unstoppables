@@ -153,14 +153,20 @@ go run ./cmd/simulator
 
 ### Frontend
 
-The frontend is organized as static and script-driven page assets. You can serve it locally with any basic web server:
+The frontend is a static browser client connected to the Go API. Start the local backend and dependencies first:
+
+```bash
+docker compose -f infrastructure/docker/docker-compose.yml up --build -d
+```
+
+Then serve the UI:
 
 ```bash
 cd frontend
 python -m http.server 8000
 ```
 
-Then open http://localhost:8000.
+Open http://localhost:8000. The backend allows `http://localhost:8000` and `http://127.0.0.1:8000` by default; configure `APP_CORS_ORIGINS` for another local origin. See [frontend/README.md](frontend/README.md) for connected workflows and prototype limitations.
 
 ### Data and simulation
 

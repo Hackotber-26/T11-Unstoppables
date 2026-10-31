@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0.0",
+  "classification_values": ["synthetic", "verified"],
+  "station_fields": ["station_id", "name", "corridor_id", "x_m", "y_m", "accessible", "active", "data_class"],
+  "route_fields": ["edge_id", "from_station_id", "to_station_id", "corridor_id", "distance_meters", "travel_seconds", "edge_type", "data_class"],
+  "demand_fields": ["request_id", "scenario_id", "station_id", "destination_corridor_id", "requested_offset_seconds", "party_size", "max_wait_seconds", "max_detour_meters", "accessibility_required", "data_class"],
+  "driver_fields": ["driver_id", "scenario_id", "capacity", "accessible_vehicle", "available", "data_class"],
+  "safety_event_fields": ["event_id", "scenario_id", "request_id", "severity", "event_type", "data_class"]
+}

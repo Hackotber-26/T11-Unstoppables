@@ -1,0 +1,19 @@
+{
+  "scenario_id": "safety_escalation",
+  "description": "Synthetic requests and review events for safety workflow testing; not a risk model.",
+  "seed": 41035,
+  "rider_count": 80,
+  "arrival_window_seconds": 900,
+  "arrival_shape": "flat",
+  "destination_mismatch_rate": 0.15,
+  "party_size_two_rate": 0.04,
+  "accessible_request_rate": 0.2,
+  "safety_event_count": 6,
+  "drivers": 36,
+  "vehicle_capacity": 4,
+  "accessible_vehicle_rate": 0.25,
+  "max_wait_seconds": 240,
+  "max_detour_meters": 1800,
+  "max_pool_size": 4,
+  "pool_discount_bps": 1200
+}

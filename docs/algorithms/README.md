@@ -60,3 +60,16 @@ The algorithms are designed to improve:
 ## Key implementation focus
 
 The repository includes simulation, matching, and operational structures for these algorithms, and they are expected to be evaluated with real scenario data before production rollout.
+
+## JavaScript reference engines
+
+Import the supported domain functions from `frontend/scripts/engine/index.mjs`.
+
+- `frontend/scripts/engine/matching.mjs` ranks candidates and rejects safety, capacity, wait, detour, or pickup-window violations.
+- `frontend/scripts/engine/routing.mjs` computes a minimum-time directed route and a bounded ETA from supplied network edges.
+- `frontend/scripts/engine/fare.mjs` calculates fares in integer cents to avoid floating-point currency drift.
+- `frontend/scripts/simulation/scenario.mjs` generates repeatable synthetic demand and groups riders by corridor and pickup window.
+- `frontend/scripts/payments/lifecycle.mjs` validates payment state transitions; `frontend/scripts/payments/ledger.mjs` calculates a balance from append-only entries.
+- `frontend/tests/unit/engines.test.mjs` contains Node's built-in unit tests for these modules.
+
+These modules are deterministic domain logic, not production integrations. Authentication, payment authorization/capture, ledger persistence, concurrency control, and payment-provider webhooks must be enforced by trusted backend services. No API credentials belong in browser code. A payment processor cannot be selected or connected until the operator chooses a self-hosted gateway and supplies a supported acquiring configuration; a local ledger does not move real funds. Matching weights, fare rates, and simulation assumptions require calibration against verified project data before operational use.

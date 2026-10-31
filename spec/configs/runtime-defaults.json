@@ -1,0 +1,40 @@
+{
+  "spec_version": "1.0.0",
+  "service": {
+    "environment": "development",
+    "host": "0.0.0.0",
+    "port": 8080,
+    "request_timeout_seconds": 15,
+    "shutdown_grace_seconds": 20
+  },
+  "session": {
+    "algorithm": "HS256",
+    "lifetime_seconds": 3600,
+    "minimum_secret_characters": 32,
+    "password_hash": "bcrypt"
+  },
+  "pooling": {
+    "maximum_wait_seconds": 300,
+    "maximum_detour_meters": 2500,
+    "maximum_pool_size": 4,
+    "matching_weights": {
+      "corridor": 0.35,
+      "pickup_time": 0.25,
+      "detour": 0.2,
+      "wait": 0.2
+    }
+  },
+  "dispatch": {
+    "pool_poll_seconds": 10,
+    "solo_poll_seconds": 5,
+    "pool_offer_grace_seconds": 30,
+    "pool_window_seconds": 300,
+    "require_verified_driver": true,
+    "require_verified_vehicle": true
+  },
+  "data_policy": {
+    "synthetic_classification": "synthetic",
+    "verified_classification": "verified",
+    "external_paid_apis_allowed": false
+  }
+}

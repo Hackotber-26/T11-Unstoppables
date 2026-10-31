@@ -28,6 +28,8 @@ Exercise complete user journeys such as rider request, matching, assignment, pay
 ### Simulation-based tests
 Run scenario-driven evaluations for demand bursts, station surges, and driver shortage conditions.
 
+Backend-specific suites live in `backend/tests/`: integration tests validate the embedded SQL and persistent workflows against a disposable PostgreSQL database; property tests check fare and pool-capacity invariants; vector tests validate the synthetic graph contract; load benchmarks run explicitly and are not latency release gates.
+
 ---
 
 ## Priority areas

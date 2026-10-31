@@ -1,0 +1,9 @@
+station_id,name,corridor_id,x_m,y_m,accessible,active,data_class
+ST-A1,Demo North Gate,COR-A,0,0,true,true,synthetic
+ST-A2,Demo North Exchange,COR-A,1200,300,true,true,synthetic
+ST-A3,Demo North Market,COR-A,2600,250,false,true,synthetic
+ST-A4,Demo North Terminal,COR-A,4100,0,true,true,synthetic
+ST-B1,Demo East Gate,COR-B,0,1600,true,true,synthetic
+ST-B2,Demo East Exchange,COR-B,1400,1850,false,true,synthetic
+ST-B3,Demo East Market,COR-B,2850,1750,true,true,synthetic
+ST-B4,Demo East Terminal,COR-B,4300,1600,true,true,synthetic
