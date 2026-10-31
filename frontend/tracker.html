@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Space+Grotesk:wght@600&amp;family=Syne:wght@700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface":"#111126","surface-tint":"#dab8ff","on-secondary":"#003825","on-primary-container":"#3e0074","on-background":"#e2dffd","surface-container-lowest":"#0c0c21","inverse-on-surface":"#2e2e45","surface-container":"#1d1d33","on-primary-fixed-variant":"#640fb1","error":"#ffb4ab","on-tertiary":"#3b2f00","secondary":"#46f8b6","on-error-container":"#ffdad6","outline-variant":"#4c4453","on-tertiary-fixed-variant":"#564500","primary-fixed":"#efdbff","surface-container-highest":"#333349","secondary-fixed":"#4efebb","secondary-container":"#00db9b","on-primary":"#470083","on-surface":"#e2dffd","tertiary":"#e9c339","on-tertiary-container":"#4d3e00","outline":"#978d9f","inverse-surface":"#e2dffd","background":"#111126","surface-variant":"#333349","surface-container-high":"#28283e","tertiary-fixed":"#ffe07e","primary-fixed-dim":"#dab8ff","on-secondary-fixed":"#002114","on-surface-variant":"#cec2d5","surface-container-low":"#19192f","on-secondary-container":"#005b3e","on-error":"#690005","on-primary-fixed":"#2b0053","on-tertiary-fixed":"#231b00","tertiary-fixed-dim":"#e9c339","primary-container":"#b26fff","surface-bright":"#37374e","surface-dim":"#111126","tertiary-container":"#cba81b","error-container":"#93000a","on-secondary-fixed-variant":"#005137","inverse-primary":"#7d35cb","secondary-fixed-dim":"#19e1a1","primary":"#dab8ff"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"space-2xl":"3rem","margin-tablet":"1.5rem","space-md":"1rem","margin":"1rem","space-sm":"0.5rem","space-xl":"2rem","space-xs":"0.25rem","space-lg":"1.5rem","gutter-desktop":"1.5rem","margin-desktop":"2.5rem","gutter":"1rem"},fontFamily:{"body-lg":["Manrope"],"display-hero-mobile":["Syne"],"body-md":["Manrope"],"label-lg":["Manrope"],"label-sm":["Manrope"],"label-md":["Manrope"],"headline-lg-mobile":["Syne"],"headline-md":["Syne"],"display-hero":["Syne"],"data-mono":["Space Grotesk"],"headline-lg":["Syne"],"headline-sm":["Syne"],"body-sm":["Manrope"]},fontSize:{"body-lg":["16px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"400"}],"display-hero-mobile":["34px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"800"}],"body-md":["14px",{"lineHeight":"20px","letterSpacing":"0em","fontWeight":"400"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.02em","fontWeight":"600"}],"label-sm":["10px",{"lineHeight":"14px","letterSpacing":"0.06em","fontWeight":"700"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"600"}],"headline-lg-mobile":["26px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-md":["22px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"700"}],"display-hero":["48px",{"lineHeight":"54px","letterSpacing":"-0.03em","fontWeight":"800"}],"data-mono":["14px",{"lineHeight":"18px","letterSpacing":"0.03em","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"38px","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-sm":["18px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"18px","letterSpacing":"0.01em","fontWeight":"400"}]}}}};</script></head><body class="bg-background font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 w-full z-50 bg-surface-container-lowest/85 backdrop-blur-2xl shadow-[0_8px_32px_rgba(10,10,31,0.6)]"><div class="h-20 max-w-[1360px] mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><div class="relative flex items-center gap-space-xs"><div class="h-8 w-1.5 rounded-full bg-primary shadow-[0_0_12px_rgba(176,107,255,0.8)]"></div><div class="h-6 w-1.5 rounded-full bg-secondary shadow-[0_0_12px_rgba(70,248,182,0.8)]"></div><div class="h-4 w-1.5 rounded-full bg-tertiary shadow-[0_0_12px_rgba(233,195,57,0.8)]"></div></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm uppercase tracking-wider text-on-surface flex items-center gap-space-xs">Last-Mile <span class="text-primary font-display-hero text-headline-sm">Pod</span></span><span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Namma Metro Feeder Grid</span></div></div><nav class="hidden lg:flex items-center gap-space-xs p-space-xs rounded-full bg-surface-container/60 backdrop-blur-md" data-active-classes="bg-primary-container text-on-primary-container rounded-full shadow-[0_0_16px_rgba(176,107,255,0.4)]"><a class="px-space-md py-space-xs rounded-full text-on-surface-variant font-label-md text-label-md hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="home" href="#">Home / Story</a><a class="px-space-md py-space-xs rounded-full text-on-surface-variant font-label-md text-label-md hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="book-feeder-ticket" href="#">Book Feeder Ticket</a><a aria-current="page" class="px-space-md py-space-xs font-label-md transition-all bg-primary-container text-on-primary-container rounded-full shadow-[0_0_16px_rgba(176,107,255,0.4)]" data-path="live-pod-tracker" href="#">Live Pod Tracker</a><a class="px-space-md py-space-xs rounded-full text-on-surface-variant font-label-md text-label-md hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="safher-safety-circle" href="#">SafHER Safety Circle</a><a class="px-space-md py-space-xs rounded-full text-on-surface-variant font-label-md text-label-md hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="commuter-auth" href="#">Login &amp; Register</a></nav><div class="flex items-center gap-space-md"><a class="relative group inline-flex items-center gap-space-sm px-space-lg py-space-xs rounded-full bg-primary text-on-primary font-label-lg text-label-lg shadow-[0_0_20px_rgba(176,107,255,0.5)] hover:bg-primary-fixed hover:text-on-primary-fixed transition-all" data-path="book-feeder-ticket" href="#"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span></span><span>Get Boarding Pass</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-background min-h-screen"><div class="flex flex-col w-full">
+<!-- Atmospheric Glow Accents (Contained) -->
+<div class="relative w-full overflow-hidden">
+<div class="absolute -top-40 left-1/4 w-96 h-96 rounded-full bg-primary/10 blur-[120px] pointer-events-none"></div>
+<div class="absolute top-1/3 -right-20 w-[420px] h-[420px] rounded-full bg-secondary/10 blur-[140px] pointer-events-none"></div>
+<div class="absolute bottom-10 left-10 w-80 h-80 rounded-full bg-tertiary/10 blur-[100px] pointer-events-none"></div>
+<div class="max-w-[1360px] mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop py-space-xl flex flex-col gap-space-xl">
+<!-- Top Meta Breadcrumb & Live Strip -->
+<div class="flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="inline-flex items-center gap-1.5 px-space-md py-space-xs rounded-full bg-surface-container-high text-primary font-data-mono text-data-mono shadow-[0_0_12px_rgba(176,107,255,0.25)]">
+<span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+            TRIP #LMJ-8492
+          </span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">BMRCL Mesh Node 04B • Autonomous Dispatch</span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container font-data-mono text-body-sm text-secondary">GPS LOCKED ±0.8m</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center gap-1.5 px-space-md py-space-xs rounded-full bg-surface-container-low text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">wifi_tethering</span>
+<span>Mesh Relay: 5G SBN-IND-09</span>
+</div>
+<button class="flex items-center justify-center w-8 h-8 rounded-full bg-surface-container-high text-on-surface hover:text-secondary hover:bg-surface-bright transition-all" id="refreshSyncBtn">
+<span class="material-symbols-outlined text-[18px]">sync</span>
+</button>
+</div>
+</div>
+<!-- Active Trip Header & Status Hero (Bento Stage 1) -->
+<div class="relative rounded-xl bg-surface-container/70 backdrop-blur-2xl p-space-lg md:p-space-xl shadow-[0_8px_32px_rgba(10,10,31,0.7)] overflow-hidden">
+<!-- Accent light strip on top edge -->
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-tertiary"></div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+<!-- Left: Trip Status & Path Context -->
+<div class="lg:col-span-8 flex flex-col gap-space-md">
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="inline-flex items-center gap-1 px-space-sm py-0.5 rounded-full bg-secondary/15 text-secondary font-label-sm text-label-sm tracking-wide">
+<span class="material-symbols-outlined text-[14px]">electric_rickshaw</span>
+                EV POD IN TRANSIT
+              </span>
+<span class="text-on-surface-variant font-body-sm text-body-sm">•</span>
+<span class="text-tertiary font-label-sm text-label-sm uppercase tracking-wider">Gate 2 Concourse • Bay 4 Slot C</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">
+              Pod Dispatched — <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-fixed to-secondary">Approaching Bay 4</span>
+</h1>
+<!-- Waypoint Capsule Line -->
+<div class="p-space-md rounded-lg bg-surface-container-lowest/80 flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">subway</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Origin Station</span>
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Indiranagar Metro (Purple)</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-surface-container text-on-surface-variant text-label-sm font-data-mono self-center">
+<span>Via 80ft Rd</span>
+<span class="material-symbols-outlined text-[14px] text-secondary">trending_flat</span>
+<span>Old Airport Rd</span>
+</div>
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center text-secondary flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">apartment</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Final Cluster</span>
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Bagmane Tech Park</span>
+</div>
+</div>
+</div>
+<!-- Fast Walk Guidance Micro-Banner -->
+<div class="flex items-center gap-space-sm px-space-md py-space-xs rounded-lg bg-surface-container-low text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-tertiary">footprint</span>
+<span class="font-body-sm text-body-sm">
+                From Concourse: Take <strong class="text-on-surface">Escalator 2B Down</strong> → Follow illuminated <strong class="text-secondary">Green Corridor Line</strong> → Pod docked at Bay 4.
+              </span>
+</div>
+</div>
+<!-- Right: Circular Radar Countdown Timer -->
+<div class="lg:col-span-4 flex flex-col items-center justify-center">
+<div class="relative flex items-center justify-center w-52 h-52">
+<!-- Ambient Halo -->
+<div class="absolute inset-0 rounded-full bg-primary/10 blur-xl animate-pulse"></div>
+<!-- SVG Radial Gauge -->
+<svg class="w-48 h-48 -rotate-90" viewbox="0 0 160 160">
+<circle class="text-surface-container-highest" cx="80" cy="80" fill="none" opacity="0.4" r="68" stroke="currentColor" stroke-width="6"></circle>
+<circle class="transition-all duration-1000" cx="80" cy="80" fill="none" id="countdownArc" r="68" stroke="url(#timerGradient)" stroke-dasharray="427" stroke-dashoffset="110" stroke-linecap="round" stroke-width="7"></circle>
+<defs>
+<lineargradient id="timerGradient" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#dab8ff"></stop>
+<stop offset="50%" stop-color="#46f8b6"></stop>
+<stop offset="100%" stop-color="#e9c339"></stop>
+</lineargradient>
+</defs>
+</svg>
+<!-- Central Numbers -->
+<div class="absolute flex flex-col items-center justify-center text-center">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Arrival In</span>
+<span class="font-display-hero text-headline-lg font-bold text-on-surface tracking-tight font-data-mono" id="etaTimer">02:45</span>
+<span class="font-label-sm text-label-sm text-secondary flex items-center gap-1 font-data-mono">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-ping"></span> ON TIME • BAY 4
+                </span>
+</div>
+</div>
+<!-- Distance ticker -->
+<div class="mt-space-sm flex items-center gap-space-md text-center">
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase">Distance</div>
+<div class="font-data-mono text-headline-sm text-primary font-bold">420 m</div>
+</div>
+<div class="h-6 w-px bg-surface-container-highest"></div>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase">Avg Wait</div>
+<div class="font-data-mono text-headline-sm text-secondary font-bold">1.2 min</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Dual Telemetry Layout (Map on Left, Manifest & Controls on Right) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+<!-- LEFT: Interactive Live Transit Corridor Map & Telemetry HUD (8 Cols) -->
+<div class="lg:col-span-8 flex flex-col gap-space-lg">
+<!-- Visual Transit Radar Map Viewport -->
+<div class="relative rounded-xl bg-surface-container-lowest overflow-hidden shadow-[0_8px_32px_rgba(10,10,31,0.8)]">
+<!-- Map Top HUD Bar -->
+<div class="absolute top-4 left-4 right-4 z-20 flex flex-wrap items-center justify-between gap-space-sm pointer-events-none">
+<div class="flex items-center gap-space-xs pointer-events-auto">
+<span class="px-space-md py-1 rounded-full bg-surface-container/90 backdrop-blur-md text-on-surface font-data-mono text-body-sm shadow-[0_0_12px_rgba(0,0,0,0.5)] flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                  LIVEMESH: INDIRANAGAR SECTOR 3
+                </span>
+<span class="hidden sm:inline-flex px-space-sm py-1 rounded-full bg-surface-container-high/80 backdrop-blur-md text-tertiary font-label-sm text-label-sm">
+                  PEAK HOUR SMART ROUTING
+                </span>
+</div>
+<!-- Map Control Overlay -->
+<div class="flex items-center gap-1.5 pointer-events-auto">
+<button class="w-8 h-8 rounded-full bg-surface-container-high/90 backdrop-blur-md text-on-surface hover:text-primary flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">layers</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-surface-container-high/90 backdrop-blur-md text-on-surface hover:text-secondary flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">my_location</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-surface-container-high/90 backdrop-blur-md text-on-surface hover:text-primary flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">zoom_in</span>
+</button>
+</div>
+</div>
+<!-- Stylized Cyber-Transit Map SVG Canvas -->
+<div class="w-full h-[520px] relative bg-surface-container-lowest flex items-center justify-center overflow-hidden">
+<!-- Subtle Background Blueprint Grid -->
+<svg class="absolute inset-0 w-full h-full opacity-15" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="40" id="gridPattern" patternunits="userSpaceOnUse" width="40">
+<path d="M 40 0 L 0 0 0 40" fill="none" stroke="#dab8ff" stroke-width="0.5"></path>
+</pattern>
+</defs>
+<rect fill="url(#gridPattern)" height="100%" width="100%"></rect>
+</svg>
+<!-- Main SVG Vector Transit Canvas -->
+<svg class="w-full h-full relative z-10" fill="none" viewbox="0 0 800 520" xmlns="http://www.w3.org/2000/svg">
+<!-- City Road Outlines (Muted dark rails) -->
+<path d="M 50 180 C 180 180 260 210 380 210 C 510 210 600 340 760 340" stroke="#1d1d33" stroke-linecap="round" stroke-width="24"></path>
+<path d="M 220 80 L 220 460" stroke="#19192f" stroke-linecap="round" stroke-width="16"></path>
+<path d="M 380 30 L 380 490" stroke="#1d1d33" stroke-linecap="round" stroke-width="20"></path>
+<path d="M 120 420 Q 380 380 720 440" stroke="#19192f" stroke-linecap="round" stroke-width="14"></path>
+<!-- Purple Line (BMRCL Viaduct Route) -->
+<g id="purpleLineTrack">
+<!-- Ambient Glow Layer -->
+<path d="M 40 140 L 260 140 L 410 90 L 760 90" filter="blur(4px)" opacity="0.3" stroke="#dab8ff" stroke-linecap="round" stroke-width="8"></path>
+<!-- Crisp Rail Line -->
+<path d="M 40 140 L 260 140 L 410 90 L 760 90" stroke="#dab8ff" stroke-linecap="round" stroke-width="4"></path>
+<!-- Track Ties -->
+<path d="M 40 140 L 260 140 L 410 90 L 760 90" stroke="#470083" stroke-dasharray="2 10" stroke-linecap="round" stroke-width="4"></path>
+</g>
+<!-- Purple Line Train Token with Animation -->
+<g id="metroTrainToken" transform="translate(160, 140)">
+<circle cx="0" cy="0" fill="#3e0074" r="14" stroke="#dab8ff" stroke-width="2"></circle>
+<circle cx="0" cy="0" fill="#dab8ff" r="6"></circle>
+<!-- Train label badge -->
+<rect fill="#111126" height="18" rx="9" stroke="#dab8ff" stroke-width="1" width="70" x="-35" y="-30"></rect>
+<text fill="#dab8ff" font-family="Space Grotesk" font-size="9" font-weight="bold" text-anchor="middle" x="0" y="-18">METRO #14</text>
+</g>
+<!-- Station Intermodal Hub Node: Indiranagar Concourse -->
+<g id="metroStationHub" transform="translate(260, 140)">
+<circle cx="0" cy="0" fill="#111126" opacity="0.4" r="28" stroke="#dab8ff" stroke-width="2"></circle>
+<circle cx="0" cy="0" fill="#1d1d33" r="18" stroke="#dab8ff" stroke-width="2"></circle>
+<circle cx="0" cy="0" fill="#dab8ff" r="8"></circle>
+<!-- Station Beacon Callout -->
+<rect fill="#1d1d33" height="24" rx="6" stroke="#dab8ff" stroke-width="1" width="130" x="-65" y="24"></rect>
+<text fill="#e2dffd" font-family="Syne" font-size="11" font-weight="bold" text-anchor="middle" x="0" y="40">INDIRANAGAR STN</text>
+</g>
+<!-- Gate 2 Escalator Pedestrian Corridor -->
+<path d="M 260 140 Q 275 195 305 210" stroke="#e9c339" stroke-dasharray="4 4" stroke-width="3"></path>
+<!-- Concourse Bay 4 Node -->
+<g id="bay4Pickup" transform="translate(305, 210)">
+<circle cx="0" cy="0" fill="#e9c339" opacity="0.15" r="22"></circle>
+<circle cx="0" cy="0" fill="#111126" r="12" stroke="#e9c339" stroke-width="2"></circle>
+<circle cx="0" cy="0" fill="#e9c339" r="5"></circle>
+<rect fill="#111126" height="22" rx="4" stroke="#e9c339" stroke-width="1" width="90" x="18" y="-12"></rect>
+<text fill="#e9c339" font-family="Space Grotesk" font-size="9" font-weight="bold" text-anchor="middle" x="63" y="2">PICKUP BAY 4</text>
+</g>
+<!-- Pod Approach Trajectory (Glowing Neon Green Line) -->
+<g id="podTrajectory">
+<!-- Blurred under-glow -->
+<path d="M 200 310 C 240 290 270 240 305 210" filter="blur(6px)" opacity="0.3" stroke="#46f8b6" stroke-linecap="round" stroke-width="8"></path>
+<!-- Crisp Trajectory -->
+<path d="M 200 310 C 240 290 270 240 305 210" stroke="#46f8b6" stroke-linecap="round" stroke-width="3.5"></path>
+<!-- Direction pulse arrows on path -->
+<path d="M 230 295 L 235 285" stroke="#003825" stroke-linecap="round" stroke-width="2"></path>
+<path d="M 270 250 L 275 240" stroke="#003825" stroke-linecap="round" stroke-width="2"></path>
+</g>
+<!-- Live Pod Vehicle Beacon (Mahindra Treo EV-07) -->
+<g id="podVehicleMarker" transform="translate(235, 280)">
+<!-- Pulsing Radar Ping Rings -->
+<circle class="animate-ping" cx="0" cy="0" fill="none" opacity="0.4" r="26" stroke="#46f8b6" stroke-width="1.5" style="animation-duration: 2.2s;"></circle>
+<circle cx="0" cy="0" fill="#003825" r="16" stroke="#46f8b6" stroke-width="2.5"></circle>
+<!-- Mini EV glyph -->
+<circle cx="0" cy="0" fill="#46f8b6" r="6"></circle>
+<!-- Floating Pod HUD Tag -->
+<g transform="translate(-60, -44)">
+<rect fill="#111126" height="34" rx="6" stroke="#46f8b6" stroke-width="1.5" width="120"></rect>
+<text fill="#46f8b6" font-family="Space Grotesk" font-size="10" font-weight="bold" text-anchor="middle" x="60" y="14">EV-07 • KA-03-8821</text>
+<text fill="#cec2d5" font-family="Manrope" font-size="8" text-anchor="middle" x="60" y="27">Speed: 28 km/h • 420m</text>
+</g>
+</g>
+<!-- Last-Mile Route After Bay 4 (Planned Shared Leg) -->
+<!-- Leg 1: Bay 4 -> Domlur Flyover (Priya R.) -->
+<path d="M 305 210 C 370 210 440 270 510 270" stroke="#dab8ff" stroke-dasharray="6 6" stroke-linecap="round" stroke-width="3"></path>
+<!-- Stop 1 Pin: Domlur Flyover -->
+<g id="stop1Pin" transform="translate(510, 270)">
+<circle cx="0" cy="0" fill="#1d1d33" r="14" stroke="#dab8ff" stroke-width="2"></circle>
+<circle cx="0" cy="0" fill="#dab8ff" r="5"></circle>
+<!-- Callout -->
+<rect fill="#111126" height="28" rx="6" stroke="#4c4453" stroke-width="1" width="110" x="-55" y="18"></rect>
+<text fill="#e2dffd" font-family="Syne" font-size="9" font-weight="bold" text-anchor="middle" x="0" y="31">STOP 1: DOMLUR</text>
+<text fill="#cec2d5" font-family="Manrope" font-size="8" text-anchor="middle" x="0" y="41">Priya R. (Drop 1.8km)</text>
+</g>
+<!-- Leg 2: Domlur -> Bagmane Tech Park (Final) -->
+<path d="M 510 270 C 580 270 630 330 700 330" stroke="#46f8b6" stroke-dasharray="6 6" stroke-linecap="round" stroke-width="3.5"></path>
+<!-- Stop 2 Pin: Bagmane Tech Park (User + Arjun) -->
+<g id="stop2Pin" transform="translate(700, 330)">
+<circle cx="0" cy="0" fill="#46f8b6" opacity="0.15" r="20"></circle>
+<circle cx="0" cy="0" fill="#003825" r="14" stroke="#46f8b6" stroke-width="2"></circle>
+<circle cx="0" cy="0" fill="#46f8b6" r="5"></circle>
+<!-- Glow callout -->
+<rect fill="#111126" height="30" rx="6" stroke="#46f8b6" stroke-width="1" width="130" x="-65" y="20"></rect>
+<text fill="#46f8b6" font-family="Syne" font-size="9" font-weight="bold" text-anchor="middle" x="0" y="34">FINAL: BAGMANE TECH</text>
+<text fill="#e2dffd" font-family="Manrope" font-size="8" text-anchor="middle" x="0" y="45">You + Arjun K. (3.4km)</text>
+</g>
+<!-- Walking Beacon Avatar (You at Concourse) -->
+<g id="userConcourseBeacon" transform="translate(285, 175)">
+<circle class="animate-ping" cx="0" cy="0" fill="#dab8ff" opacity="0.3" r="10"></circle>
+<circle cx="0" cy="0" fill="#efdbff" r="7" stroke="#470083" stroke-width="1.5"></circle>
+<text fill="#dab8ff" font-family="Space Grotesk" font-size="9" font-weight="bold" x="12" y="4">YOU (WALKING 45s)</text>
+</g>
+</svg>
+<!-- Map Bottom Live Mini Ticker -->
+<div class="absolute bottom-4 left-4 right-4 z-20 flex flex-wrap items-center justify-between gap-space-sm pointer-events-none">
+<div class="flex items-center gap-space-xs pointer-events-auto">
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-surface-container/90 backdrop-blur-md text-secondary font-data-mono text-body-sm">
+<span class="material-symbols-outlined text-[14px]">speed</span>
+                    SPEED: 28 KM/H
+                  </span>
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-surface-container/90 backdrop-blur-md text-on-surface-variant font-data-mono text-body-sm">
+<span class="material-symbols-outlined text-[14px] text-primary">alt_route</span>
+                    BYPASS: ACTIVE (80FT RD)
+                  </span>
+</div>
+<div class="pointer-events-auto">
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-surface-container/90 backdrop-blur-md text-on-surface font-data-mono text-body-sm">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                    SYNC: 99.4%
+                  </span>
+</div>
+</div>
+</div>
+<!-- Corridor Street-View Mini Thumbnails (Photo realism element) -->
+<div class="p-space-md bg-surface-container-low flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-16 h-12 rounded-lg bg-surface-container overflow-hidden flex-shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="High-resolution night photo of Bengaluru Indiranagar metro station concourse illuminated with purple neon lighting and commuters walking toward EV charging bays." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkNC1Rez3InanDAuXHzxTf8bOvVe2HJz8_iqGwTvdFPLMtZUaboDn61QIpWi2OAeAXbn_35VWq8b5pXGS_t7DoSEcQyCc9k157JCaZKM2tLl5ciU4EiIM9BCpG2DuB0tF1PLDCKEbwl7zqVn8SS8gkfiJM3_0JLDZb1RaJHf0vNuLf8nXZ7cQhyq83lFT5ShoWeNbWpMBcuvkhjNFMZIu4vute3wssauGNOHdIubE"/>
+<div class="absolute inset-0 bg-primary/20 mix-blend-overlay"></div>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-label-md text-on-surface">Concourse Bay 4 Cam Feed</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Gate 2 Escalator exit clear • Feeder bay open</span>
+</div>
+</div>
+<a class="inline-flex items-center gap-1 text-primary hover:text-primary-fixed text-label-md font-label-md transition-colors" href="#">
+<span>View Full Concourse Route</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</a>
+</div>
+</div>
+<!-- Real-Time Telemetry Metrics Bar (Glass Bento Strip) -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-md">
+<div class="p-space-md rounded-xl bg-surface-container/60 backdrop-blur-lg flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">battery_charging_full</span>
+                Pod State of Charge
+              </span>
+<span class="font-data-mono text-headline-sm text-secondary font-bold">84%</span>
+<div class="w-full h-1.5 rounded-full bg-surface-container-highest overflow-hidden mt-1">
+<div class="h-full bg-secondary rounded-full" style="width: 84%"></div>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container/60 backdrop-blur-lg flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary">traffic</span>
+                Route Congestion
+              </span>
+<span class="font-data-mono text-headline-sm text-tertiary font-bold">Low • 8 mins</span>
+<div class="w-full h-1.5 rounded-full bg-surface-container-highest overflow-hidden mt-1">
+<div class="h-full bg-tertiary rounded-full" style="width: 25%"></div>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container/60 backdrop-blur-lg flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">eco</span>
+                CO2 Avoided
+              </span>
+<span class="font-data-mono text-headline-sm text-primary font-bold">1.42 kg</span>
+<span class="font-body-sm text-label-sm text-on-surface-variant">vs solo petrol cab</span>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container/60 backdrop-blur-lg flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">shield</span>
+                Corridor Safety
+              </span>
+<span class="font-data-mono text-headline-sm text-secondary font-bold">SafHER L3</span>
+<span class="font-body-sm text-label-sm text-on-surface-variant">Patrol Mesh active</span>
+</div>
+</div>
+</div>
+<!-- RIGHT: Assigned Pod Manifest, OTP, Co-riders, & Action Hub (4 Cols) -->
+<div class="lg:col-span-4 flex flex-col gap-space-lg">
+<!-- Boarding Pass & OTP Highlight Card -->
+<div class="rounded-xl bg-gradient-to-br from-surface-container-high/90 to-surface-container/90 backdrop-blur-2xl p-space-lg shadow-[0_8px_32px_rgba(10,10,31,0.6)] flex flex-col gap-space-md relative overflow-hidden">
+<div class="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-secondary/15 blur-2xl"></div>
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Boarding Authentication</span>
+<span class="px-space-sm py-0.5 rounded-full bg-secondary/15 text-secondary font-data-mono text-label-sm">QR • NFC ENABLED</span>
+</div>
+<div class="flex items-center justify-between p-space-md rounded-lg bg-surface-container-lowest/90">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Driver Start PIN</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Share upon boarding</span>
+</div>
+<!-- Glowing Big PIN -->
+<div class="px-space-lg py-space-xs rounded-lg bg-primary-container/30 shadow-[0_0_16px_rgba(176,107,255,0.4)]">
+<span class="font-data-mono text-headline-lg font-bold text-primary tracking-widest">5914</span>
+</div>
+</div>
+<!-- Pod & Driver Profile Bento -->
+<div class="flex items-center gap-space-md pt-space-xs">
+<div class="relative w-14 h-14 rounded-full overflow-hidden flex-shrink-0 bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="A portrait of an Indian female EV auto driver named Manjula smiling warmly, wearing a professional uniform, night urban lighting with subtle violet and cyan reflections." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDt93AUeb5aerqGfo71CW7vBMXIF_lzc5BmtDlTCVu2fsRZz71ikqNt1GqV82p1lI14vT8HH1kF2YP6TwkvtHY8M-yzsIPpAFj7R7UhyADuxnl0gFuISfLQPNvcNN3OCpLztpsrlUSeMxYcr_jt9z0bWMQrFmLMJh6ovXwu_Wdn_bAy02VGfL1qZqqWMZ3wyRz0_KGSBbqnxKwf7bLMkiyt4JwQPXr2qtW2POs79s"/>
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-secondary ring-2 ring-surface"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Manjula N.</span>
+<span class="material-symbols-outlined text-[16px] text-secondary" title="Aadhaar &amp; Police Verified">verified</span>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-body-sm text-body-sm">
+<span class="text-tertiary flex items-center font-data-mono"><span class="material-symbols-outlined text-[14px] text-tertiary mr-0.5">star</span>4.96</span>
+<span>•</span>
+<span>1,840+ trips</span>
+</div>
+</div>
+<div class="ml-auto flex items-center gap-1">
+<a class="w-9 h-9 rounded-full bg-surface-container-highest text-secondary hover:bg-secondary hover:text-on-secondary flex items-center justify-center transition-all shadow-[0_0_12px_rgba(70,248,182,0.2)]" href="tel:9876543210">
+<span class="material-symbols-outlined text-[18px]">call</span>
+</a>
+<button class="w-9 h-9 rounded-full bg-surface-container-highest text-primary hover:bg-primary hover:text-on-primary flex items-center justify-center transition-all shadow-[0_0_12px_rgba(176,107,255,0.2)]">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</button>
+</div>
+</div>
+<!-- Vehicle Hardware Capsule -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between text-body-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-secondary">electric_rickshaw</span>
+<span class="text-on-surface font-data-mono font-semibold">KA-03-EM-8821</span>
+</div>
+<span class="text-on-surface-variant font-label-sm">Mahindra Treo EV (3-Seater)</span>
+</div>
+</div>
+<!-- Co-Rider Pool Manifest (Shapley Algorithm Split) -->
+<div class="rounded-xl bg-surface-container/70 backdrop-blur-2xl p-space-lg shadow-[0_8px_32px_rgba(10,10,31,0.5)] flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface">Pool Manifest</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary/15 text-secondary font-label-sm text-label-sm">Full (3/3)</span>
+</div>
+<span class="font-data-mono text-label-sm text-tertiary">Smart Splitting</span>
+</div>
+<!-- Manifest Rows -->
+<div class="flex flex-col gap-space-sm">
+<!-- Rider 1: Priya R. -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest/70 flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-primary font-headline-sm text-label-md font-bold">
+                    PR
+                  </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Priya R. • Seat 1</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Drop 1 • Domlur Flyover (1.8 km)</span>
+</div>
+</div>
+<span class="font-data-mono text-body-sm text-secondary font-semibold">₹22</span>
+</div>
+<!-- Rider 2: Arjun K. -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest/70 flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-secondary font-headline-sm text-label-md font-bold">
+                    AK
+                  </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Arjun K. • Seat 2</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Drop 2 • Bagmane Tech (3.4 km)</span>
+</div>
+</div>
+<span class="font-data-mono text-body-sm text-secondary font-semibold">₹28</span>
+</div>
+<!-- Rider 3: Current User (YOU) -->
+<div class="p-space-sm rounded-lg bg-primary-container/15 flex items-center justify-between gap-space-sm shadow-[0_0_12px_rgba(176,107,255,0.15)]">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-sm text-label-md font-bold">
+                    YOU
+                  </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary-fixed font-bold">You • Seat 3</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Drop 2 • Bagmane Tech (3.4 km)</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-data-mono text-body-md text-primary font-bold">₹28</span>
+<div class="font-label-sm text-label-sm text-secondary">Saved ₹62</div>
+</div>
+</div>
+</div>
+<!-- Fair Fare Equation Breakdown -->
+<div class="p-space-sm rounded-lg bg-surface-container-high/60 flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>Dynamic Shapley Fair-Share</span>
+<span class="text-secondary font-data-mono">68% Lower than solo cab</span>
+</div>
+</div>
+<!-- Trip Safety & Dispatch Action Hub -->
+<div class="rounded-xl bg-surface-container/70 backdrop-blur-2xl p-space-lg shadow-[0_8px_32px_rgba(10,10,31,0.5)] flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Trip Controls &amp; Safety</span>
+<span class="flex items-center gap-1 text-secondary font-label-sm">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                Mesh Connected
+              </span>
+</div>
+<!-- Action 1: Share Live Ride -->
+<button class="w-full flex items-center justify-center gap-2 py-space-sm px-space-md rounded-full bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-lg text-label-lg transition-all shadow-[0_0_12px_rgba(244,243,255,0.06)]" id="shareRideBtn">
+<span class="material-symbols-outlined text-[18px] text-primary">share</span>
+<span>Share Live Telemetry Link</span>
+</button>
+<!-- Action 2: SafHER SOS Emergency Control (High-Vis Alert Design System) -->
+<button class="w-full flex items-center justify-between px-space-md py-space-sm rounded-xl bg-error-container text-on-error-container hover:bg-error hover:text-on-error transition-all shadow-[0_0_24px_rgba(255,107,154,0.35)] group" id="sosAlertBtn">
+<div class="flex items-center gap-space-sm text-left">
+<div class="w-9 h-9 rounded-full bg-error flex items-center justify-center text-on-error flex-shrink-0 animate-pulse">
+<span class="material-symbols-outlined text-[20px]">fmd_good</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-label-md font-bold tracking-wider uppercase text-on-error-container group-hover:text-on-error">SafHER Emergency SOS</span>
+<span class="font-body-sm text-body-sm opacity-90">Auto-relay to Metro Police &amp; Contacts</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+<!-- Concourse Walking Navigation Trigger -->
+<div class="pt-space-xs flex items-center gap-space-sm">
+<a class="flex-1 text-center py-2 px-space-sm rounded-full bg-surface-container-lowest text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" href="#">
+                Report Issue
+              </a>
+<a class="flex-1 text-center py-2 px-space-sm rounded-full bg-surface-container-lowest text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" href="#">
+                Cancel Ride
+              </a>
+</div>
+</div>
+</div>
+</div>
+<!-- Station Concourse Direction Drawer & Step-by-Step Waypoint Timeline -->
+<div class="rounded-xl bg-surface-container/60 backdrop-blur-xl p-space-lg md:p-space-xl flex flex-col gap-space-lg shadow-[0_8px_32px_rgba(10,10,31,0.5)]">
+<div class="flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-tertiary uppercase tracking-widest font-data-mono">Station Intermodal Route</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Seamless Transfer • Gate 2 Concourse to Pod Bay 4</h2>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-secondary/15 text-secondary font-data-mono text-body-sm">
+<span class="material-symbols-outlined text-[16px]">directions_walk</span>
+              Est. Walking Time: 1 min 20 sec (95 meters)
+            </span>
+</div>
+</div>
+<!-- Horizontal Step Timeline -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-space-md relative">
+<!-- Step 1 -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-space-xs relative">
+<div class="flex items-center justify-between">
+<span class="w-6 h-6 rounded-full bg-primary text-on-primary font-data-mono text-label-sm font-bold flex items-center justify-center">1</span>
+<span class="font-data-mono text-label-sm text-secondary">COMPLETED</span>
+</div>
+<span class="font-headline-sm text-label-md text-on-surface font-bold">Platform De-board</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Exit Purple Line Train 14 from Door 3 at Indiranagar Concourse Level.</p>
+</div>
+<!-- Step 2 (Active) -->
+<div class="p-space-md rounded-lg bg-primary-container/20 flex flex-col gap-space-xs relative shadow-[0_0_16px_rgba(176,107,255,0.2)]">
+<div class="flex items-center justify-between">
+<span class="w-6 h-6 rounded-full bg-primary text-on-primary font-data-mono text-label-sm font-bold flex items-center justify-center animate-bounce">2</span>
+<span class="font-data-mono text-label-sm text-primary font-bold">YOU ARE HERE</span>
+</div>
+<span class="font-headline-sm text-label-md text-primary-fixed font-bold">Escalator 2B Down</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Follow the glowing purple overhead feeder indicators toward Gate 2 Exit.</p>
+</div>
+<!-- Step 3 -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-space-xs relative">
+<div class="flex items-center justify-between">
+<span class="w-6 h-6 rounded-full bg-surface-container-high text-on-surface font-data-mono text-label-sm font-bold flex items-center justify-center">3</span>
+<span class="font-data-mono text-label-sm text-on-surface-variant">45 SEC</span>
+</div>
+<span class="font-headline-sm text-label-md text-on-surface font-bold">Concourse Floor Trail</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Follow the luminous green floor line guiding directly to the EV Pod feeder terminal.</p>
+</div>
+<!-- Step 4 -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-space-xs relative">
+<div class="flex items-center justify-between">
+<span class="w-6 h-6 rounded-full bg-surface-container-high text-on-surface font-data-mono text-label-sm font-bold flex items-center justify-center">4</span>
+<span class="font-data-mono text-label-sm text-secondary font-bold">DOCK 4</span>
+</div>
+<span class="font-headline-sm text-label-md text-on-surface font-bold">Board Pod KA-03-8821</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Validate with PIN 5914 to driver Manjula. Vehicle departs at 02:45.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Inline Logic for Real-Time Countdown & Micro-Interactions -->
+<script>
+  (function() {
+    let totalSeconds = 165; // 2 mins 45 secs
+    const timerElem = document.getElementById('etaTimer');
+    const arcElem = document.getElementById('countdownArc');
+    const refreshBtn = document.getElementById('refreshSyncBtn');
+    const shareBtn = document.getElementById('shareRideBtn');
+    const sosBtn = document.getElementById('sosAlertBtn');
+
+    const initialCircumference = 427; // 2 * PI * 68 ≈ 427.25
+
+    function updateTimer() {
+      if (totalSeconds > 0) {
+        totalSeconds--;
+        const mins = Math.floor(totalSeconds / 60);
+        const secs = totalSeconds % 60;
+        if (timerElem) {
+          timerElem.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }
+
+        if (arcElem) {
+          const progress = totalSeconds / 165;
+          const offset = initialCircumference * (1 - progress);
+          arcElem.style.strokeDashoffset = offset;
+        }
+      } else {
+        if (timerElem) {
+          timerElem.textContent = "00:00";
+        }
+      }
+    }
+
+    const intervalId = setInterval(updateTimer, 1000);
+
+    if (refreshBtn) {
+      refreshBtn.addEventListener('click', () => {
+        refreshBtn.classList.add('animate-spin');
+        setTimeout(() => {
+          refreshBtn.classList.remove('animate-spin');
+        }, 800);
+      });
+    }
+
+    if (shareBtn) {
+      shareBtn.addEventListener('click', () => {
+        const dummyUrl = window.location.href;
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(dummyUrl).then(() => {
+            const original = shareBtn.innerHTML;
+            shareBtn.innerHTML = '<span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>Tracking Link Copied!</span>';
+            setTimeout(() => {
+              shareBtn.innerHTML = original;
+            }, 2500);
+          }).catch(() => {});
+        }
+      });
+    }
+
+    if (sosBtn) {
+      sosBtn.addEventListener('click', () => {
+        alert("SafHER Protocol Triggered: Transmitting geo-coordinates to Namma Metro Control Room & Bengaluru City Police nodal hub.");
+      });
+    }
+  })();
+</script></main><footer class="w-full bg-surface-container-lowest py-space-2xl"><div class="max-w-[1360px] mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop flex flex-col gap-space-xl"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-xl"><div class="flex flex-col gap-space-sm"><div class="flex items-center gap-space-xs"><div class="h-6 w-1 rounded-full bg-primary"></div><div class="h-4 w-1 rounded-full bg-secondary"></div><div class="h-2 w-1 rounded-full bg-tertiary"></div><span class="font-headline-sm text-headline-sm uppercase text-on-surface">Bengaluru Feeder</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">Connecting Namma Metro stations to your doorstep through smart EV pods, SafHER corridors, and autonomous shared transit clusters.</p></div><div class="flex flex-col gap-space-sm"><span class="font-label-md text-label-md uppercase tracking-wider text-on-surface">Metro Line Integrations</span><div class="flex flex-wrap gap-space-xs"><span class="inline-flex items-center px-space-sm py-space-xs rounded-full bg-surface-container font-label-sm text-label-sm text-primary shadow-[0_0_8px_rgba(176,107,255,0.2)]"><span class="w-1.5 h-1.5 rounded-full bg-primary mr-1.5"></span>Purple Line</span><span class="inline-flex items-center px-space-sm py-space-xs rounded-full bg-surface-container font-label-sm text-label-sm text-secondary shadow-[0_0_8px_rgba(70,248,182,0.2)]"><span class="w-1.5 h-1.5 rounded-full bg-secondary mr-1.5"></span>Green Line</span><span class="inline-flex items-center px-space-sm py-space-xs rounded-full bg-surface-container font-label-sm text-label-sm text-tertiary shadow-[0_0_8px_rgba(233,195,57,0.2)]"><span class="w-1.5 h-1.5 rounded-full bg-tertiary mr-1.5"></span>Yellow Line</span><span class="inline-flex items-center px-space-sm py-space-xs rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface-variant"><span class="w-1.5 h-1.5 rounded-full bg-outline mr-1.5"></span>Pink Phase 2</span></div></div><div class="flex flex-col gap-space-sm"><span class="font-label-md text-label-md uppercase tracking-wider text-on-surface">Critical Telemetry</span><div class="flex flex-col gap-space-xs"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="live-pod-tracker" href="#">Kengeri – Baiyappanahalli Pods</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="live-pod-tracker" href="#">Silk Board – KR Puram Sync</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="book-feeder-ticket" href="#">Smart Card QR Sync</a></div></div><div class="flex flex-col gap-space-sm"><span class="font-label-md text-label-md uppercase tracking-wider text-error">SafHER SOS Hotline</span><p class="font-body-sm text-body-sm text-on-surface-variant">Geo-fenced SOS broadcast to Bengaluru City Police &amp; BMRCL nodal posts.</p><div class="flex items-center gap-space-xs"><a class="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm" data-path="safher-safety-circle" href="#"><span class="material-symbols-outlined text-[16px]">fmd_good</span>SOS Grid Active</a></div></div></div><div class="flex flex-col md:flex-row items-center justify-between gap-space-md pt-space-lg"><span class="font-body-sm text-body-sm text-on-surface-variant">© 2025 Last-Mile Journey • BMRCL Commuter Pod Initiative</span><div class="flex items-center gap-space-lg"><span class="font-data-mono text-data-mono text-secondary">STATUS: GRID NOMINAL</span></div></div></div></footer></body></html>

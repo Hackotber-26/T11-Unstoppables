@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_blank" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Space+Grotesk:wght@600&amp;family=Syne:wght@700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface":"#111126","surface-tint":"#dab8ff","on-secondary":"#003825","on-primary-container":"#3e0074","on-background":"#e2dffd","surface-container-lowest":"#0c0c21","inverse-on-surface":"#2e2e45","surface-container":"#1d1d33","on-primary-fixed-variant":"#640fb1","error":"#ffb4ab","on-tertiary":"#3b2f00","secondary":"#46f8b6","on-error-container":"#ffdad6","outline-variant":"#4c4453","on-tertiary-fixed-variant":"#564500","primary-fixed":"#efdbff","surface-container-highest":"#333349","secondary-fixed":"#4efebb","secondary-container":"#00db9b","on-primary":"#470083","on-surface":"#e2dffd","tertiary":"#e9c339","on-tertiary-container":"#4d3e00","outline":"#978d9f","inverse-surface":"#e2dffd","background":"#111126","surface-variant":"#333349","surface-container-high":"#28283e","tertiary-fixed":"#ffe07e","primary-fixed-dim":"#dab8ff","on-secondary-fixed":"#002114","on-surface-variant":"#cec2d5","surface-container-low":"#19192f","on-secondary-container":"#005b3e","on-error":"#690005","on-primary-fixed":"#2b0053","on-tertiary-fixed":"#231b00","tertiary-fixed-dim":"#e9c339","primary-container":"#b26fff","surface-bright":"#37374e","surface-dim":"#111126","tertiary-container":"#cba81b","error-container":"#93000a","on-secondary-fixed-variant":"#005137","inverse-primary":"#7d35cb","secondary-fixed-dim":"#19e1a1","primary":"#dab8ff"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"space-2xl":"3rem","margin-tablet":"1.5rem","space-md":"1rem","margin":"1rem","space-sm":"0.5rem","space-xl":"2rem","space-xs":"0.25rem","space-lg":"1.5rem","gutter-desktop":"1.5rem","margin-desktop":"2.5rem","gutter":"1rem"},fontFamily:{"body-lg":["Manrope"],"display-hero-mobile":["Syne"],"body-md":["Manrope"],"label-lg":["Manrope"],"label-sm":["Manrope"],"label-md":["Manrope"],"headline-lg-mobile":["Syne"],"headline-md":["Syne"],"display-hero":["Syne"],"data-mono":["Space Grotesk"],"headline-lg":["Syne"],"headline-sm":["Syne"],"body-sm":["Manrope"]},fontSize:{"body-lg":["16px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"400"}],"display-hero-mobile":["34px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"800"}],"body-md":["14px",{"lineHeight":"20px","letterSpacing":"0em","fontWeight":"400"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.02em","fontWeight":"600"}],"label-sm":["10px",{"lineHeight":"14px","letterSpacing":"0.06em","fontWeight":"700"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"600"}],"headline-lg-mobile":["26px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-md":["22px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"700"}],"display-hero":["48px",{"lineHeight":"54px","letterSpacing":"-0.03em","fontWeight":"800"}],"data-mono":["14px",{"lineHeight":"18px","letterSpacing":"0.03em","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"38px","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-sm":["18px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"18px","letterSpacing":"0.01em","fontWeight":"400"}]}}}};</script></head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen flex items-center justify-center p-margin"><main class="w-full max-w-md mx-auto"><div class="flex flex-col w-full">
+<div class="relative w-full overflow-hidden rounded-xl bg-surface-container-lowest p-space-md shadow-2xl">
+<!-- Cyber Transit Background Grid & Ambient Glows -->
+<div class="pointer-events-none absolute -top-24 -left-20 h-72 w-72 rounded-full bg-primary/20 blur-3xl"></div>
+<div class="pointer-events-none absolute top-1/2 -right-24 h-80 w-80 rounded-full bg-secondary/15 blur-3xl"></div>
+<div class="pointer-events-none absolute bottom-0 left-1/3 h-52 w-52 rounded-full bg-surface-tint/10 blur-2xl"></div>
+<!-- Telemetry Header Banner -->
+<div class="relative z-10 flex items-center justify-between bg-surface-container/60 backdrop-blur-md px-space-md py-space-sm rounded-lg mb-space-md">
+<div class="flex items-center space-x-space-xs">
+<span class="inline-block h-2 w-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-data-mono text-label-sm text-secondary uppercase tracking-widest">Namma Grid Live</span>
+</div>
+<div class="flex items-center space-x-space-xs font-data-mono text-label-sm text-surface-tint">
+<span class="material-symbols-outlined text-sm">bolt</span>
+<span>PEAK SURGE BYPASS</span>
+</div>
+</div>
+<!-- Hero Value Narrative -->
+<div class="relative z-10 flex flex-col space-y-space-xs mb-space-lg">
+<div class="inline-flex items-center space-x-space-xs self-start rounded-full bg-surface-container-high px-space-sm py-space-xs">
+<span class="material-symbols-outlined text-primary text-base">directions_subway</span>
+<span class="font-data-mono text-label-sm text-on-surface-variant uppercase">Bengaluru Smart Feeder</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-extrabold tracking-tight">
+        Match journeys, <br/>
+<span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">never commute alone.</span>
+</h1>
+<p class="font-body-md text-body-md text-outline">
+        Sync with verified daily tech commuters from Namma Metro station gates right to your office campus.
+      </p>
+<!-- Key Perks Bento Grid -->
+<div class="grid grid-cols-2 gap-space-xs pt-space-xs">
+<div class="flex items-start space-x-space-xs rounded-lg bg-surface-container-low/70 p-space-xs backdrop-blur-sm">
+<span class="material-symbols-outlined text-secondary text-base shrink-0">verified</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Zero wait limbo at metro gates</span>
+</div>
+<div class="flex items-start space-x-space-xs rounded-lg bg-surface-container-low/70 p-space-xs backdrop-blur-sm">
+<span class="material-symbols-outlined text-secondary text-base shrink-0">percent</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Up to 70% cheaper than solo surge</span>
+</div>
+<div class="flex items-start space-x-space-xs rounded-lg bg-surface-container-low/70 p-space-xs backdrop-blur-sm">
+<span class="material-symbols-outlined text-primary text-base shrink-0">shield_person</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Aadhaar-verified SafHER pods</span>
+</div>
+<div class="flex items-start space-x-space-xs rounded-lg bg-surface-container-low/70 p-space-xs backdrop-blur-sm">
+<span class="material-symbols-outlined text-secondary text-base shrink-0">nfc</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Auto Namma Metro Card sync</span>
+</div>
+</div>
+<!-- Social Proof Badge -->
+<div class="flex items-center space-x-space-sm pt-space-xs">
+<div class="flex -space-x-2">
+<span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-primary text-on-primary font-headline-sm text-xs font-bold ring-2 ring-surface-container-lowest">SK</span>
+<span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-secondary text-on-secondary font-headline-sm text-xs font-bold ring-2 ring-surface-container-lowest">AR</span>
+<span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-tertiary text-on-tertiary font-headline-sm text-xs font-bold ring-2 ring-surface-container-lowest">VN</span>
+</div>
+<p class="font-data-mono text-label-sm text-outline">
+<span class="text-secondary font-bold">48,240+</span> daily commuters active today
+        </p>
+</div>
+</div>
+<!-- Quick Demo Simulation Strip -->
+<div class="relative z-10 mb-space-md">
+<button class="w-full flex items-center justify-between rounded-lg bg-surface-container p-space-sm hover:bg-surface-container-high transition-colors" id="quick-demo-btn" type="button">
+<div class="flex items-center space-x-space-xs">
+<span class="material-symbols-outlined text-primary-fixed text-lg">play_circle</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">1-Tap Commuter Demo</span>
+</div>
+<span class="font-data-mono text-label-sm rounded-full bg-surface-container-highest px-space-xs py-0.5 text-secondary">Indiranagar Stn Gate 2</span>
+</button>
+</div>
+<!-- Tabbed Auth Container -->
+<div class="relative z-10 rounded-xl bg-surface-container/90 backdrop-blur-xl p-space-md shadow-xl">
+<!-- Nav Tabs -->
+<div class="grid grid-cols-2 rounded-lg bg-surface-container-lowest p-1 mb-space-md">
+<button class="rounded-md py-space-xs font-label-md text-label-md transition-all text-on-primary bg-primary shadow-md" id="tab-signin-btn" type="button">
+          Sign In
+        </button>
+<button class="rounded-md py-space-xs font-label-md text-label-md transition-all text-outline hover:text-on-surface" id="tab-register-btn" type="button">
+          Create Account
+        </button>
+</div>
+<!-- VIEW 1: SIGN IN -->
+<div class="flex flex-col space-y-space-md" id="signin-view">
+<!-- Auth Method Selector (Phone / Transit ID) -->
+<div class="flex items-center justify-between rounded-lg bg-surface-container-low px-space-sm py-space-xs">
+<span class="font-body-sm text-body-sm text-outline">Login Mode:</span>
+<div class="flex space-x-space-xs font-label-sm text-label-sm">
+<button class="text-primary font-bold" id="btn-mode-phone" type="button">Mobile OTP</button>
+<span class="text-outline-variant">/</span>
+<button class="text-outline hover:text-on-surface" id="btn-mode-transit" type="button">Smart Card ID</button>
+</div>
+</div>
+<!-- Phone Input Group -->
+<div class="flex flex-col space-y-space-xs" id="phone-login-group">
+<label class="font-label-md text-label-md text-on-surface flex items-center justify-between">
+<span>Registered Phone Number</span>
+<span class="font-data-mono text-label-sm text-secondary font-normal">Auto OTP Sync</span>
+</label>
+<div class="flex rounded-lg bg-surface-container-lowest p-space-xs">
+<div class="flex items-center space-x-1 pl-space-xs pr-space-sm text-outline font-data-mono text-data-mono">
+<span class="text-sm">🇮🇳</span>
+<span class="text-on-surface font-semibold">+91</span>
+</div>
+<input class="w-full bg-transparent font-data-mono text-data-mono text-on-surface placeholder:text-outline-variant focus:outline-none" id="signin-phone" maxlength="10" placeholder="98765 43210" type="tel"/>
+<button class="rounded-md bg-surface-container-high px-space-sm font-label-sm text-label-sm text-primary hover:bg-surface-bright transition-colors shrink-0" id="btn-request-otp" type="button">
+              Get OTP
+            </button>
+</div>
+</div>
+<!-- Transit Card ID Group (Initially Hidden) -->
+<div class="hidden flex flex-col space-y-space-xs" id="transit-login-group">
+<label class="font-label-md text-label-md text-on-surface">Namma Metro Card / Enguru Transit ID</label>
+<div class="flex items-center rounded-lg bg-surface-container-lowest px-space-sm py-space-xs">
+<span class="material-symbols-outlined text-outline mr-space-xs text-lg">credit_card</span>
+<input class="w-full bg-transparent font-data-mono text-data-mono text-on-surface placeholder:text-outline-variant focus:outline-none uppercase" id="signin-transit-id" placeholder="BLR-MC-90214-X" type="text"/>
+</div>
+</div>
+<!-- OTP or Password Input -->
+<div class="flex flex-col space-y-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface" id="lbl-credential">Verification Code (OTP)</label>
+<button class="font-label-sm text-label-sm text-primary hover:underline" id="btn-toggle-cred-type" type="button">Use Password Instead</button>
+</div>
+<div class="flex items-center rounded-lg bg-surface-container-lowest px-space-sm py-space-xs">
+<span class="material-symbols-outlined text-outline mr-space-xs text-lg">lock</span>
+<input class="w-full bg-transparent font-data-mono text-data-mono text-on-surface placeholder:text-outline-variant tracking-widest focus:outline-none" id="signin-credential" maxlength="6" placeholder="••••••" type="text"/>
+<span class="font-data-mono text-label-sm text-outline-variant" id="otp-timer">00:48</span>
+</div>
+</div>
+<!-- Preferences & Recovery Row -->
+<div class="flex items-center justify-between font-label-sm text-label-sm text-outline">
+<label class="flex items-center space-x-space-xs cursor-pointer select-none">
+<input checked="" class="h-4 w-4 rounded bg-surface-container-lowest accent-primary" type="checkbox"/>
+<span class="text-on-surface-variant">Keep me synced</span>
+</label>
+<button class="text-surface-tint hover:underline" type="button">Need Help?</button>
+</div>
+<!-- Primary Sign In CTA -->
+<button class="w-full flex items-center justify-center space-x-space-xs rounded-full bg-primary py-space-sm font-label-lg text-label-lg font-bold text-on-primary shadow-lg hover:brightness-110 active:scale-95 transition-all" id="cta-signin" type="button">
+<span>Continue to Your Commute</span>
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+<!-- Social & Gov ID Sign In Dividers -->
+<div class="relative flex items-center justify-center my-space-xs">
+<div class="w-full h-px bg-surface-container-highest"></div>
+<span class="absolute bg-surface-container px-space-xs font-data-mono text-label-sm text-outline uppercase">Fast Identity Pass</span>
+</div>
+<div class="grid grid-cols-2 gap-space-xs">
+<button class="flex items-center justify-center space-x-space-xs rounded-lg bg-surface-container-low py-space-xs px-space-sm hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-base text-on-surface">account_circle</span>
+<span class="font-label-sm text-label-sm text-on-surface">Google Sync</span>
+</button>
+<button class="flex items-center justify-center space-x-space-xs rounded-lg bg-surface-container-low py-space-xs px-space-sm hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-base text-secondary">fingerprint</span>
+<span class="font-label-sm text-label-sm text-on-surface">DigiLocker</span>
+</button>
+</div>
+</div>
+<!-- VIEW 2: CREATE ACCOUNT -->
+<div class="hidden flex flex-col space-y-space-md" id="register-view">
+<!-- Full Name -->
+<div class="flex flex-col space-y-space-xs">
+<label class="font-label-md text-label-md text-on-surface">Commuter Full Name</label>
+<div class="flex items-center rounded-lg bg-surface-container-lowest px-space-sm py-space-xs">
+<span class="material-symbols-outlined text-outline mr-space-xs text-lg">person</span>
+<input class="w-full bg-transparent font-body-md text-body-md text-on-surface placeholder:text-outline-variant focus:outline-none" id="reg-name" placeholder="Ananya Sharma" type="text"/>
+</div>
+</div>
+<!-- Phone Number -->
+<div class="flex flex-col space-y-space-xs">
+<label class="font-label-md text-label-md text-on-surface flex items-center justify-between">
+<span>Primary Phone Number</span>
+<span class="font-label-sm text-label-sm text-secondary flex items-center">
+<span class="material-symbols-outlined text-xs mr-0.5">verified_user</span> Instant SMS OTP
+            </span>
+</label>
+<div class="flex rounded-lg bg-surface-container-lowest p-space-xs">
+<div class="flex items-center space-x-1 pl-space-xs pr-space-sm text-outline font-data-mono text-data-mono">
+<span class="text-sm">🇮🇳</span>
+<span class="text-on-surface font-semibold">+91</span>
+</div>
+<input class="w-full bg-transparent font-data-mono text-data-mono text-on-surface placeholder:text-outline-variant focus:outline-none" id="reg-phone" maxlength="10" placeholder="98450 12345" type="tel"/>
+</div>
+</div>
+<!-- Home Metro Station Selector -->
+<div class="flex flex-col space-y-space-xs">
+<label class="font-label-md text-label-md text-on-surface">Primary Hub Station</label>
+<div class="flex items-center rounded-lg bg-surface-container-lowest px-space-sm py-space-xs">
+<span class="material-symbols-outlined text-primary mr-space-xs text-lg">tram</span>
+<select class="w-full bg-transparent font-body-md text-body-md text-on-surface focus:outline-none cursor-pointer" id="reg-station">
+<option class="bg-surface-container text-on-surface" value="indiranagar">Indiranagar (Purple Line)</option>
+<option class="bg-surface-container text-on-surface" value="whitefield">Whitefield (Kadugodi)</option>
+<option class="bg-surface-container text-on-surface" value="silkboard">Silk Board (Yellow Line Junction)</option>
+<option class="bg-surface-container text-on-surface" value="mgroad">MG Road Interchange</option>
+<option class="bg-surface-container text-on-surface" value="majestic">Nadaprabhu Kempegowda (Majestic)</option>
+<option class="bg-surface-container text-on-surface" value="jayadeva">Jayadeva Hospital Interchange</option>
+</select>
+</div>
+</div>
+<!-- SafHER Circle Opt-in Tile -->
+<div class="rounded-lg bg-surface-container-low p-space-sm">
+<div class="flex items-start justify-between">
+<div class="flex items-start space-x-space-xs">
+<span class="material-symbols-outlined text-primary text-xl">female</span>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface font-bold">SafHER Women-Only Pods</h4>
+<p class="font-body-sm text-body-sm text-outline">Exclusive evening and late-night shared e-rickshaws &amp; autos.</p>
+</div>
+</div>
+<input class="h-5 w-5 rounded bg-surface-container-lowest accent-primary mt-1 cursor-pointer" id="safher-toggle" type="checkbox"/>
+</div>
+<div class="hidden mt-space-xs rounded bg-surface-container-highest/60 px-space-xs py-1" id="safher-note">
+<p class="font-data-mono text-label-sm text-secondary flex items-center">
+<span class="material-symbols-outlined text-xs mr-1">task_alt</span> Aadhaar identity verification required for pool activation
+            </p>
+</div>
+</div>
+<!-- Terms Agreement -->
+<label class="flex items-start space-x-space-xs cursor-pointer select-none">
+<input checked="" class="h-4 w-4 rounded bg-surface-container-lowest accent-primary mt-0.5" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-outline">
+            I agree to Bengaluru Transit Shared Mobility Protocol and automated live GPS station geofencing.
+          </span>
+</label>
+<!-- Create Account CTA -->
+<button class="w-full flex items-center justify-center space-x-space-xs rounded-full bg-secondary py-space-sm font-label-lg text-label-lg font-bold text-on-secondary shadow-lg hover:brightness-110 active:scale-95 transition-all" id="cta-register" type="button">
+<span>Create Verified Account</span>
+<span class="material-symbols-outlined text-lg">check_circle</span>
+</button>
+</div>
+</div>
+<!-- Live Feeder Station Status Footer -->
+<div class="relative z-10 mt-space-md flex items-center justify-between rounded-lg bg-surface-container-low px-space-md py-space-xs text-outline font-data-mono text-label-sm">
+<div class="flex items-center space-x-space-xs">
+<span class="material-symbols-outlined text-sm text-secondary">wifi_tethering</span>
+<span>Auto Pod Queues: NORMAL</span>
+</div>
+<span class="text-surface-tint">Indiranagar: 14 Autos Waiting</span>
+</div>
+</div>
+</div>
+<script>
+  (function () {
+    const tabSignIn = document.getElementById('tab-signin-btn');
+    const tabRegister = document.getElementById('tab-register-btn');
+    const viewSignIn = document.getElementById('signin-view');
+    const viewRegister = document.getElementById('register-view');
+
+    const btnModePhone = document.getElementById('btn-mode-phone');
+    const btnModeTransit = document.getElementById('btn-mode-transit');
+    const groupPhone = document.getElementById('phone-login-group');
+    const groupTransit = document.getElementById('transit-login-group');
+
+    const btnToggleCred = document.getElementById('btn-toggle-cred-type');
+    const lblCredential = document.getElementById('lbl-credential');
+    const inputCredential = document.getElementById('signin-credential');
+
+    const safherToggle = document.getElementById('safher-toggle');
+    const safherNote = document.getElementById('safher-note');
+
+    const btnDemo = document.getElementById('quick-demo-btn');
+    const signinPhone = document.getElementById('signin-phone');
+
+    // Switch between Sign In and Register Tabs
+    tabSignIn.addEventListener('click', function () {
+      tabSignIn.className = 'rounded-md py-space-xs font-label-md text-label-md transition-all text-on-primary bg-primary shadow-md';
+      tabRegister.className = 'rounded-md py-space-xs font-label-md text-label-md transition-all text-outline hover:text-on-surface';
+      viewSignIn.classList.remove('hidden');
+      viewRegister.classList.add('hidden');
+    });
+
+    tabRegister.addEventListener('click', function () {
+      tabRegister.className = 'rounded-md py-space-xs font-label-md text-label-md transition-all text-on-primary bg-primary shadow-md';
+      tabSignIn.className = 'rounded-md py-space-xs font-label-md text-label-md transition-all text-outline hover:text-on-surface';
+      viewRegister.classList.remove('hidden');
+      viewSignIn.classList.add('hidden');
+    });
+
+    // Toggle Phone vs Transit Smart Card ID login
+    btnModePhone.addEventListener('click', function () {
+      btnModePhone.className = 'text-primary font-bold';
+      btnModeTransit.className = 'text-outline hover:text-on-surface';
+      groupPhone.classList.remove('hidden');
+      groupTransit.classList.add('hidden');
+    });
+
+    btnModeTransit.addEventListener('click', function () {
+      btnModeTransit.className = 'text-primary font-bold';
+      btnModePhone.className = 'text-outline hover:text-on-surface';
+      groupTransit.classList.remove('hidden');
+      groupPhone.classList.add('hidden');
+    });
+
+    // Toggle OTP / Password mode
+    let isPassword = false;
+    btnToggleCred.addEventListener('click', function () {
+      isPassword = !isPassword;
+      if (isPassword) {
+        lblCredential.textContent = 'Account Password';
+        btnToggleCred.textContent = 'Use SMS OTP';
+        inputCredential.placeholder = 'Enter password';
+        inputCredential.type = 'password';
+      } else {
+        lblCredential.textContent = 'Verification Code (OTP)';
+        btnToggleCred.textContent = 'Use Password Instead';
+        inputCredential.placeholder = '••••••';
+        inputCredential.type = 'text';
+      }
+    });
+
+    // SafHER checkbox toggle
+    safherToggle.addEventListener('change', function () {
+      if (safherToggle.checked) {
+        safherNote.classList.remove('hidden');
+      } else {
+        safherNote.classList.add('hidden');
+      }
+    });
+
+    // Demo Autofill Button
+    btnDemo.addEventListener('click', function () {
+      tabSignIn.click();
+      signinPhone.value = '9845099882';
+      inputCredential.value = '554109';
+      btnDemo.classList.add('bg-primary/20');
+      setTimeout(function () {
+        btnDemo.classList.remove('bg-primary/20');
+      }, 500);
+    });
+  })();
+</script></main></body></html>
