@@ -1,0 +1,19 @@
+{
+  "scenario_id": "weekday_peak",
+  "description": "Synthetic weekday commute pulse with moderate fleet supply.",
+  "seed": 41031,
+  "rider_count": 120,
+  "arrival_window_seconds": 900,
+  "arrival_shape": "peak",
+  "destination_mismatch_rate": 0.12,
+  "party_size_two_rate": 0.08,
+  "accessible_request_rate": 0.1,
+  "safety_event_count": 0,
+  "drivers": 38,
+  "vehicle_capacity": 4,
+  "accessible_vehicle_rate": 0.2,
+  "max_wait_seconds": 300,
+  "max_detour_meters": 2500,
+  "max_pool_size": 4,
+  "pool_discount_bps": 1500
+}

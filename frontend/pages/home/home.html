@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2f5f2">
+  <title>Nimma Saarthi | Metro Feeder</title>
+  <link rel="stylesheet" href="../../styles/pages/home.css">
+  <link rel="stylesheet" href="../../styles/master.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="../../deployment-config.js"></script>
+  <script type="module" src="../../scripts/core/home.mjs?v=2"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../../index.html" aria-label="Nimma Saarthi overview">
+      <span class="brand-mark" aria-hidden="true">N</span>
+      <span><strong>Nimma Saarthi</strong><small>Metro feeder network</small></span>
+    </a>
+    <div class="topbar-right">
+      <span class="service-state"><span id="healthDot" class="status-dot" aria-hidden="true"></span><span id="healthText">Checking API</span></span>
+      <span id="identityLabel" class="identity-label">Signed out</span>
+      <a class="button button-quiet button-small" href="../../portal.html#/auth/welcome">Role workspaces</a>
+      <button id="signOutButton" class="button button-quiet hidden" type="button">Sign out</button>
+    </div>
+  </header>
+
+  <main id="home" class="app-shell">
+    <section id="authView" class="auth-layout" aria-labelledby="authHeading">
+      <div class="auth-intro">
+        <p class="eyebrow">Bengaluru · last-mile coordination</p>
+        <h1 id="authHeading">Your metro exit,<br><em>already planned.</em></h1>
+        <p class="intro-copy">Request a feeder trip, compare the live fare quote, and see eligible corridor matches. Trip, wallet, and account data comes from the connected API.</p>
+        <div class="service-note"><span class="note-icon" aria-hidden="true">↗</span><span>Prototype service. GPS sharing and SMS verification require provider configuration. No card processor or transit-authority feed is connected.</span></div>
+      </div>
+
+      <section class="panel auth-panel" aria-label="Account access">
+        <div class="tabs" role="tablist" aria-label="Account actions">
+          <button class="tab is-active" type="button" role="tab" aria-selected="true" data-auth-tab="login">Sign in</button>
+          <button class="tab" type="button" role="tab" aria-selected="false" data-auth-tab="register">Create account</button>
+        </div>
+        <form id="loginForm" class="form-stack" novalidate>
+          <div>
+            <h2>Welcome back</h2>
+            <p class="muted">Sign in with the email and password registered on this service.</p>
+          </div>
+          <label>Email address<input name="email" type="email" autocomplete="email" required maxlength="254"></label>
+          <label>Password<input name="password" type="password" autocomplete="current-password" required maxlength="72"></label>
+          <button class="button button-primary" type="submit">Sign in <span aria-hidden="true">→</span></button>
+        </form>
+        <form id="registerForm" class="form-stack hidden" novalidate>
+          <div>
+            <h2>Create a rider account</h2>
+            <p class="muted">Passwords must contain at least 12 characters. Registration also signs you in.</p>
+          </div>
+          <label>Full name<input name="name" type="text" autocomplete="name" required maxlength="100"></label>
+          <label>Email address<input name="email" type="email" autocomplete="email" required maxlength="254"></label>
+          <label>Phone (optional)<input name="phone" type="tel" autocomplete="tel" maxlength="40"></label>
+          <label>Password<input name="password" type="password" autocomplete="new-password" required minlength="12" maxlength="72"></label>
+          <button class="button button-primary" type="submit">Create account <span aria-hidden="true">→</span></button>
+        </form>
+        <p id="authMessage" class="form-message" role="status" aria-live="polite"></p>
+      </section>
+    </section>
+
+    <section id="workspaceView" class="workspace hidden" aria-label="Mobility workspace">
+      <aside class="sidebar" aria-label="Workspace navigation">
+        <p class="sidebar-label">Workspace</p>
+        <button class="nav-button is-current" type="button" data-view-target="book"><span aria-hidden="true">＋</span> Request a trip</button>
+        <button class="nav-button" type="button" data-view-target="trips"><span aria-hidden="true">≋</span> My trips</button>
+        <button class="nav-button" type="button" data-view-target="wallet"><span aria-hidden="true">▤</span> Wallet</button>
+        <button id="adminNavButton" class="nav-button hidden" type="button" data-view-target="admin"><span aria-hidden="true">⌘</span> Operations</button>
+        <div class="sidebar-foot">
+          <span class="eyebrow">Connected service</span>
+          <code id="apiOriginLabel"></code>
+          <button id="refreshAllButton" class="button button-quiet button-small" type="button">Refresh workspace</button>
+        </div>
+      </aside>
+
+      <div class="workspace-content">
+        <div id="appMessage" class="app-message" role="status" aria-live="polite"></div>
+
+        <section id="view-book" class="content-view" data-view="book">
+          <div class="page-heading">
+            <div><p class="eyebrow">Trip request</p><h1>Plan a feeder ride</h1></div>
+            <span class="live-tag"><span class="status-dot status-dot-green"></span>API-backed</span>
+          </div>
+          <div class="book-grid">
+            <form id="tripForm" class="panel form-stack">
+              <div><h2>Journey details</h2><p class="muted">Choose your pickup and drop-off on the map. The backend road router calculates route distance and fare.</p></div>
+              <label>Origin station<select id="originStationSelect" name="originId" required><option value="">Loading Namma Metro stations…</option></select></label>
+              <p class="muted">The station is used for pickup-bay operations. Set the exact pickup and destination pins below.</p>
+              <div class="button-row">
+                <button class="button button-secondary button-small is-current" type="button" data-map-selection="pickup" aria-pressed="true">Set pickup pin</button>
+                <button class="button button-quiet button-small" type="button" data-map-selection="dropoff" aria-pressed="false">Set drop-off pin</button>
+                <button id="useCurrentLocationButton" class="button button-quiet button-small" type="button">Use my location</button>
+              </div>
+              <div id="homeBookingMap" class="route-map booking-map" role="application" aria-label="Interactive map to select your pickup and drop-off"></div>
+              <div class="split-grid"><p id="homePickupSummary" class="muted">Pickup: not selected</p><p id="homeDropoffSummary" class="muted">Drop-off: not selected</p></div>
+              <p class="muted">OpenStreetMap tiles reveal the approximate map area viewed to the tile provider. Device location is only used if you request it.</p>
+              <fieldset class="choice-fieldset"><legend>Ride mode</legend>
+                <label class="choice"><input type="radio" name="poolMode" value="corridor" checked><span><strong>Corridor pool</strong><small>15% prototype discount</small></span></label>
+                <label class="choice"><input type="radio" name="poolMode" value="solo"><span><strong>Solo</strong><small>No pool discount</small></span></label>
+              </fieldset>
+              <div class="button-row">
+                <button id="quoteButton" class="button button-secondary" type="button">Get fare quote</button>
+                <button id="createTripButton" class="button button-primary" type="submit" disabled>Request trip</button>
+              </div>
+            </form>
+
+            <aside class="panel fare-panel" aria-labelledby="quoteHeading">
+              <p class="eyebrow">Price preview</p>
+              <h2 id="quoteHeading">Fare quote</h2>
+              <p id="quoteEmpty" class="empty-state">Enter journey details and request a quote. The server calculates the authoritative amount.</p>
+              <div id="quoteResult" class="quote-result hidden">
+                <div class="fare-total"><span>Estimated total</span><strong id="quoteTotal">—</strong></div>
+                <dl class="definition-list">
+                  <div><dt>Base</dt><dd id="quoteBase">—</dd></div>
+                  <div><dt>Distance</dt><dd id="quoteDistance">—</dd></div>
+                  <div><dt>Pool discount</dt><dd id="quoteDiscount">—</dd></div>
+                  <div><dt>Currency</dt><dd id="quoteCurrency">—</dd></div>
+                </dl>
+                <p id="quoteRoute" class="fine-print">Road route and estimated time will appear here after calculation.</p>
+                <p class="fine-print">The road router measures the journey; distance is never entered by the rider. A fare quote is not a payment authorization.</p>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section id="view-trips" class="content-view hidden" data-view="trips">
+          <div class="page-heading">
+            <div><p class="eyebrow">Your account</p><h1>Trips</h1><p class="muted">Trip history is loaded from your authenticated account.</p></div>
+            <button id="refreshTripsButton" class="button button-secondary" type="button">Refresh trips</button>
+          </div>
+          <div id="tripList" class="trip-list" aria-live="polite"><div class="panel empty-state">Loading trips…</div></div>
+          <section id="candidatePanel" class="panel candidate-panel hidden" aria-live="polite">
+            <div class="panel-heading"><div><p class="eyebrow">Matching</p><h2>Eligible corridor candidates</h2></div><button id="closeCandidatesButton" class="icon-button" type="button" aria-label="Close candidates">×</button></div>
+            <div id="candidateList" class="candidate-list"></div>
+            <p class="fine-print">Candidates are scored using current backend rules. This endpoint does not form a pool or assign a vehicle.</p>
+          </section>
+        </section>
+
+        <section id="view-wallet" class="content-view hidden" data-view="wallet">
+          <div class="page-heading">
+            <div><p class="eyebrow">Account balance</p><h1>Wallet</h1><p class="muted">Balance and ledger entries are read from the backend.</p></div>
+            <button id="refreshWalletButton" class="button button-secondary" type="button">Refresh wallet</button>
+          </div>
+          <section class="panel wallet-panel">
+            <div class="wallet-balance"><span>Available balance</span><strong id="walletBalance">—</strong><small id="walletCurrency">—</small></div>
+            <p class="service-note"><span class="note-icon" aria-hidden="true">i</span><span>Card processing and self-service top-ups are not connected. Only audited administrator credits can add wallet funds.</span></p>
+          </section>
+          <section class="panel">
+            <div class="panel-heading"><div><p class="eyebrow">Append-only activity</p><h2>Ledger</h2></div></div>
+            <div id="ledgerList" class="ledger-list"><p class="empty-state">Loading wallet entries…</p></div>
+          </section>
+        </section>
+
+        <section id="view-admin" class="content-view hidden" data-view="admin">
+          <div class="page-heading">
+            <div><p class="eyebrow">Role-restricted</p><h1>Operations</h1><p class="muted">These tools require a pre-provisioned admin account.</p></div>
+            <button id="refreshAdminButton" class="button button-secondary" type="button">Refresh operations</button>
+          </div>
+          <div class="admin-grid">
+            <section class="panel"><div class="panel-heading"><div><p class="eyebrow">Database aggregates</p><h2>Trip metrics</h2></div></div><pre id="adminMetrics" class="data-output">Load metrics to begin.</pre></section>
+            <section class="panel"><div class="panel-heading"><div><p class="eyebrow">Deterministic defaults</p><h2>Simulation</h2></div><button id="runSimulationButton" class="button button-secondary" type="button">Run scenario</button></div><pre id="simulationResult" class="data-output">No simulation run yet.</pre></section>
+            <section class="panel"><div class="panel-heading"><div><p class="eyebrow">Directory</p><h2>Riders and drivers</h2></div><button id="loadDirectoryButton" class="button button-secondary" type="button">Load</button></div><div class="directory-grid"><div><h3>Riders</h3><div id="adminRiders" class="compact-list">Not loaded</div></div><div><h3>Drivers</h3><div id="adminDrivers" class="compact-list">Not loaded</div></div></div></section>
+            <form id="creditForm" class="panel form-stack"><div><p class="eyebrow">Audited adjustment</p><h2>Credit wallet</h2><p class="muted">This does not charge a payment method.</p></div><label>User ID<input name="userId" required autocomplete="off"></label><label>Amount in rupees<input name="amountRupees" type="number" min="0.01" step="0.01" required></label><label>Description<input name="description" maxlength="240" required></label><button class="button button-primary" type="submit">Create credit entry</button></form>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><span>Nimma Saarthi · mobility prototype</span><span>Only verified API responses are shown as operational data.</span></footer>
+</body>
+</html>

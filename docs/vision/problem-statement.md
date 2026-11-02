@@ -1,51 +1,49 @@
 # Problem Statement
 
-## The Last Mile Problem
+## The last-mile gap
 
-Mass transit efficiently moves people across cities.
+Metro systems are effective at moving people at scale, but they often fail to provide a seamless transition to a rider's final destination. The issue emerges immediately after the commuter leaves the station.
 
-The challenge begins when commuters leave the station.
+## Current experience
 
----
+```text
+Metro arrival
+  ↓
+Exit station
+  ↓
+Search for ride
+  ↓
+Wait for vehicle
+  ↓
+Travel with uncertain timing
+```
 
-## Current Flow
+## Operational pain points
 
-Metro Arrival
-↓
-Exit Station
-↓
-Search For Ride
-↓
-Wait
-↓
-Travel
+### For riders
+- high trip costs when travel is fragmented
+- long wait times after exiting public transit
+- uncertainty about pickup and ETAs
+- poor safety perceptions in dispersed, ad hoc transportation
+- inconsistent trip experience
 
----
+### For drivers
+- idle time between trips
+- poor dispatch visibility
+- inefficient route planning when demand is not coordinated
+- reduced utilization in high-activity transit corridors
 
-## Problems
+### For cities
+- increased congestion from near-empty trips
+- inefficient vehicle use during commuter peaks
+- fragmented mobility systems that do not align with transit patterns
 
-### Riders
+## Root cause
 
-- High costs
-- Long waits
-- Safety concerns
-- Unpredictable experience
-
-### Drivers
-
-- Idle time
-- Poor utilization
-
-### Cities
-
-- Congestion
-- Low occupancy
-- Fragmented mobility
-
----
+The core issue is timing and coordination. Demand is real, but it emerges in a bursty, fragmented way after passengers leave transit nodes. Without coordination, the system operates at lower efficiency than it could.
 
 ## Opportunity
 
-Metro commuter flows are predictable.
+Commuter patterns are predictable. If the platform uses station arrival, corridor demand, and trip timing as inputs, it can pre-match riders, position vehicles, and reduce the friction that typically accompanies the final leg of travel.
 
-TrainSync uses this predictability to coordinate transportation before commuters arrive at station exits.
+NimmaSaarthi addresses this by turning transit flow into an operational signal for demand orchestration.

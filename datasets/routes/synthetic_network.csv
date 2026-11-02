@@ -1,0 +1,15 @@
+edge_id,from_station_id,to_station_id,corridor_id,distance_meters,travel_seconds,edge_type,data_class
+E-A12,ST-A1,ST-A2,COR-A,1237,210,road,synthetic
+E-A21,ST-A2,ST-A1,COR-A,1237,205,road,synthetic
+E-A23,ST-A2,ST-A3,COR-A,1401,240,road,synthetic
+E-A32,ST-A3,ST-A2,COR-A,1401,235,road,synthetic
+E-A34,ST-A3,ST-A4,COR-A,1512,255,road,synthetic
+E-A43,ST-A4,ST-A3,COR-A,1512,250,road,synthetic
+E-B12,ST-B1,ST-B2,COR-B,1421,245,road,synthetic
+E-B21,ST-B2,ST-B1,COR-B,1421,240,road,synthetic
+E-B23,ST-B2,ST-B3,COR-B,1452,250,road,synthetic
+E-B32,ST-B3,ST-B2,COR-B,1452,245,road,synthetic
+E-B34,ST-B3,ST-B4,COR-B,1501,260,road,synthetic
+E-B43,ST-B4,ST-B3,COR-B,1501,255,road,synthetic
+E-XA1,ST-A1,ST-B1,COR-X,1600,330,connector,synthetic
+E-XB1,ST-B1,ST-A1,COR-X,1600,330,connector,synthetic

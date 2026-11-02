@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="refresh" content="0; url=../../../portal.html#/admin/stations">
+<script>location.replace("../../../portal.html#/admin/stations");</script>
+
+<title>Nimma Saarthi - Stations Management</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+
+body{
+    background:#090d14;
+}
+
+.glass{
+    background:rgba(255,255,255,.04);
+    backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.station-card:hover{
+    transform:translateY(-4px);
+    transition:.3s;
+}
+
+</style>
+</head>
+
+<body class="text-white">
+
+<div class="flex min-h-screen">
+
+<!-- SIDEBAR -->
+
+<aside class="w-72 bg-black/30 border-r border-white/10 p-6">
+
+<h1 class="text-2xl font-bold mb-10">
+Nimma Saarthi
+</h1>
+
+<nav class="space-y-4">
+
+<a href="../dashboard/dashboard.html">Dashboard</a>
+<a href="../analytics/analytics.html">Analytics</a>
+<a href="../pools/pools.html">Pools</a>
+<a href="../trips/trips.html">Trips</a>
+<a href="../drivers/drivers.html">Drivers</a>
+<a href="../vehicles/vehicles.html">Vehicles</a>
+
+<a href="stations.html" class="text-purple-400 font-semibold block">
+Stations
+</a>
+<a href="../../home/home.html?view=admin">API-backed Operations</a>
+
+</nav>
+
+</aside>
+
+<!-- MAIN CONTENT -->
+
+<main class="flex-1 p-8">
+
+<!-- HEADER -->
+
+<div class="flex justify-between items-center mb-10">
+
+<div>
+
+<h2 class="text-4xl font-bold">
+Stations Management
+</h2>
+
+<p class="text-gray-400 mt-2">
+Monitor station operations and demand intelligence
+</p>
+
+</div>
+
+<div class="flex gap-4">
+
+<button class="glass px-4 py-2 rounded-xl">
+Refresh
+</button>
+
+<button class="bg-purple-600 px-5 py-2 rounded-xl">
+Add Station
+</button>
+
+</div>
+
+</div>
+
+<!-- KPI SECTION -->
+
+<section class="grid grid-cols-5 gap-5 mb-8">
+
+<div class="glass rounded-2xl p-5">
+
+<h3 class="text-3xl text-purple-400 font-bold">
+42
+</h3>
+
+<p class="text-gray-400">
+Total Stations
+</p>
+
+</div>
+
+<div class="glass rounded-2xl p-5">
+
+<h3 class="text-3xl text-green-400 font-bold">
+38
+</h3>
+
+<p class="text-gray-400">
+Operational
+</p>
+
+</div>
+
+<div class="glass rounded-2xl p-5">
+
+<h3 class="text-3xl text-yellow-400 font-bold">
+4
+</h3>
+
+<p class="text-gray-400">
+High Demand
+</p>
+
+</div>
+
+<div class="glass rounded-2xl p-5">
+
+<h3 class="text-3xl text-red-400 font-bold">
+2
+</h3>
+
+<p class="text-gray-400">
+Alerts
+</p>
+
+</div>
+
+<div class="glass rounded-2xl p-5">
+
+<h3 class="text-3xl text-cyan-400 font-bold">
+91%
+</h3>
+
+<p class="text-gray-400">
+Network Health
+</p>
+
+</div>
+
+</section>
+
+<!-- STATIONS TABLE -->
+
+<div class="glass rounded-2xl p-6 mb-8">
+
+<div class="flex justify-between items-center mb-6">
+
+<h3 class="text-xl font-bold">
+Station Registry
+</h3>
+
+<input
+type="text"
+placeholder="Search Station..."
+class="bg-black/20 border border-white/10 rounded-xl px-4 py-2">
+
+</div>
+
+<table class="w-full">
+
+<thead>
+
+<tr class="border-b border-white/10 text-gray-400">
+
+<th class="text-left pb-3">Station</th>
+<th class="text-left pb-3">Line</th>
+<th class="text-left pb-3">Passengers</th>
+<th class="text-left pb-3">Pools</th>
+<th class="text-left pb-3">Bays</th>
+<th class="text-left pb-3">Status</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+<td class="py-4">Indiranagar</td>
+<td>Purple</td>
+<td>842</td>
+<td>184</td>
+<td>8</td>
+<td class="text-green-400">Healthy</td>
+</tr>
+
+<tr>
+<td class="py-4">Whitefield</td>
+<td>Purple</td>
+<td>1203</td>
+<td>244</td>
+<td>12</td>
+<td class="text-green-400">Healthy</td>
+</tr>
+
+<tr>
+<td class="py-4">MG Road</td>
+<td>Purple</td>
+<td>954</td>
+<td>182</td>
+<td>10</td>
+<td class="text-green-400">Healthy</td>
+</tr>
+
+<tr>
+<td class="py-4">Silk Board</td>
+<td>Yellow</td>
+<td>2041</td>
+<td>401</td>
+<td>14</td>
+<td class="text-yellow-400">Congested</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- STATION DEMAND HEATMAP -->
+
+<div class="glass rounded-2xl p-6 mb-8">
+
+<h3 class="text-xl font-bold mb-6">
+Station Demand Heatmap
+</h3>
+
+<div class="grid grid-cols-6 gap-4">
+
+<div class="bg-green-500 p-6 rounded-xl text-center">
+MG Road
+</div>
+
+<div class="bg-purple-600 p-6 rounded-xl text-center">
+Whitefield
+</div>
+
+<div class="bg-red-500 p-6 rounded-xl text-center">
+Silk Board
+</div>
+
+<div class="bg-yellow-500 p-6 rounded-xl text-center">
+Indiranagar
+</div>
+
+<div class="bg-green-600 p-6 rounded-xl text-center">
+Majestic
+</div>
+
+<div class="bg-cyan-500 p-6 rounded-xl text-center">
+Bommasandra
+</div>
+
+</div>
+
+</div>
+
+<!-- PERFORMANCE + DETAILS -->
+
+<div class="grid grid-cols-12 gap-6">
+
+<!-- POOL PERFORMANCE -->
+
+<div class="col-span-6 glass rounded-2xl p-6">
+
+<h3 class="text-xl font-bold mb-6">
+
+Pool Formation Efficiency
+
+</h3>
+
+<div class="space-y-5">
+
+<div>
+
+<div class="flex justify-between mb-2">
+
+<span>Indiranagar</span>
+<span>92%</span>
+
+</div>
+
+<div class="h-2 bg-gray-800 rounded">
+
+<div class="h-2 bg-green-500 rounded w-[92%]"></div>
+
+</div>
+
+</div>
+
+<div>
+
+<div class="flex justify-between mb-2">
+
+<span>Whitefield</span>
+<span>88%</span>
+
+</div>
+
+<div class="h-2 bg-gray-800 rounded">
+
+<div class="h-2 bg-purple-500 rounded w-[88%]"></div>
+
+</div>
+
+</div>
+
+<div>
+
+<div class="flex justify-between mb-2">
+
+<span>Silk Board</span>
+<span>74%</span>
+
+</div>
+
+<div class="h-2 bg-gray-800 rounded">
+
+<div class="h-2 bg-yellow-500 rounded w-[74%]"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- SELECTED STATION DETAILS -->
+
+<div class="col-span-6 glass rounded-2xl p-6">
+
+<h3 class="text-xl font-bold mb-6">
+Station Details
+</h3>
+
+<div class="space-y-4">
+
+<div class="flex justify-between">
+
+<span class="text-gray-400">
+Station Manager
+</span>
+
+<span>
+Suresh K.
+</span>
+
+</div>
+
+<div class="flex justify-between">
+
+<span class="text-gray-400">
+Metro Line
+</span>
+
+<span>
+Purple Line
+</span>
+
+</div>
+
+<div class="flex justify-between">
+
+<span class="text-gray-400">
+Morning Peak
+</span>
+
+<span>
+08:00 - 10:00
+</span>
+
+</div>
+
+<div class="flex justify-between">
+
+<span class="text-gray-400">
+Evening Peak
+</span>
+
+<span>
+17:30 - 20:00
+</span>
+
+</div>
+
+<div class="flex justify-between">
+
+<span class="text-gray-400">
+Average Wait
+</span>
+
+<span class="text-green-400">
+3.4 Min
+</span>
+
+</div>
+
+<div class="flex justify-between">
+
+<span class="text-gray-400">
+Available Vehicles
+</span>
+
+<span>
+126
+</span>
+
+</div>
+
+<div class="flex justify-between">
+
+<span class="text-gray-400">
+SOS Events
+</span>
+
+<span class="text-red-400">
+2
+</span>
+
+</div>
+
+<div class="flex justify-between">
+
+<span class="text-gray-400">
+Daily Throughput
+</span>
+
+<span>
+24,500
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- OPERATIONS -->
+
+<div class="glass rounded-2xl p-6 mt-8">
+
+<h3 class="text-xl font-bold mb-6">
+Station Operations
+</h3>
+
+<div class="flex flex-wrap gap-4">
+
+<button class="bg-green-600 px-5 py-3 rounded-xl">
+Open Station
+</button>
+
+<button class="bg-yellow-600 px-5 py-3 rounded-xl">
+Maintenance Mode
+</button>
+
+<button class="bg-purple-600 px-5 py-3 rounded-xl">
+Manage Bays
+</button>
+
+<button class="bg-blue-600 px-5 py-3 rounded-xl">
+View Analytics
+</button>
+
+<button class="bg-red-600 px-5 py-3 rounded-xl">
+Emergency Lockdown
+</button>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "tariff_id": "usd-v1",
+  "version": 1,
+  "status": "simulation_default",
+  "currency": "USD",
+  "rounding": "ceil_distance_component_to_cent_then_floor_discount_to_cent",
+  "base_fare_cents": 250,
+  "distance_rate_cents_per_kilometer": 150,
+  "corridor_discount_basis_points": 1500,
+  "solo_discount_basis_points": 0,
+  "maximum_trip_distance_meters": 500000,
+  "source": "project simulation assumption; not a market or legal fare recommendation",
+  "effective_at": "2026-01-01T00:00:00Z"
+}

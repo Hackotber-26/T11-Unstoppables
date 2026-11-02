@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: nimma-saarthi-api
+    runtime: docker
+    plan: standard
+    region: singapore
+    dockerContext: .
+    dockerfilePath: ./infrastructure/docker/Dockerfile.backend
+    dockerCommand: /app/start-web.sh
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_HOST
+        value: 0.0.0.0
+      - key: APP_CORS_ORIGINS
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DRIVER_DOCUMENTS_PATH
+        value: /var/data/driver-documents
+      - key: DRIVER_DOCUMENTS_ENCRYPTION_KEY
+        sync: false
+      - key: OSRM_BASE_URL
+        sync: false
+      - key: GOOGLE_MAPS_API_KEY
+        sync: false
+    disk:
+      name: driver-documents
+      mountPath: /var/data
+      sizeGB: 5

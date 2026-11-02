@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/trainsync/scenario.schema.json",
+  "title": "TrainSync Synthetic Scenario",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "scenario_id", "description", "seed", "rider_count", "arrival_window_seconds",
+    "arrival_shape", "destination_mismatch_rate", "party_size_two_rate",
+    "accessible_request_rate", "safety_event_count", "drivers", "vehicle_capacity",
+    "accessible_vehicle_rate", "max_wait_seconds", "max_detour_meters",
+    "max_pool_size", "pool_discount_bps"
+  ],
+  "properties": {
+    "scenario_id": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+    "description": {"type": "string", "minLength": 1},
+    "seed": {"type": "integer", "minimum": 0},
+    "rider_count": {"type": "integer", "minimum": 1},
+    "arrival_window_seconds": {"type": "integer", "minimum": 1},
+    "arrival_shape": {"enum": ["flat", "peak"]},
+    "destination_mismatch_rate": {"type": "number", "minimum": 0, "maximum": 1},
+    "party_size_two_rate": {"type": "number", "minimum": 0, "maximum": 1},
+    "accessible_request_rate": {"type": "number", "minimum": 0, "maximum": 1},
+    "safety_event_count": {"type": "integer", "minimum": 0},
+    "drivers": {"type": "integer", "minimum": 0},
+    "vehicle_capacity": {"type": "integer", "minimum": 2},
+    "accessible_vehicle_rate": {"type": "number", "minimum": 0, "maximum": 1},
+    "max_wait_seconds": {"type": "integer", "minimum": 0},
+    "max_detour_meters": {"type": "integer", "minimum": 0},
+    "max_pool_size": {"type": "integer", "minimum": 2},
+    "pool_discount_bps": {"type": "integer", "minimum": 0, "maximum": 10000}
+  }
+}

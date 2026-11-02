@@ -1,0 +1,20 @@
+{
+  "spec_version": "1.0.0",
+  "coordinate_reference": "synthetic-local-cartesian",
+  "units": "meters",
+  "axis": {
+    "x": "east-positive",
+    "y": "north-positive"
+  },
+  "geographic_coordinates": false,
+  "edge_semantics": {
+    "direction": "directed",
+    "distance_field": "distance_meters",
+    "cost_field": "travel_seconds",
+    "reverse_edges_must_be_explicit": true,
+    "distance_must_be_positive": true,
+    "travel_seconds_must_be_positive": true
+  },
+  "classification": "synthetic",
+  "precision_note": "Coordinates and route costs are fictional fixtures and are not suitable for navigation or geospatial inference."
+}

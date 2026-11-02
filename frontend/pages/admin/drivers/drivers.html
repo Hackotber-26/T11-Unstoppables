@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="refresh" content="0; url=../../../portal.html#/admin/drivers">
+<script>location.replace("../../../portal.html#/admin/drivers");</script>
+
+<title>Nimma Saarthi - Driver Management</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+
+body{
+    background:#090d14;
+}
+
+.glass{
+    background:rgba(255,255,255,.04);
+    backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.glow-green{
+    box-shadow:0 0 25px rgba(16,185,129,.25);
+}
+
+.glow-purple{
+    box-shadow:0 0 25px rgba(168,85,247,.25);
+}
+
+.glow-yellow{
+    box-shadow:0 0 25px rgba(245,158,11,.25);
+}
+
+.glow-red{
+    box-shadow:0 0 25px rgba(239,68,68,.25);
+}
+
+.status-online{
+    color:#10b981;
+}
+
+.status-offline{
+    color:#ef4444;
+}
+
+</style>
+</head>
+
+<body class="text-white">
+
+<div class="flex min-h-screen">
+
+<!-- SIDEBAR -->
+
+<aside class="w-72 bg-black/30 border-r border-white/10 p-6">
+
+<h1 class="text-2xl font-bold mb-10">
+Nimma Saarthi
+</h1>
+
+<nav class="space-y-4">
+
+<a href="../dashboard/dashboard.html">Dashboard</a>
+<a href="../analytics/analytics.html">Analytics</a>
+<a href="../pools/pools.html">Pools</a>
+<a href="../trips/trips.html">Trips</a>
+
+<a href="drivers.html" class="block text-purple-400 font-semibold">
+Drivers
+</a>
+
+<a href="../vehicles/vehicles.html">Vehicles</a>
+<a href="../stations/stations.html">Stations</a>
+<a href="../../home/home.html?view=admin">API-backed Operations</a>
+
+</nav>
+
+</aside>
+
+<!-- MAIN -->
+
+<main class="flex-1 p-8">
+
+<!-- HEADER -->
+
+<div class="flex justify-between items-center mb-10">
+
+<div>
+
+<h2 class="text-4xl font-bold">
+Driver Management Center
+</h2>
+
+<p class="text-gray-400 mt-2">
+Driver operations, compliance & fleet monitoring
+</p>
+
+</div>
+
+<div class="flex gap-4">
+
+<button class="glass px-4 py-2 rounded-xl">
+Refresh
+</button>
+
+<button class="bg-purple-600 px-5 py-2 rounded-xl">
+Add Driver
+</button>
+
+</div>
+
+</div>
+
+<!-- KPI CARDS -->
+
+<section class="grid grid-cols-5 gap-5 mb-8">
+
+<div class="glass p-5 rounded-2xl glow-green">
+
+<p class="text-gray-400">
+Online Drivers
+</p>
+
+<h3 class="text-3xl font-bold text-green-400 mt-2">
+842
+</h3>
+
+</div>
+
+<div class="glass p-5 rounded-2xl glow-purple">
+
+<p class="text-gray-400">
+Total Drivers
+</p>
+
+<h3 class="text-3xl font-bold text-purple-400 mt-2">
+1,124
+</h3>
+
+</div>
+
+<div class="glass p-5 rounded-2xl glow-yellow">
+
+<p class="text-gray-400">
+Average Rating
+</p>
+
+<h3 class="text-3xl font-bold text-yellow-400 mt-2">
+4.8
+</h3>
+
+</div>
+
+<div class="glass p-5 rounded-2xl">
+
+<p class="text-gray-400">
+Trips Today
+</p>
+
+<h3 class="text-3xl font-bold text-cyan-400 mt-2">
+5,412
+</h3>
+
+</div>
+
+<div class="glass p-5 rounded-2xl glow-red">
+
+<p class="text-gray-400">
+Flagged Drivers
+</p>
+
+<h3 class="text-3xl font-bold text-red-400 mt-2">
+7
+</h3>
+
+</div>
+
+</section>
+
+<!-- MAIN GRID -->
+
+<div class="grid grid-cols-12 gap-6">
+
+<!-- DRIVER LIST -->
+
+<div class="col-span-8 glass rounded-2xl p-6">
+
+<div class="flex justify-between items-center mb-6">
+
+<h3 class="text-xl font-bold">
+
+Driver Registry
+
+</h3>
+
+<input
+type="text"
+placeholder="Search Driver..."
+class="bg-black/20 px-4 py-2 rounded-xl border border-white/10">
+
+</div>
+
+<table class="w-full">
+
+<thead>
+
+<tr class="text-gray-400 border-b border-white/10">
+
+<th class="text-left pb-3">Driver</th>
+<th class="text-left pb-3">Vehicle</th>
+<th class="text-left pb-3">Trips</th>
+<th class="text-left pb-3">Rating</th>
+<th class="text-left pb-3">Status</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td class="py-4">
+Ramesh Kumar
+</td>
+
+<td>
+Auto EV
+</td>
+
+<td>
+1824
+</td>
+
+<td>
+⭐ 4.9
+</td>
+
+<td class="status-online">
+ONLINE
+</td>
+
+</tr>
+
+<tr>
+
+<td class="py-4">
+Sunil M
+</td>
+
+<td>
+Cab EV
+</td>
+
+<td>
+1548
+</td>
+
+<td>
+⭐ 4.8
+</td>
+
+<td class="status-online">
+ONLINE
+</td>
+
+</tr>
+
+<tr>
+
+<td class="py-4">
+Vijay K
+</td>
+
+<td>
+Shuttle
+</td>
+
+<td>
+2341
+</td>
+
+<td>
+⭐ 4.7
+</td>
+
+<td class="status-offline">
+OFFLINE
+</td>
+
+</tr>
+
+<tr>
+
+<td class="py-4">
+Anand R
+</td>
+
+<td>
+Auto EV
+</td>
+
+<td>
+1103
+</td>
+
+<td>
+⭐ 4.9
+</td>
+
+<td class="status-online">
+ONLINE
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- DRIVER DISTRIBUTION -->
+
+<div class="col-span-4 glass rounded-2xl p-6">
+
+<h3 class="text-xl font-bold mb-6">
+Driver Distribution
+</h3>
+
+<div class="space-y-6">
+
+<div>
+
+<div class="flex justify-between">
+
+<span>Indiranagar</span>
+<span>126</span>
+
+</div>
+
+<div class="bg-gray-800 h-2 rounded mt-2">
+
+<div class="bg-purple-500 h-2 rounded w-[80%]"></div>
+
+</div>
+
+</div>
+
+<div>
+
+<div class="flex justify-between">
+
+<span>Whitefield</span>
+<span>178</span>
+
+</div>
+
+<div class="bg-gray-800 h-2 rounded mt-2">
+
+<div class="bg-green-500 h-2 rounded w-[92%]"></div>
+
+</div>
+
+</div>
+
+<div>
+
+<div class="flex justify-between">
+
+<span>MG Road</span>
+<span>95</span>
+
+</div>
+
+<div class="bg-gray-800 h-2 rounded mt-2">
+
+<div class="bg-yellow-500 h-2 rounded w-[60%]"></div>
+
+</div>
+
+</div>
+
+<div>
+
+<div class="flex justify-between">
+
+<span>Silk Board</span>
+<span>241</span>
+
+</div>
+
+<div class="bg-gray-800 h-2 rounded mt-2">
+
+<div class="bg-cyan-500 h-2 rounded w-[100%]"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- DRIVER PROFILE -->
+
+<div class="grid grid-cols-12 gap-6 mt-8">
+
+<div class="col-span-5 glass rounded-2xl p-6">
+
+<h3 class="text-xl font-bold mb-5">
+
+Driver Profile
+
+</h3>
+
+<div class="text-center">
+
+<div class="w-24 h-24 bg-purple-600 rounded-full mx-auto mb-4"></div>
+
+<h4 class="text-xl font-bold">
+Ramesh Kumar
+</h4>
+
+<p class="text-gray-400">
+Driver ID: DR-2041
+</p>
+
+</div>
+
+<div class="grid grid-cols-2 gap-4 mt-6">
+
+<div>
+<p class="text-gray-400 text-sm">Age</p>
+<p>34</p>
+</div>
+
+<div>
+<p class="text-gray-400 text-sm">Experience</p>
+<p>5 Years</p>
+</div>
+
+<div>
+<p class="text-gray-400 text-sm">Vehicle</p>
+<p>Auto EV</p>
+</div>
+
+<div>
+<p class="text-gray-400 text-sm">Rating</p>
+<p>4.9 ⭐</p>
+</div>
+
+</div>
+
+</div>
+
+<!-- KYC STATUS -->
+
+<div class="col-span-7 glass rounded-2xl p-6">
+
+<h3 class="text-xl font-bold mb-5">
+
+KYC & Compliance
+
+</h3>
+
+<div class="grid grid-cols-4 gap-4">
+
+<div class="bg-green-500/10 p-4 rounded-xl">
+
+<p class="text-green-400 font-bold">
+✓ Aadhar
+</p>
+
+<p class="text-sm text-gray-400 mt-1">
+Verified
+</p>
+
+</div>
+
+<div class="bg-green-500/10 p-4 rounded-xl">
+
+<p class="text-green-400 font-bold">
+✓ Driving License
+</p>
+
+<p class="text-sm text-gray-400 mt-1">
+Verified
+</p>
+
+</div>
+
+<div class="bg-green-500/10 p-4 rounded-xl">
+
+<p class="text-green-400 font-bold">
+✓ Vehicle RC
+</p>
+
+<p class="text-sm text-gray-400 mt-1">
+Verified
+</p>
+
+</div>
+
+<div class="bg-yellow-500/10 p-4 rounded-xl">
+
+<p class="text-yellow-400 font-bold">
+Pending
+</p>
+
+<p class="text-sm text-gray-400 mt-1">
+Background Check
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- EARNINGS -->
+
+<div class="glass rounded-2xl p-6 mt-8">
+
+<h3 class="text-xl font-bold mb-6">
+
+Driver Earnings Dashboard
+
+</h3>
+
+<div class="grid grid-cols-4 gap-6">
+
+<div class="bg-black/20 p-5 rounded-xl">
+
+<p class="text-gray-400">
+Today
+</p>
+
+<h4 class="text-2xl font-bold text-green-400">
+₹1,842
+</h4>
+
+</div>
+
+<div class="bg-black/20 p-5 rounded-xl">
+
+<p class="text-gray-400">
+This Week
+</p>
+
+<h4 class="text-2xl font-bold text-purple-400">
+₹12,410
+</h4>
+
+</div>
+
+<div class="bg-black/20 p-5 rounded-xl">
+
+<p class="text-gray-400">
+This Month
+</p>
+
+<h4 class="text-2xl font-bold text-yellow-400">
+₹48,903
+</h4>
+
+</div>
+
+<div class="bg-black/20 p-5 rounded-xl">
+
+<p class="text-gray-400">
+Lifetime
+</p>
+
+<h4 class="text-2xl font-bold text-cyan-400">
+₹8.7L
+</h4>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- INCIDENTS -->
+
+<div class="glass rounded-2xl p-6 mt-8">
+
+<h3 class="text-xl font-bold mb-6">
+
+Driver Incident History
+
+</h3>
+
+<div class="space-y-3">
+
+<div
+class="bg-black/20 rounded-xl p-4 flex justify-between">
+
+<span>
+Speeding Warning
+</span>
+
+<span class="text-yellow-400">
+15 Oct 2026
+</span>
+
+</div>
+
+<div
+class="bg-black/20 rounded-xl p-4 flex justify-between">
+
+<span>
+Passenger Compliment
+</span>
+
+<span class="text-green-400">
+18 Oct 2026
+</span>
+
+</div>
+
+<div
+class="bg-black/20 rounded-xl p-4 flex justify-between">
+
+<span>
+SOS Investigation Closed
+</span>
+
+<span class="text-green-400">
+23 Oct 2026
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ACTION CENTER -->
+
+<div class="glass rounded-2xl p-6 mt-8">
+
+<h3 class="text-xl font-bold mb-6">
+
+Driver Administration
+
+</h3>
+
+<div class="flex gap-4">
+
+<button class="bg-green-600 px-6 py-3 rounded-xl">
+Approve Driver
+</button>
+
+<button class="bg-yellow-600 px-6 py-3 rounded-xl">
+Suspend
+</button>
+
+<button class="bg-red-600 px-6 py-3 rounded-xl">
+Blacklist
+</button>
+
+<button class="bg-purple-600 px-6 py-3 rounded-xl">
+Assign Vehicle
+</button>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+</body>
+</html>

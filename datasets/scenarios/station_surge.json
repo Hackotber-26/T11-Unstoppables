@@ -1,0 +1,19 @@
+{
+  "scenario_id": "station_surge",
+  "description": "Synthetic short-duration arrival surge at a constrained station network.",
+  "seed": 41032,
+  "rider_count": 240,
+  "arrival_window_seconds": 360,
+  "arrival_shape": "peak",
+  "destination_mismatch_rate": 0.18,
+  "party_size_two_rate": 0.12,
+  "accessible_request_rate": 0.12,
+  "safety_event_count": 1,
+  "drivers": 52,
+  "vehicle_capacity": 4,
+  "accessible_vehicle_rate": 0.2,
+  "max_wait_seconds": 240,
+  "max_detour_meters": 2200,
+  "max_pool_size": 4,
+  "pool_discount_bps": 1500
+}

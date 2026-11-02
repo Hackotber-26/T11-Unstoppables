@@ -1,0 +1,111 @@
+@layer base {
+      html { scroll-behavior: smooth; }
+      body { overscroll-behavior: none; }
+    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #06080e; }
+    ::-webkit-scrollbar-thumb { background: #261b3d; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #8b2fc9; }
+
+    /* Moving Viaduct Railway Sleeper Track */
+    @keyframes trackGlide {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-40px); }
+    }
+    .viaduct-sleeper-track {
+      background-image: repeating-linear-gradient(90deg, #1e172e 0px, #1e172e 4px, transparent 4px, transparent 24px);
+      animation: trackGlide 1.2s linear infinite;
+    }
+
+    /* Overhead Catenary Electric Wire Glow */
+    @keyframes catenarySpark {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; filter: drop-shadow(0 0 6px #c084fc); }
+    }
+    .catenary-wire {
+      animation: catenarySpark 3s ease-in-out infinite;
+    }
+
+    /* Horizontal Moving Purple Line Metro Train Navigation */
+    @keyframes trainGlideCruise {
+      0% { transform: translateX(0px); }
+      50% { transform: translateX(30px); }
+      100% { transform: translateX(0px); }
+    }
+    @keyframes trainGlideExpress {
+      0% { transform: translateX(-120%); }
+      100% { transform: translateX(120%); }
+    }
+    .train-cruising {
+      animation: trainGlideCruise 12s ease-in-out infinite;
+    }
+    .train-express {
+      animation: trainGlideExpress 6s linear infinite !important;
+    }
+    .train-paused {
+      animation-play-state: paused !important;
+    }
+
+    /* Purple Line Window Interactive Styling & Warm In-Cabin Illumination */
+    .metro-window-pane {
+      background: linear-gradient(180deg, rgba(26, 16, 44, 0.96) 0%, rgba(10, 12, 22, 0.98) 100%);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .metro-window-pane::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background: linear-gradient(180deg, rgba(254, 240, 138, 0.15) 0%, transparent 100%);
+      pointer-events: none;
+    }
+    .metro-window-pane:hover {
+      box-shadow: 0 0 25px rgba(168, 85, 247, 0.65), inset 0 0 16px rgba(192, 132, 252, 0.35);
+      border-color: #c084fc !important;
+      transform: translateY(-2px);
+    }
+    .metro-window-pane:hover .window-interior-glow {
+      opacity: 1;
+    }
+
+    /* Glass Panels */
+    .glass-panel {
+      background: rgba(18, 23, 36, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-panel-purple {
+      background: rgba(18, 23, 36, 0.9);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(168, 85, 247, 0.15);
+    }
+
+    /* Modal Backdrop */
+    .modal-backdrop {
+      background: rgba(4, 6, 12, 0.88);
+      backdrop-filter: blur(14px);
+    }
+
+    /* Radar scan pulse */
+    @keyframes radarScanPulse {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .radar-beam {
+      animation: radarScanPulse 6s linear infinite;
+    }
+
+    /* Rain simulation overlay */
+    .rain-layer {
+      background-image: repeating-linear-gradient(transparent, transparent 15px, rgba(168, 85, 247, 0.15) 15px, rgba(0, 240, 255, 0.15) 20px);
+      animation: rainGlide 0.8s linear infinite;
+    }
+    @keyframes rainGlide {
+      0% { background-position: 0 0; }
+      100% { background-position: 20px 80px; }
+    }

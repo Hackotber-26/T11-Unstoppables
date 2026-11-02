@@ -1,8 +1,8 @@
 # ==========================================
-# TrainSync Documentation Bootstrap Script
+# NimmaSaarthi Documentation Bootstrap Script
 # ==========================================
 
-Write-Host "Creating TrainSync documentation..."
+Write-Host "Creating NimmaSaarthi documentation..."
 
 $base = Get-Location
 
@@ -14,7 +14,7 @@ New-Item -ItemType Directory -Force -Path "docs/architecture" | Out-Null
 # =====================================================
 
 @'
-# TrainSync
+# NimmaSaarthi
 
 ## Metro-Aware Mobility Orchestration Platform
 
@@ -26,9 +26,9 @@ Match Journeys, Not Destinations.
 
 ## Vision
 
-TrainSync is a mobility orchestration platform that optimizes the transition between metro travel and final destination travel.
+NimmaSaarthi is a mobility orchestration platform that optimizes the transition between metro travel and final destination travel.
 
-Instead of forcing commuters to search for transportation after leaving a station, TrainSync predicts metro arrivals, forms efficient rider pools before arrival, and coordinates vehicles in advance.
+Instead of forcing commuters to search for transportation after leaving a station, NimmaSaarthi predicts metro arrivals, forms efficient rider pools before arrival, and coordinates vehicles in advance.
 
 ---
 
@@ -41,7 +41,7 @@ Request Ride
 → Wait
 → Travel
 
-TrainSync:
+NimmaSaarthi:
 
 Board Train
 → Pool Me
@@ -54,7 +54,7 @@ Board Train
 
 ## Mission
 
-TrainSync coordinates passengers, vehicles and transit systems to create seamless last-mile transportation.
+NimmaSaarthi coordinates passengers, vehicles and transit systems to create seamless last-mile transportation.
 '@ | Set-Content "docs/vision/executive-summary.md"
 
 # =====================================================
@@ -64,9 +64,9 @@ TrainSync coordinates passengers, vehicles and transit systems to create seamles
 @'
 # Product Vision
 
-## TrainSync
+## NimmaSaarthi
 
-TrainSync is a Metro-Aware Mobility Orchestration Platform.
+NimmaSaarthi is a Metro-Aware Mobility Orchestration Platform.
 
 ---
 
@@ -168,7 +168,7 @@ Travel
 
 Metro commuter flows are predictable.
 
-TrainSync uses this predictability to coordinate transportation before commuters arrive at station exits.
+NimmaSaarthi uses this predictability to coordinate transportation before commuters arrive at station exits.
 '@ | Set-Content "docs/vision/problem-statement.md"
 
 # =====================================================
@@ -391,9 +391,9 @@ Write-Host "Documentation created successfully."
 
 git add .
 
-git commit -m "docs: bootstrap TrainSync documentation"
+git commit -m "docs: bootstrap NimmaSaarthi documentation"
 
 git push origin main
 
 Write-Host ""
-Write-Host "TrainSync documentation pushed successfully." -ForegroundColor Green
+Write-Host "NimmaSaarthi documentation pushed successfully." -ForegroundColor Green

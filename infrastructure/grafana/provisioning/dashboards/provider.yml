@@ -1,0 +1,11 @@
+apiVersion: 1
+
+providers:
+  - name: TrainSync
+    orgId: 1
+    folder: TrainSync
+    type: file
+    disableDeletion: true
+    editable: true
+    options:
+      path: /etc/grafana/provisioning/dashboards

@@ -1,0 +1,307 @@
+openapi: 3.0.3
+info:
+  title: TrainSync API
+  version: 1.0.0
+  description: |
+    Local, open-source API for the TrainSync metro-aware mobility orchestration platform.
+    No paid external APIs are used by this service.
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Local development server
+security:
+  - ApiKeyAuth: []
+paths:
+  /health:
+    get:
+      summary: Health check
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+
+  /auth/register:
+    post:
+      summary: Register rider
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRiderRequest'
+      responses:
+        '201':
+          description: Rider created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+
+  /auth/login:
+    post:
+      summary: Login and issue token
+      responses:
+        '200':
+          description: Auth token issued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+
+  /riders:
+    get:
+      summary: List riders
+      responses:
+        '200':
+          description: Rider list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Rider'
+
+  /drivers:
+    get:
+      summary: List drivers
+      responses:
+        '200':
+          description: Driver list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Driver'
+
+  /trips:
+    post:
+      summary: Create trip request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTripRequest'
+      responses:
+        '201':
+          description: Trip created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+
+  /trips/{tripId}:
+    get:
+      summary: Get trip details
+      parameters:
+        - in: path
+          name: tripId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Trip data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trip'
+
+  /pools/match:
+    post:
+      summary: Match rider to suitable pool
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                riderId:
+                  type: string
+      responses:
+        '200':
+          description: Pool candidates returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PoolCandidate'
+
+  /fare/quote:
+    post:
+      summary: Calculate estimated fare
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FareQuoteRequest'
+      responses:
+        '200':
+          description: Fare quote
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FareQuote'
+
+  /simulation/run:
+    post:
+      summary: Run simulation scenario
+      responses:
+        '200':
+          description: Simulation result
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /metrics:
+    get:
+      summary: Platform metrics
+      responses:
+        '200':
+          description: Important operational metrics
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Optional API key. Set in deployment environment when needed.
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+        services:
+          type: object
+          additionalProperties:
+            type: string
+    RegisterRiderRequest:
+      type: object
+      required: [name, email]
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+    Rider:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        stationId:
+          type: string
+    Driver:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        vehicleId:
+          type: string
+        status:
+          type: string
+    CreateTripRequest:
+      type: object
+      required: [riderId, originId, destination]
+      properties:
+        riderId:
+          type: string
+        originId:
+          type: string
+        destination:
+          type: string
+    Trip:
+      type: object
+      properties:
+        id:
+          type: string
+        riderId:
+          type: string
+        driverId:
+          type: string
+        status:
+          type: string
+        originId:
+          type: string
+        destination:
+          type: string
+        poolMode:
+          type: string
+        fareAmount:
+          type: number
+    PoolCandidate:
+      type: object
+      properties:
+        riderId:
+          type: string
+        score:
+          type: number
+        reason:
+          type: string
+    FareQuoteRequest:
+      type: object
+      required: [tripId, poolMode]
+      properties:
+        tripId:
+          type: string
+        poolMode:
+          type: string
+          enum: [corridor, solo]
+    FareQuote:
+      type: object
+      properties:
+        tripId:
+          type: string
+        baseFare:
+          type: number
+        poolDiscount:
+          type: number
+        total:
+          type: number
+        currency:
+          type: string
+    ApiResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        data:
+          nullable: true

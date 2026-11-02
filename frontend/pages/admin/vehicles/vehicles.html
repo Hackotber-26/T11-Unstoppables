@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="refresh" content="0; url=../../../portal.html#/admin/vehicles">
+<script>location.replace("../../../portal.html#/admin/vehicles");</script>
+
+<title>Nimma Saarthi - Fleet Management</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+
+body{
+    background:#090d14;
+}
+
+.glass{
+    background:rgba(255,255,255,.04);
+    backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.vehicle-card:hover{
+    transform:translateY(-5px);
+    transition:.3s;
+}
+
+</style>
+</head>
+
+<body class="text-white">
+
+<div class="flex min-h-screen">
+
+<!-- SIDEBAR -->
+
+<aside class="w-72 bg-black/30 border-r border-white/10 p-6">
+
+<h1 class="text-2xl font-bold mb-10">
+Nimma Saarthi
+</h1>
+
+<nav class="space-y-4">
+
+<a href="../dashboard/dashboard.html">Dashboard</a>
+<a href="../analytics/analytics.html">Analytics</a>
+<a href="../pools/pools.html">Pools</a>
+<a href="../trips/trips.html">Trips</a>
+<a href="../drivers/drivers.html">Drivers</a>
+
+<a href="vehicles.html" class="block font-semibold text-purple-400">
+Vehicles
+</a>
+
+<a href="../stations/stations.html">Stations</a>
+<a href="../../home/home.html?view=admin">API-backed Operations</a>
+
+</nav>
+
+</aside>
+
+<!-- MAIN -->
+
+<main class="flex-1 p-8">
+
+<!-- HEADER -->
+
+<div class="flex justify-between items-center mb-10">
+
+<div>
+
+<h2 class="text-4xl font-bold">
+Fleet Management Center
+</h2>
+
+<p class="text-gray-400 mt-2">
+Monitor vehicles, battery health and assignments
+</p>
+
+</div>
+
+<div class="flex gap-4">
+
+<button class="glass px-4 py-2 rounded-xl">
+Refresh Fleet
+</button>
+
+<button class="bg-purple-600 px-5 py-2 rounded-xl">
+Add Vehicle
+</button>
+
+</div>
+
+</div>
+
+<!-- KPI -->
+
+<section class="grid grid-cols-5 gap-5 mb-8">
+
+<div class="glass p-5 rounded-2xl">
+
+<p class="text-gray-400">
+Total Vehicles
+</p>
+
+<h3 class="text-3xl font-bold text-purple-400 mt-2">
+842
+</h3>
+
+</div>
+
+<div class="glass p-5 rounded-2xl">
+
+<p class="text-gray-400">
+Active Fleet
+</p>
+
+<h3 class="text-3xl font-bold text-green-400 mt-2">
+726
+</h3>
+
+</div>
+
+<div class="glass p-5 rounded-2xl">
+
+<p class="text-gray-400">
+Maintenance
+</p>
+
+<h3 class="text-3xl font-bold text-yellow-400 mt-2">
+41
+</h3>
+
+</div>
+
+<div class="glass p-5 rounded-2xl">
+
+<p class="text-gray-400">
+Charging
+</p>
+
+<h3 class="text-3xl font-bold text-cyan-400 mt-2">
+33
+</h3>
+
+</div>
+
+<div class="glass p-5 rounded-2xl">
+
+<p class="text-gray-400">
+Fleet Utilization
+</p>
+
+<h3 class="text-3xl font-bold text-green-400 mt-2">
+86%
+</h3>
+
+</div>
+
+</section>
+
+<!-- VEHICLE TABLE -->
+
+<div class="glass rounded-2xl p-6 mb-8">
+
+<div class="flex justify-between items-center mb-6">
+
+<h3 class="text-xl font-bold">
+Fleet Registry
+</h3>
+
+<input
+type="text"
+placeholder="Search Vehicle..."
+class="bg-black/20 border border-white/10 rounded-xl px-4 py-2">
+
+</div>
+
+<table class="w-full">
+
+<thead>
+
+<tr class="border-b border-white/10 text-gray-400">
+
+<th class="text-left pb-3">Vehicle No</th>
+<th class="text-left pb-3">Type</th>
+<th class="text-left pb-3">Driver</th>
+<th class="text-left pb-3">Battery</th>
+<th class="text-left pb-3">Location</th>
+<th class="text-left pb-3">Status</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td class="py-4">KA03 EV 8812</td>
+<td>Auto EV</td>
+<td>Ramesh Kumar</td>
+<td class="text-green-400">92%</td>
+<td>Indiranagar</td>
+<td class="text-green-400">ACTIVE</td>
+
+</tr>
+
+<tr>
+
+<td class="py-4">KA03 EV 7351</td>
+<td>Cab EV</td>
+<td>Sunil M</td>
+<td class="text-yellow-400">47%</td>
+<td>Whitefield</td>
+<td class="text-green-400">ACTIVE</td>
+
+</tr>
+
+<tr>
+
+<td class="py-4">KA03 EV 1148</td>
+<td>Shuttle</td>
+<td>Vijay K</td>
+<td class="text-red-400">12%</td>
+<td>Charging Hub</td>
+<td class="text-cyan-400">CHARGING</td>
+
+</tr>
+
+<tr>
+
+<td class="py-4">KA03 EV 6284</td>
+<td>Auto EV</td>
+<td>Anand R</td>
+<td class="text-yellow-400">38%</td>
+<td>MG Road</td>
+<td class="text-yellow-400">SERVICE</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- VEHICLE CARDS -->
+
+<div class="grid grid-cols-3 gap-6 mb-8">
+
+<div class="glass p-6 rounded-2xl vehicle-card">
+
+<h3 class="font-bold text-lg mb-4">
+Auto EV Fleet
+</h3>
+
+<div class="space-y-3">
+
+<p>Total Vehicles: 412</p>
+<p>Active: 366</p>
+<p>Charging: 19</p>
+<p>Maintenance: 27</p>
+
+</div>
+
+</div>
+
+<div class="glass p-6 rounded-2xl vehicle-card">
+
+<h3 class="font-bold text-lg mb-4">
+Cab EV Fleet
+</h3>
+
+<div class="space-y-3">
+
+<p>Total Vehicles: 286</p>
+<p>Active: 244</p>
+<p>Charging: 18</p>
+<p>Maintenance: 24</p>
+
+</div>
+
+</div>
+
+<div class="glass p-6 rounded-2xl vehicle-card">
+
+<h3 class="font-bold text-lg mb-4">
+Shuttle Fleet
+</h3>
+
+<div class="space-y-3">
+
+<p>Total Vehicles: 144</p>
+<p>Active: 116</p>
+<p>Charging: 9</p>
+<p>Maintenance: 19</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- BATTERY ANALYTICS -->
+
+<div class="grid grid-cols-12 gap-6 mb-8">
+
+<div class="col-span-7 glass p-6 rounded-2xl">
+
+<h3 class="text-xl font-bold mb-6">
+
+Battery Health Overview
+
+</h3>
+
+<div class="space-y-5">
+
+<div>
+
+<div class="flex justify-between mb-2">
+
+<span>Healthy (80%+)</span>
+<span>65%</span>
+
+</div>
+
+<div class="h-3 bg-gray-800 rounded">
+
+<div class="h-3 rounded bg-green-500 w-[65%]"></div>
+
+</div>
+
+</div>
+
+<div>
+
+<div class="flex justify-between mb-2">
+
+<span>Moderate (40%-80%)</span>
+<span>27%</span>
+
+</div>
+
+<div class="h-3 bg-gray-800 rounded">
+
+<div class="h-3 rounded bg-yellow-500 w-[27%]"></div>
+
+</div>
+
+</div>
+
+<div>
+
+<div class="flex justify-between mb-2">
+
+<span>Critical (&lt;40%)</span>
+<span>8%</span>
+
+</div>
+
+<div class="h-3 bg-gray-800 rounded">
+
+<div class="h-3 rounded bg-red-500 w-[8%]"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- LIVE ALERTS -->
+
+<div class="col-span-5 glass p-6 rounded-2xl">
+
+<h3 class="text-xl font-bold mb-6">
+
+Fleet Alerts
+
+</h3>
+
+<div class="space-y-4">
+
+<div class="bg-red-500/10 border border-red-500/20 rounded-xl p-4">
+
+🔋 KA03 EV 1148 battery below 15%
+
+</div>
+
+<div class="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4">
+
+🛠 Scheduled maintenance due tomorrow
+
+</div>
+
+<div class="bg-green-500/10 border border-green-500/20 rounded-xl p-4">
+
+✅ Shuttle SH-11 returned to service
+
+</div>
+
+<div class="bg-purple-500/10 border border-purple-500/20 rounded-xl p-4">
+
+🚗 New vehicle assigned to Whitefield Hub
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- VEHICLE DETAILS -->
+
+<div class="glass rounded-2xl p-6 mb-8">
+
+<h3 class="text-xl font-bold mb-6">
+
+Selected Vehicle Details
+
+</h3>
+
+<div class="grid grid-cols-4 gap-6">
+
+<div>
+
+<p class="text-gray-400 text-sm">
+Vehicle Number
+</p>
+
+<p class="font-bold">
+KA03 EV 8812
+</p>
+
+</div>
+
+<div>
+
+<p class="text-gray-400 text-sm">
+Vehicle Type
+</p>
+
+<p class="font-bold">
+Auto EV
+</p>
+
+</div>
+
+<div>
+
+<p class="text-gray-400 text-sm">
+Assigned Driver
+</p>
+
+<p class="font-bold">
+Ramesh Kumar
+</p>
+
+</div>
+
+<div>
+
+<p class="text-gray-400 text-sm">
+Battery Health
+</p>
+
+<p class="font-bold text-green-400">
+92%
+</p>
+
+</div>
+
+<div>
+
+<p class="text-gray-400 text-sm">
+Insurance Expiry
+</p>
+
+<p>
+12 Mar 2027
+</p>
+
+</div>
+
+<div>
+
+<p class="text-gray-400 text-sm">
+RC Status
+</p>
+
+<p class="text-green-400">
+Verified
+</p>
+
+</div>
+
+<div>
+
+<p class="text-gray-400 text-sm">
+Last Service
+</p>
+
+<p>
+15 Oct 2026
+</p>
+
+</div>
+
+<div>
+
+<p class="text-gray-400 text-sm">
+Distance Travelled
+</p>
+
+<p>
+24,310 KM
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- OPERATIONS -->
+
+<div class="glass rounded-2xl p-6">
+
+<h3 class="text-xl font-bold mb-6">
+Fleet Operations
+</h3>
+
+<div class="flex flex-wrap gap-4">
+
+<button class="bg-green-600 px-5 py-3 rounded-xl">
+Assign Driver
+</button>
+
+<button class="bg-blue-600 px-5 py-3 rounded-xl">
+Send To Charging
+</button>
+
+<button class="bg-yellow-600 px-5 py-3 rounded-xl">
+Schedule Maintenance
+</button>
+
+<button class="bg-red-600 px-5 py-3 rounded-xl">
+Mark Out Of Service
+</button>
+
+<button class="bg-purple-600 px-5 py-3 rounded-xl">
+View GPS Route
+</button>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+:80 {
+    reverse_proxy backend:8080
+}
+
+:443 {
+    reverse_proxy backend:8080
+}
